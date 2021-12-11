@@ -13,7 +13,7 @@ namespace PlantFriend.Controllers
     [ApiController]
     public class LogsController : ControllerBase
     {
-        LogRepo _logRepo;
+        readonly LogRepo _logRepo;
 
         public LogsController(LogRepo logRepo)
         {

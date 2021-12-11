@@ -11,7 +11,7 @@ namespace PlantFriend.DataAccess
 {
     public class UserInventoryRepo
     {
-        string _connectionString;
+        readonly string _connectionString;
         public UserInventoryRepo(IConfiguration config)
         {
             _connectionString = config.GetConnectionString("PlantFriend");

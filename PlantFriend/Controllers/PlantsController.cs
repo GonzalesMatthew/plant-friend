@@ -25,5 +25,16 @@ namespace PlantFriend.Controllers
         {
             return Ok(_plantRepo.GetAll());
         }
+
+        [HttpPost]
+        public IActionResult AddPlant(Plant newPlant)
+        {
+            if (string.IsNullOrEmpty(newPlant.Name) || string.IsNullOrEmpty(newPlant.ImageUrl))
+            {
+                return BadRequest("Name and ImageUrl are required fields.");
+            }
+            _plantRepo.Add(newPlant);
+            return Created($"/api/plants/{newPlant.Id}", newPlant);
+        }
     }
 }

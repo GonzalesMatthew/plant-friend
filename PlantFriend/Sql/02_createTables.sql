@@ -3,14 +3,14 @@ CREATE TABLE dbo.Plant
 	(
 	Id uniqueidentifier NOT NULL primary key default(newsequentialid()),
 	[Name] varchar(50) NOT NULL,
-	Light varchar(4000) NOT NULL,
-	Water money NOT NULL,
-	WaterFrequency varchar(4000) NOT NULL,
-	Temperature float NOT NULL,
-	Nutrients varchar(4000) NOT NULL,
-	NutrientsFrequency varchar(4000) NOT NULL,
-	[Description] varchar(4000) NOT NULL,
-	CareNeeds varchar(4000) NOT NULL,
+	Light varchar(4000),
+	Water money,
+	WaterFrequency varchar(4000),
+	Temperature float,
+	Nutrients varchar(4000),
+	NutrientsFrequency varchar(4000),
+	[Description] varchar(4000),
+	CareNeeds varchar(4000),
 	ImageUrl nvarchar(4000) NOT NULL
 	);
 

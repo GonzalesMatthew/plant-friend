@@ -11,7 +11,7 @@ namespace PlantFriend.DataAccess
 {
     public class LogRepo
     {
-        string _connectionString;
+        readonly string _connectionString;
         public LogRepo(IConfiguration config)
         {
             _connectionString = config.GetConnectionString("PlantFriend");

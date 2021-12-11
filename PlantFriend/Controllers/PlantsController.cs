@@ -36,5 +36,35 @@ namespace PlantFriend.Controllers
             _plantRepo.Add(newPlant);
             return Created($"/api/plants/{newPlant.Id}", newPlant);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            var plant = _plantRepo.GetById(id);
+            if (plant == null)
+            {
+                return NotFound($"No plant with the id {id} was found.");
+            }
+            return Ok(plant);
+        }
+
+        [HttpPut("{id})")]
+        public IActionResult UpdatePlant(Guid id, Plant plant)
+        {
+            var plantToUpdate = _plantRepo.GetById(id);
+            if (plantToUpdate == null)
+            {
+                NotFound("This plant was not found.");
+            }
+            var updatedPlant = _plantRepo.UpdatePlant(id, plant);
+            return Ok(updatedPlant);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeletePlant(Guid id)
+        {
+            _plantRepo.Remove(id);
+            return Ok("Plant successfully removed.");
+        }
     }
 }

@@ -6,7 +6,7 @@ CREATE TABLE dbo.Plant
 	Light varchar(4000) NOT NULL,
 	Water money NOT NULL,
 	WaterFrequency varchar(4000) NOT NULL,
-	Temperature int NOT NULL,
+	Temperature float NOT NULL,
 	Nutrients varchar(4000) NOT NULL,
 	NutrientsFrequency varchar(4000) NOT NULL,
 	[Description] varchar(4000) NOT NULL,

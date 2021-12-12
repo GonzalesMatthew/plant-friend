@@ -20,8 +20,11 @@ namespace PlantFriend.DataAccess
         internal IEnumerable<Plant> GetAll()
         {
             using var db = new SqlConnection(_connectionString);
+
             var sql = @"select * from Plant";
+
             var plants = db.Query<Plant>(sql);
+
             return plants;
         }
 

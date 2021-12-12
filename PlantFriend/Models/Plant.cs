@@ -12,7 +12,7 @@ namespace PlantFriend.Models
         public string Light { get; set; }
         public string Water { get; set; }
         public string WaterFrequency { get; set; }
-        public float Temperature { get; set; }
+        public string Temperature { get; set; }
         public string Nutrients { get; set; }
         public string NutrientsFrequency { get; set; }
         public string Description { get; set; }

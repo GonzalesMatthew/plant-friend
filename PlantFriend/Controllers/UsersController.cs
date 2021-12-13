@@ -25,5 +25,46 @@ namespace PlantFriend.Controllers
         {
             return Ok(_userRepo.GetAll());
         }
+
+        [HttpPost]
+        public IActionResult AddUser(User newUser)
+        {
+            if (newUser.FirebaseId == Guid.Empty)
+            {
+                return BadRequest("FirebaseId is required to add User.");
+            }
+            _userRepo.Add(newUser);
+            return Created($"/api/users/{newUser.Id}", newUser);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(Guid id)
+        {
+            var user = _userRepo.GetById(id);
+            if (user == null)
+            {
+                return NotFound($"No user with the id {id} was found.");
+            }
+            return Ok(user);
+        }
+
+        [HttpPut("{id})")]
+        public IActionResult UpdateUser(Guid id, User user)
+        {
+            var userToUpdate = _userRepo.GetById(id);
+            if (userToUpdate == null)
+            {
+                NotFound("This user was not found.");
+            }
+            var updatedPlant = _userRepo.UpdateUser(id, user);
+            return Ok(updatedPlant);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteUser (Guid id)
+        {
+            _userRepo.Remove(id);
+            return Ok("User successfully removed.");
+        }
     }
 }

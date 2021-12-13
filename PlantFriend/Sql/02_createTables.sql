@@ -3,14 +3,14 @@ CREATE TABLE dbo.Plant
 	(
 	Id uniqueidentifier NOT NULL primary key default(newsequentialid()),
 	[Name] varchar(50) NOT NULL,
-	Light varchar(4000) NOT NULL,
-	Water money NOT NULL,
-	WaterFrequency varchar(4000) NOT NULL,
-	Temperature int NOT NULL,
-	Nutrients varchar(4000) NOT NULL,
-	NutrientsFrequency varchar(4000) NOT NULL,
-	[Description] varchar(4000) NOT NULL,
-	CareNeeds varchar(4000) NOT NULL,
+	Light varchar(4000),
+	Water varchar(300),
+	WaterFrequency varchar(4000),
+	Temperature varchar(400),
+	Nutrients varchar(4000),
+	NutrientsFrequency varchar(4000),
+	[Description] varchar(4000),
+	CareNeeds varchar(4000),
 	ImageUrl nvarchar(4000) NOT NULL
 	);
 
@@ -61,7 +61,6 @@ CREATE TABLE dbo.[Log]
 CREATE TABLE dbo.UserInventory
 	(
 	Id uniqueidentifier NOT NULL primary key default(newsequentialid()),
-	InventoryId uniqueidentifier NOT NULL,
 	UserId uniqueidentifier NOT NULL,
 	Quantity int NOT NULL,
 	[Name] varchar(50) NOT NULL,

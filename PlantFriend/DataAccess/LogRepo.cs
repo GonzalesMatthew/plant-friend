@@ -25,51 +25,44 @@ namespace PlantFriend.DataAccess
             return logs;
         }
 
-        internal void Add(Plant newPlant)
+        internal void Add(Log newLog)
         {
             using var db = new SqlConnection(_connectionString);
-            var sql = @"insert into Plant(Name, Light, Water, WaterFrequency, Temperature, Nutrients, NutrientsFrequency, Description, CareNeeds, ImageUrl)
+            var sql = @"insert into [Log] (UserPlantId, DateCreated, EntryNumber, [Entry], EntryDate)
                         output inserted.Id
-                        values (@name, @light, @water, @waterFrequency, @temperature, @nutrients, @nutrientsFrequency, @description, @careNeeds, @imageUrl)";
-            var id = db.ExecuteScalar<Guid>(sql, newPlant);
-            newPlant.Id = id;
+                        values (@userPlantId, GETDATE(), @entryNumber, @entry, GETDATE()";
+            var id = db.ExecuteScalar<Guid>(sql, newLog);
+            newLog.Id = id;
         }
 
-        internal Plant GetById(Guid id)
+        internal Log GetById(Guid id)
         {
             using var db = new SqlConnection(_connectionString);
-            var sql = @"select * from Plant where Id = @id";
-            var plant = db.QuerySingleOrDefault<Plant>(sql, new { id });
-            return plant;
+            var sql = @"select * from Log where Id = @id";
+            var log = db.QuerySingleOrDefault<Log>(sql, new { id });
+            return log;
         }
 
-        internal Plant UpdatePlant(Guid id, Plant plant)
+        internal Log UpdateLog(Guid id, Log log)
         {
             using var db = new SqlConnection(_connectionString);
-            var sql = @"update Plant
+            var sql = @"update Log
                         set 
-                            Name = @name,
-                            Light = @light, 
-                            Water = @water, 
-                            WaterFrequency = @waterFrequency, 
-                            Temperature = @temperature, 
-                            Nutrients = @nutrients, 
-                            NutrientsFrequency = @nutrientsFrequency, 
-                            Description = @description,
-                            CareNeeds = @careNeeds,
-                            ImageUrl = @imageUrl
+                            EntryNumber = @entryNumber, 
+                            [Entry] = @entry, 
+                            EntryDate = @entryDate
                         output inserted.*
                         where Id = @id";
-            plant.Id = id;
-            var updatedPlant = db.QuerySingleOrDefault<Plant>(sql, plant);
-            return updatedPlant;
+            log.Id = id;
+            var updatedLog = db.QuerySingleOrDefault<Log>(sql, log);
+            return updatedLog;
         }
 
         internal void Remove(Guid id)
         {
             using var db = new SqlConnection(_connectionString);
             var sql = @"Delete
-                        From Plant
+                        From Log
                         Where Id = @id";
             db.Execute(sql, new { id });
         }

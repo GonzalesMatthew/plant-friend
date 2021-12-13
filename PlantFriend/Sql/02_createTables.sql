@@ -61,7 +61,6 @@ CREATE TABLE dbo.[Log]
 CREATE TABLE dbo.UserInventory
 	(
 	Id uniqueidentifier NOT NULL primary key default(newsequentialid()),
-	InventoryId uniqueidentifier NOT NULL,
 	UserId uniqueidentifier NOT NULL,
 	Quantity int NOT NULL,
 	[Name] varchar(50) NOT NULL,

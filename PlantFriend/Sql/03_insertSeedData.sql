@@ -1,7 +1,7 @@
 -- insert User data
 insert into [User] (Id, FirebaseId, [Admin], FirstName, LastName, Email, ImageUrl, DateCreated)
 	values 
-		('b1a01661-4331-ec11-8172-0800275f12c6', 'P6NWPzbF3VQVhf4lVNMFQgiZPRe2', 1, 'Matthew', 'Gonzales', 'gonzalesmattg@gmail.com', '', cast('2021-12-10' as datetime))
+		('FD0AC8DB-AC5B-EC11-817C-0800275F12C6', 'P6NWPzbF3VQVhf4lVNMFQgiZPRe2', 1, 'Matthew', 'Gonzales', 'gonzalesmattg@gmail.com', '', cast('2021-12-10' as datetime))
 ;
 
 -- insert Plant data
@@ -12,10 +12,16 @@ insert into Plant (Id, [Name], Light, Water, WaterFrequency, Temperature, Nutrie
 ;
 
 -- insert UserPlant data
-insert into UserPlant (Id, PlantId, UserId, [Status], PetName, DateCreated, InitialAgeDays, AgeStage)
+insert into UserPlant (PlantId, UserId, [Status], PetName, DateCreated, InitialAgeDays, AgeStage)
 	values
-	()
+	('431142f1-b9eb-4dbb-b31b-942f10beb49a', 'b1a01661-4331-ec11-8172-0800275f12c6', 'Alive', 'Jazz', GETDATE(), 120, 'Youth')
 ;
+select * from [User];
+select * from Plant;
+
+insert into UserPlant (PlantId, UserId, [Status], PetName, DateCreated, InitialAgeDays, AgeStage)
+            output inserted.Id
+			values ('431142f1-b9eb-4dbb-b31b-942f10beb49a', 'b1a01661-4331-ec11-8172-0800275f12c6', 'Alive', 'Jazz', GETDATE(), 120, 'Youth')
 
 -- insert Log data -- note: will need to test datetime constructor with C# first
 insert into [Log] (Id, UserPlantId, DateCreated, EntryNumber, [Entry], EntryDate)

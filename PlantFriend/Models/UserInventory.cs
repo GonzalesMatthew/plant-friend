@@ -8,7 +8,6 @@ namespace PlantFriend.Models
     public class UserInventory
     {
         public Guid Id { get; set; }
-        public Guid InventoryId { get; set; }
         public Guid UserId { get; set; }
         public int Quantity { get; set; }
         public string Name { get; set; }

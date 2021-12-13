@@ -12,8 +12,8 @@ namespace PlantFriend.Models
         public Guid UserId { get; set; }
         public string Status { get; set; }
         public string PetName { get; set; }
-        public string DateCreated { get; set; }
-        public string InitialAgeDays { get; set; }
+        public DateTime DateCreated { get; set; }
+        public int InitialAgeDays { get; set; }
         public string AgeStage { get; set; }
     }
 }

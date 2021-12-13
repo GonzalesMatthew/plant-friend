@@ -29,7 +29,7 @@ namespace PlantFriend.Controllers
         [HttpPost]
         public IActionResult AddUser(User newUser)
         {
-            if (newUser.FirebaseId == Guid.Empty)
+            if (string.IsNullOrEmpty(newUser.FirebaseId))
             {
                 return BadRequest("FirebaseId is required to add User.");
             }

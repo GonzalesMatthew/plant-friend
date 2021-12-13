@@ -8,7 +8,7 @@ namespace PlantFriend.Models
     public class User
     {
         public Guid Id { get; set; }
-        public Guid FirebaseId { get; set; }
+        public string FirebaseId { get; set; }
         public bool Admin { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

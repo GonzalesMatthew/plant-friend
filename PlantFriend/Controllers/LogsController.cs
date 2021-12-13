@@ -27,44 +27,44 @@ namespace PlantFriend.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddUserPlant(UserPlant newUserPlant)
+        public IActionResult AddLog(Log newLog)
         {
-            if ((newUserPlant.PlantId == Guid.Empty) || (newUserPlant.UserId == Guid.Empty))
+            if (newLog.UserPlantId == Guid.Empty)
             {
-                return BadRequest("PlantId and UserId are required fields.");
+                return BadRequest("UserPlantId is a required field.");
             }
-            _userPlantRepo.Add(newUserPlant);
-            return Created($"/api/usersPlants/{newUserPlant.Id}", newUserPlant);
+            _logRepo.Add(newLog);
+            return Created($"/api/logs/{newLog.Id}", newLog);
         }
 
         [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
-            var userPlant = _userPlantRepo.GetById(id);
-            if (userPlant == null)
+            var log = _logRepo.GetById(id);
+            if (log == null)
             {
-                return NotFound($"No userPlant with the id {id} was found.");
+                return NotFound($"No log with the id {id} was found.");
             }
-            return Ok(userPlant);
+            return Ok(log);
         }
 
         [HttpPut("{id})")]
-        public IActionResult UpdateUserPlant(Guid id, UserPlant userPlant)
+        public IActionResult UpdateLog(Guid id, Log log)
         {
-            var userPlantToUpdate = _userPlantRepo.GetById(id);
-            if (userPlantToUpdate == null)
+            var logToUpdate = _logRepo.GetById(id);
+            if (logToUpdate == null)
             {
-                NotFound("This userPlant was not found.");
+                NotFound("This log was not found.");
             }
-            var updatedUserPlant = _userPlantRepo.UpdateUserPlant(id, userPlant);
-            return Ok(updatedUserPlant);
+            var updatedLog = _logRepo.UpdateLog(id, log);
+            return Ok(updatedLog);
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteUserPlant(Guid id)
+        public IActionResult DeleteLog(Guid id)
         {
-            _userPlantRepo.Remove(id);
-            return Ok("UserPlant successfully removed.");
+            _logRepo.Remove(id);
+            return Ok("Log successfully removed.");
         }
     }
 }

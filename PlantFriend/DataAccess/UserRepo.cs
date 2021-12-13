@@ -20,7 +20,7 @@ namespace PlantFriend.DataAccess
         internal IEnumerable<User> GetAll()
         {
             using var db = new SqlConnection(_connectionString);
-            var sql = @"select * from User";
+            var sql = @"select * from [User]";
             var users = db.Query<User>(sql);
             return users;
         }
@@ -46,10 +46,8 @@ namespace PlantFriend.DataAccess
         internal User UpdateUser(Guid id, User user)
         {
             using var db = new SqlConnection(_connectionString);
-            var sql = @"update User
+            var sql = @"update [User]
                         set 
-                            Id = @id,
-	                        FirebaseId = @firebaseId,
 	                        [Admin] = @admin,
 	                        FirstName = @firstName,
 	                        LastName = @lastName,
@@ -67,7 +65,7 @@ namespace PlantFriend.DataAccess
         {
             using var db = new SqlConnection(_connectionString);
             var sql = @"Delete
-                        From User
+                        From [User]
                         Where Id = @id";
             db.Execute(sql, new { id });
         }

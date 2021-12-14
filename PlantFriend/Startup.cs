@@ -41,14 +41,14 @@ namespace PlantFriend
                 .AddJwtBearer(options =>
                 {
                     options.IncludeErrorDetails = true;
-                    options.Authority = "";
+                    options.Authority = "https://securetoken.google.com/plantfriend-a7406";
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateLifetime = true,
                         ValidateAudience = true,
                         ValidateIssuer = true,
-                        ValidAudience = "",
-                        ValidIssuer = ""
+                        ValidAudience = "plantfriend-a7406",
+                        ValidIssuer = "https://securetoken.google.com/plantfriend-a7406"
                     };
                 });
 

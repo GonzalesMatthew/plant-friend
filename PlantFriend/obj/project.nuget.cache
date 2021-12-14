@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "ufjQKc1D4Q/uP8EjktlVerluR34h8Uo1qi8hSdwnDOe6TM403ZB8J2vKp0q3uQ8WHMTZ5uvt2AUVx7VBMmpIvw==",
+  "dgSpecHash": "ZEeMktfIC8cglyISoD4KhLK+hN1mz/wSRp4rk1TRLee/cQWy7F6qvD7q2Deln+Hi5Xcqi4WOxfztKHF4oSVhJA==",
   "success": true,
   "projectFilePath": "C:\\Users\\student\\Source\\Repos\\PlantFriend\\PlantFriend\\PlantFriend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\student\\.nuget\\packages\\azure.core\\1.6.0\\azure.core.1.6.0.nupkg.sha512",
     "C:\\Users\\student\\.nuget\\packages\\azure.identity\\1.3.0\\azure.identity.1.3.0.nupkg.sha512",
     "C:\\Users\\student\\.nuget\\packages\\dapper\\2.0.123\\dapper.2.0.123.nupkg.sha512",
+    "C:\\Users\\student\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.12\\microsoft.aspnetcore.authentication.jwtbearer.5.0.12.nupkg.sha512",
     "C:\\Users\\student\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.0.0\\microsoft.bcl.asyncinterfaces.1.0.0.nupkg.sha512",
     "C:\\Users\\student\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\student\\.nuget\\packages\\microsoft.data.sqlclient\\4.0.0\\microsoft.data.sqlclient.4.0.0.nupkg.sha512",

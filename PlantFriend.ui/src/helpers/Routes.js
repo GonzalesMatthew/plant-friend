@@ -22,6 +22,7 @@ PrivateRoute.propTypes = {
 };
 
 export default function Routes({ user }) {
+  console.warn(user);
   return (
     <div>
       <Switch>

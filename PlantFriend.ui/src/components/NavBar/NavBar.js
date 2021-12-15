@@ -5,14 +5,14 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
-  Button
+  Button,
+  NavbarBrand
 } from 'reactstrap';
 import { signInUser, signOutUser } from '../../helpers/auth';
-import brandLogo from '../../assets/PlantFriendLogo.png';
-import { Logo } from './NavBarElements';
+// import brandLogo from '../../assets/PlantFriendLogo.png';
+// import { Logo } from './NavBarElements';
 
 const NavBar = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,27 +33,26 @@ const NavBar = ({ user }) => {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">
-          <Logo>
-            src={brandLogo}
-          </Logo>
-        </NavbarBrand>
+        <NavbarBrand>PlantFriend</NavbarBrand>
+        {/* <a href="/">
+          <div className='logo-image'>
+            <img src='../../assets/PlantFriendLogo.png'/>
+          </div>
+        </a> */}
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             {user && authenticated()}
-            <NavItem>
-              {
-                user !== null
-                && <NavItem>
-                  {
-                    user
-                      ? <Button color='danger' onClick={signOutUser}>Sign Out</Button>
-                      : <Button color='info' onClick={signInUser}>Sign In</Button>
-                  }
-                </NavItem>
-              }
-            </NavItem>
+            {
+              user !== null
+              && <NavItem>
+                {
+                  user
+                    ? <Button color='danger' onClick={signOutUser}>Sign Out</Button>
+                    : <Button color='info' onClick={signInUser}>Sign In</Button>
+                }
+              </NavItem>
+            }
           </Nav>
         </Collapse>
       </Navbar>

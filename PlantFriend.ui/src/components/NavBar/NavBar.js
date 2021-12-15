@@ -10,7 +10,9 @@ import {
   NavItem,
   Button
 } from 'reactstrap';
-import { signInUser, signOutUser } from '../helpers/auth';
+import { signInUser, signOutUser } from '../../helpers/auth';
+import brandLogo from '../../assets/PlantFriendLogo.png';
+import { Logo } from './NavBarElements';
 
 const NavBar = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,10 +22,10 @@ const NavBar = ({ user }) => {
   const authenticated = () => (
     <>
       <NavItem>
-        <Link className="nav-link" to="/add-drivers/">Add Driver</Link>
+        <Link className="nav-link" to="/plants/">Plants</Link>
       </NavItem>
       <NavItem>
-        <Link className="nav-link" to="/drivers">Drivers</Link>
+        <Link className="nav-link" to="/user">Profile</Link>
       </NavItem>
     </>
   );
@@ -31,11 +33,15 @@ const NavBar = ({ user }) => {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">Brand Name</NavbarBrand>
+        <NavbarBrand href="/">
+          <Logo>
+            src={brandLogo}
+          </Logo>
+        </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
-            { user && authenticated()}
+            {user && authenticated()}
             <NavItem>
               {
                 user !== null

@@ -3,6 +3,8 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Home from '../views/Home';
 import NotFound from '../views/NotFound';
+import Plants from '../views/Plants';
+import User from '../views/User';
 
 const PrivateRoute = ({ component: Component, user, ...rest }) => {
   const routeChecker = (remainder) => (user
@@ -17,16 +19,21 @@ PrivateRoute.propTypes = {
 };
 
 export default function Routes({ user }) {
-  console.warn(user);
   return (
     <div>
       <Switch>
         <Route exact path='/' component={Home} />
         <PrivateRoute
           exact
-          path='/drivers'
+          path='/plants'
           user={user}
-          component={() => <Home user={user}/>}
+          component={() => <Plants user={user}/>}
+        />
+        <PrivateRoute
+          exact
+          path='/user'
+          user={user}
+          component={() => <User user={user}/>}
         />
         <Route path='*' component = {NotFound} />
       </Switch>

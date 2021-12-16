@@ -33,7 +33,7 @@ const NavBar = ({ user }) => {
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand>PlantFriend</NavbarBrand>
+        <NavbarBrand href='/'>PlantFriend</NavbarBrand>
         {/* <a href="/">
           <div className='logo-image'>
             <img src='../../assets/PlantFriendLogo.png'/>

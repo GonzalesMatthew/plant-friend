@@ -51,19 +51,12 @@ const HomeTitle = styled.div`
   padding-bottom: 3%;
   font-size: 35px;
   font-weight: bold;
-  color: #fc9dad;
+  color: green;
 `;
 
 const ProfileInfo = styled.h4`
   padding-bottom: 10px;
 `;
-
-// const InfoCarouselContainer = styled.div`
-//   display: flex;
-//   justify-content: space-evenly;
-//   align-items: center;
-//   Width: 100%;
-// `;
 
 export {
   HomeContainer,

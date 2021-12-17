@@ -6,7 +6,7 @@ import {
 } from 'reactstrap';
 import { signInUser, signOutUser } from '../../helpers/auth';
 import {
-  HomeContainer, HomeInfoContainer, HomeTitle, ProfileInfo, HomeButtonContainer, HomeCarousel
+  HomeContainer, HomeInfoContainer, HomeTitle, ProfileInfo, HomeButtonContainer
 } from './HomeStyled';
 
 function Home({ user }) {
@@ -27,7 +27,7 @@ function Home({ user }) {
 
   return (
     <HomeContainer>
-      <HomeTitle>Welcome to SweetTooth!</HomeTitle>
+      <HomeTitle>Welcome to PlantFriend</HomeTitle>
       <HomeInfoContainer>
         <HomeButtonContainer>
           <div>
@@ -41,7 +41,7 @@ function Home({ user }) {
           {user
             ? <div>
               <ProfileInfo>
-                You can update your payment method and address on your profile.
+                View your house plants, inventory, and caretaker schedule.
               </ProfileInfo>
               <Button outline color='info' tag={Link} to={'/user'}
                 style={{ marginLeft: '4px' }}>
@@ -54,34 +54,34 @@ function Home({ user }) {
           }
         </HomeButtonContainer>
       </HomeInfoContainer>
-      <HomeCarousel
+      {/* <HomeCarousel
         slide={true}
         items={[
           {
             altText: '',
             caption: '',
             key: 1,
-            src: 'https://arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/PIL5MJA3YUYYPBJWET7DS2UPQA.jpg'
+            src: '../../assets/PlantFriendLogo.png'
           },
           {
             altText: '',
             caption: '',
             key: 2,
-            src: 'https://images.unsplash.com/photo-1548365328-8c6db3220e4c?ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8OHx8fGVufDB8fHx8&ixlib=rb-1.2.1&w=1000&q=80'
+            src: '../../assets/PlantFriendLogo.png'
           },
           {
             altText: '',
             caption: '',
             key: 3,
-            src: 'https://images.unsplash.com/photo-1588756264692-d396bca41fb1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fGNhbmR5fGVufDB8fDB8fA%3D%3D&w=1000&q=80'
+            src: '../../assets/PlantFriendLogo.png'
           }
         ]}
-      />
+      /> */}
     </HomeContainer>
   );
 }
 
-Home.protoTypes = {
+Home.propTypes = {
   user: PropTypes.any
 };
 

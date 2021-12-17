@@ -26,7 +26,7 @@ export default function Routes({ user }) {
           exact path='/'
           component={() => <Home user={user}/>}
         />
-        <PrivateRoute
+        <Route
           exact
           path='/plants'
           user={user}

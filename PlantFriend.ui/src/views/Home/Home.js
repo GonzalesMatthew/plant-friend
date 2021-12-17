@@ -5,7 +5,9 @@ import {
   Button, ButtonGroup
 } from 'reactstrap';
 import { signInUser, signOutUser } from '../../helpers/auth';
-import { HomeContainer, HomeInfoContainer, HomeTitle, ProfileInfo } from './HomeStyled';
+import {
+  HomeContainer, HomeInfoContainer, HomeTitle, ProfileInfo, HomeButtonContainer, HomeCarousel
+} from './HomeStyled';
 
 function Home({ user }) {
   const authButtons = () => (
@@ -21,26 +23,27 @@ function Home({ user }) {
         </ButtonGroup>
       }
     </div>
-  )
+  );
+
   return (
     <HomeContainer>
       <HomeTitle>Welcome to SweetTooth!</HomeTitle>
       <HomeInfoContainer>
         <HomeButtonContainer>
           <div>
-            {user ? <h4>Make sure to check out all our snacks before leaving...</h4> : <h4>Already have an Account?</h4>}
+            {user ? <h4>Your personal house plant journal...</h4> : <h4>Already have an Account?</h4>}
             {authButtons()}
           </div>
         </HomeButtonContainer>
         <HomeButtonContainer>
-          {user ? '' : <h4>New to SweetTooth?</h4>}
+          {user ? '' : <h4>New to PlantFriend?</h4>}
 
           {user
             ? <div>
               <ProfileInfo>
                 You can update your payment method and address on your profile.
               </ProfileInfo>
-              <Button outline color='info' tag={Link} to={'/user-profile'}
+              <Button outline color='info' tag={Link} to={'/user'}
                 style={{ marginLeft: '4px' }}>
                 View Your Profile</Button>
             </div>
@@ -80,8 +83,6 @@ function Home({ user }) {
 
 Home.protoTypes = {
   user: PropTypes.any
-}
+};
 
 export default Home;
-
- 

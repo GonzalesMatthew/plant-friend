@@ -1,6 +1,6 @@
 import { UncontrolledCarousel } from 'reactstrap';
 import styled from 'styled-components';
-import logo from '../Assets/SweetToothLogo.png';
+import logo from '../../assets/PlantFriendLogo.png';
 
 const HomeContainer = styled.div`
   width: 100%;

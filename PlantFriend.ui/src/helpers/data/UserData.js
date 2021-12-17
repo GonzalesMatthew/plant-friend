@@ -9,13 +9,13 @@ const getUserById = (userId) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const addUser = () => new Promise((resolve, reject) => {
-  axios.post(`${dbUrl}/users`)
-    .then((response) => resolve(Object.values(response.data)))
+const addUser = (userObj) => new Promise((resolve, reject) => {
+  axios.post(`${dbUrl}/users`, userObj)
+    .then(getUserById(userObj.id))
     .catch((error) => reject(error));
 });
 
 export {
   addUser,
   getUserById
-}
+};

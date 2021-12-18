@@ -17,7 +17,8 @@ const getUserById = (userId) => new Promise((resolve, reject) => {
 
 const addUser = (userObj) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/users`, userObj)
-    .then(() => resolve(getUserById(userObj.id)))
+    .then(() => getUserByFirebaseId(userObj.firebaseId))
+    .then((resp) => resolve(resp))
     .catch((error) => reject(error));
 });
 

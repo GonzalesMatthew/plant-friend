@@ -43,7 +43,7 @@ namespace PlantFriend.DataAccess
             return user;
         }
 
-        internal object GetByFirebaseId(Guid id)
+        internal object GetByFirebaseId(string id)
         {
             using var db = new SqlConnection(_connectionString);
             var sql = @"select * from [User] where FirebaseId = @id";

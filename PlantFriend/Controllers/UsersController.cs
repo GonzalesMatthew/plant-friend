@@ -49,7 +49,7 @@ namespace PlantFriend.Controllers
         }
 
         [HttpGet("firebase/{id}")]
-        public IActionResult GetByFirebaseId(Guid id)
+        public IActionResult GetByFirebaseId(string id)
         {
             var user = _userRepo.GetByFirebaseId(id);
             if (user == null)

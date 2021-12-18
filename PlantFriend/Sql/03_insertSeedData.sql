@@ -1,7 +1,7 @@
 -- insert User data
 insert into [User] (Id, FirebaseId, [Admin], FirstName, LastName, Email, ImageUrl, DateCreated)
 	values 
-		('FD0AC8DB-AC5B-EC11-817C-0800275F12C6', 'INm6fTFzPmRqKfz6HRfciIKwjrM2', 1, 'Matthew', 'Gonzales', 'gonzalesmattg@gmail.com', '', cast('2021-12-10' as datetime))
+		('FD0AC8DB-AC5B-EC11-817C-0800275F12C6', 'ofiPqxJfxwMIyQeyKTQpQo2dDTj2', 1, 'Matthew', 'Gonzales', 'gonzalesmattg@gmail.com', 'https://lh3.googleusercontent.com/a-/AOh14GhylhyX2I8TnBC8wkAOtaks2E8V9gp7vFMiAlhUPQ=s96-c', cast('2021-12-10' as datetime))
 ;
 
 -- insert Plant data

@@ -16,7 +16,6 @@ axios.interceptors.request.use((request) => {
 const signInUser = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
   firebase.auth().signInWithPopup(provider).then((user) => {
-    console.warn('signInuser:', user);
     if (user.additionalUserInfo?.isNewUser) {
       const userObj = {
         firebaseId: user.user?.uid,
@@ -26,9 +25,7 @@ const signInUser = () => {
         email: user.user?.email,
         imageUrl: user.user?.photoURL,
       };
-      console.warn('new user object', userObj);
       addUser(userObj);
-      window.location.href = '/plants';
     }
   });
 };

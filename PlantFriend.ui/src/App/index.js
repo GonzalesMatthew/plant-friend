@@ -5,7 +5,7 @@ import 'firebase/auth';
 import NavBar from '../components/NavBar/NavBar';
 import Routes from '../helpers/Routes';
 import './App.scss';
-// import { getUserByFirebaseId } from '../helpers/data/UserData';
+import { getUserByFirebaseId } from '../helpers/data/UserData';
 
 function App() {
   const [user, setUser] = useState({});
@@ -19,13 +19,12 @@ function App() {
       if (authUser) {
         // eslint-disable-next-line no-undef
         authUser.getIdToken().then((token) => sessionStorage.setItem('token', token))
-          .then(console.warn('fb user on auth check:', authUser));
-        // .then(getUserByFirebaseId(authUser.uid)
-        //   .then((resp) => {
-        //     setUser(resp);
-        //     console.warn(resp);
-        //   }));
-        // console.warn(user, 'hello authed user');
+          .then(getUserByFirebaseId(authUser.uid)
+            .then((resp) => {
+              setUser(resp);
+              console.warn('setting user to:', resp);
+            }));
+        console.warn('hello authed user', user);
       } else {
         setUser(false);
         console.warn(user, 'hello not authed user');

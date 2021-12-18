@@ -48,6 +48,17 @@ namespace PlantFriend.Controllers
             return Ok(user);
         }
 
+        [HttpGet("firebase/{id}")]
+        public IActionResult GetByFirebaseId(string id)
+        {
+            var user = _userRepo.GetByFirebaseId(id);
+            if (user == null)
+            {
+                return NotFound($"No user with the firebase id {id} was found.");
+            }
+            return Ok(user);
+        }
+
         [HttpPut("{id})")]
         public IActionResult UpdateUser(Guid id, User user)
         {

@@ -1,11 +1,11 @@
 import React from 'react';
 
-function NotFound() {
+function User() {
   return (
     <div>
-      NotFound
+      User
     </div>
   );
 }
 
-export default NotFound;
+export default User;

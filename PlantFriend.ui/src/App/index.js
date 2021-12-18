@@ -5,35 +5,31 @@ import 'firebase/auth';
 import NavBar from '../components/NavBar/NavBar';
 import Routes from '../helpers/Routes';
 import './App.scss';
+import { getUserByFirebaseId } from '../helpers/data/UserData';
 
 function App() {
-  const [user, setUser] = useState({
-    fullName: 'Matthew',
-    profileImage: 'currentlyNone',
-    uid: 'alsoNone',
-    user: 'gonzalesmattg'
-  });
+  const [user, setUser] = useState({});
+  // fullName: 'Matthew',
+  // profileImage: 'currentlyNone',
+  // uid: 'alsoNone',
+  // user: 'gonzalesmattg'
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((authUser) => {
       if (authUser) {
-        console.warn('hello authed user');
         // eslint-disable-next-line no-undef
-        // authUser.getIdToken().then((token) => sessionStorage.setItem('token', token))
-        //   .then(
-        //     getUserByFirebaseId(authUser.uid)
-        //       .then((resp) => {
-        //         setUser(resp);
-        //       })
-        //   );
+        authUser.getIdToken().then((token) => sessionStorage.setItem('token', token))
+          .then(getUserByFirebaseId(authUser.uid)
+            .then((resp) => {
+              setUser(resp);
+            }));
+        console.warn(user, 'hello authed user');
       } else {
-        setUser(user);
-        console.warn('sup peeps');
+        setUser(false);
+        console.warn(user, 'hello not authed user');
       }
     });
   }, []);
-
-  console.warn(user);
 
   return (
     <div className='App'>

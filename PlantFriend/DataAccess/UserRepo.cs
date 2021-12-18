@@ -43,6 +43,14 @@ namespace PlantFriend.DataAccess
             return user;
         }
 
+        internal object GetByFirebaseId(Guid id)
+        {
+            using var db = new SqlConnection(_connectionString);
+            var sql = @"select * from [User] where FirebaseId = @id";
+            var user = db.QuerySingleOrDefault<User>(sql, new { id });
+            return user;
+        }
+
         internal User UpdateUser(Guid id, User user)
         {
             using var db = new SqlConnection(_connectionString);

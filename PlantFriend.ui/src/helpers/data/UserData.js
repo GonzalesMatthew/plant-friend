@@ -3,6 +3,12 @@ import firebaseConfig from '../apiKeys';
 
 const dbUrl = firebaseConfig.databaseURL;
 
+const getUserByFirebaseId = (uid) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/users/firebase/${uid}`)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
+
 const getUserById = (userId) => new Promise((resolve, reject) => {
   axios.get(`${dbUrl}/users/${userId}`)
     .then((response) => resolve(Object.values(response.data)))
@@ -11,11 +17,12 @@ const getUserById = (userId) => new Promise((resolve, reject) => {
 
 const addUser = (userObj) => new Promise((resolve, reject) => {
   axios.post(`${dbUrl}/users`, userObj)
-    .then(getUserById(userObj.id))
+    .then(() => resolve(getUserById(userObj.id)))
     .catch((error) => reject(error));
 });
 
 export {
-  addUser,
-  getUserById
+  getUserByFirebaseId,
+  getUserById,
+  addUser
 };

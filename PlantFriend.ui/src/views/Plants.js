@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PlantCard from '../components/Cards/PlantCard';
+import SearchBar from '../components/SearchBar/SearchBar';
 import getPlants from '../helpers/data/PlantData';
 
 function Plants() {
   const [plants, setPlants] = useState([]);
+  const [searchPlant, setSearchPlant] = useState('');
   useEffect(() => {
     getPlants().then(setPlants);
   }, []);
@@ -11,8 +13,12 @@ function Plants() {
     <>
       <div>
         Plants
-        {/* // search bar */}
-        {/* add plants button */}
+        <SearchBar
+          searchTerm={searchPlant}
+          setSearchTerm={setSearchPlant}
+          placeholder={'Search plant'}
+        />
+        <button>Add Plant</button>
       </div>
       <div className='d-flex flex-column justify-content-center align-items-center' >
         {plants.map((plant, i) => (

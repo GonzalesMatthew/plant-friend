@@ -4,6 +4,7 @@ import PlantCard from '../components/Cards/PlantCard';
 import InventoryCard from '../components/Cards/InventoryCard';
 import getUserPlantsByUserId from '../helpers/data/UserPlantData';
 import getUserInventory from '../helpers/data/UserInventoryData';
+import SearchBar from '../components/SearchBar/SearchBar';
 
 function User({
   user
@@ -12,6 +13,8 @@ function User({
   console.warn('also from the user page', user.id);
   const [userPlants, setUserPlants] = useState([]);
   const [userInventory, setUserInventory] = useState([]);
+  const [searchPlant, setSearchPlant] = useState('');
+  const [searchInventory, setSearchInventory] = useState('');
   useEffect(() => {
     getUserPlantsByUserId(user.id).then(setUserPlants);
     getUserInventory(user.id).then(setUserInventory);
@@ -20,10 +23,18 @@ function User({
     <>
       <div>
         User
-        {/* // search bar for plants */}
-        {/* add plants button */}
-        {/* search bar for inventory
-        add inventory button */}
+        <SearchBar
+          searchTerm={searchPlant}
+          setSearchTerm={setSearchPlant}
+          placeholder={'Search plant'}
+        />
+        <button>Add Plant</button>
+        <SearchBar
+          searchTerm={searchInventory}
+          setSearchTerm={setSearchInventory}
+          placeholder={'Search inventory'}
+        />
+        <button>Add Inventory</button>
       </div>
       <div className='d-flex flex-column justify-content-center align-items-center'>
         {userPlants.map((userPlant, i) => (

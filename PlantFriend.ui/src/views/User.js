@@ -44,7 +44,7 @@ function User({
       </div>
       <div>
         {userInventory.map((item, i) => (
-          
+          <div key={i}>{item.name},{i}</div>
         ))}
       </div>
     </>

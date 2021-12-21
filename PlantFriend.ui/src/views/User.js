@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import PlantCard from '../components/Cards/PlantCard';
 import getUserPlantsByUserId from '../helpers/data/UserPlantData';
+import getUserInventory from '../helpers/data/UserInventoryData';
 
 function User({
   user
@@ -9,8 +10,10 @@ function User({
   console.warn('hello from the user page', user);
   console.warn('also from the user page', user.id);
   const [userPlants, setUserPlants] = useState([]);
+  const [userInventory, setUserInventory] = useState([]);
   useEffect(() => {
     getUserPlantsByUserId(user.id).then(setUserPlants);
+    getUserInventory(user.id).then(setUserInventory);
   }, []);
   return (
     <>
@@ -37,6 +40,11 @@ function User({
             careNeeds={userPlant.plant.careNeeds}
             imageUrl={userPlant.plant.imageUrl}
           />
+        ))}
+      </div>
+      <div>
+        {userInventory.map((item, i) => (
+          
         ))}
       </div>
     </>

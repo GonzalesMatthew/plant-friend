@@ -9,9 +9,4 @@ const getUserPlantsByUserId = (uid) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-// const getPlantById
-// const addPlant
-// const updatePlant
-// const deletePlant
-
 export default getUserPlantsByUserId;

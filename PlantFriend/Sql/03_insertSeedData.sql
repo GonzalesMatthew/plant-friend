@@ -24,7 +24,7 @@ insert into [Log] (Id, UserPlantId, DateCreated, EntryNumber, [Entry], EntryDate
 ;
 
 -- insert UserInventory data
-insert into UserInventory (Id, UserId, Quantity, [Name], [Description])
+insert into UserInventory (Id, UserId, Quantity, [Name], [Description], ImageUrl)
 	values	
-		('33FB8308-BC5B-EC11-817C-0800275F12C6', 'FD0AC8DB-AC5B-EC11-817C-0800275F12C6', 1, 'Hand Trowel', 'Use the hand trowel to dig small holes, transplant seedlings, plant bulbs, and perform similar tasks.')
+		('33FB8308-BC5B-EC11-817C-0800275F12C6', 'FD0AC8DB-AC5B-EC11-817C-0800275F12C6', 1, 'Hand Trowel', 'Use the hand trowel to dig small holes, transplant seedlings, plant bulbs, and perform similar tasks.', 'https://cdn.shopify.com/s/files/1/0013/6393/5320/products/jp-general-shop-piginor-hand-trowel20200317_210031_2048x2048.jpg?v=1603079512')
 ;

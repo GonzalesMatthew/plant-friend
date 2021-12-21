@@ -65,6 +65,7 @@ CREATE TABLE dbo.UserInventory
 	Quantity int NOT NULL,
 	[Name] varchar(50) NOT NULL,
 	[Description] varchar(500) NOT NULL,
+	ImageUrl nvarchar(4000) NOT NULL,
 	CONSTRAINT FK_UserInventory_UserId FOREIGN KEY (UserId)
 		REFERENCES dbo.[User] (Id)
 	);

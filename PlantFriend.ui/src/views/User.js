@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import PlantCard from '../components/Cards/PlantCard';
+import InventoryCard from '../components/Cards/InventoryCard';
 import getUserPlantsByUserId from '../helpers/data/UserPlantData';
 import getUserInventory from '../helpers/data/UserInventoryData';
 
@@ -24,7 +25,7 @@ function User({
         {/* search bar for inventory
         add inventory button */}
       </div>
-      <div className='d-flex flex-column justify-content-center align-items-center' >
+      <div className='d-flex flex-column justify-content-center align-items-center'>
         {userPlants.map((userPlant, i) => (
           <PlantCard
             key={i}
@@ -42,9 +43,17 @@ function User({
           />
         ))}
       </div>
-      <div>
+      <div className='d-flex flex-column justify-content-center align-items-center'>
         {userInventory.map((item, i) => (
-          <div key={i}>{item.name},{i}</div>
+          <InventoryCard
+            key={i}
+            id={item.id}
+            quantity={item.quantity}
+            name={item.name}
+            userId={item.userId}
+            description={item.description}
+            imageUrl={item.imageUrl}
+          />
         ))}
       </div>
     </>

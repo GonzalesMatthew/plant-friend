@@ -45,7 +45,7 @@ function PlantCard({
 
 export default PlantCard;
 
-PlantCard.PropTypes = {
+PlantCard.propTypes = {
   user: PropTypes.any,
   id: PropTypes.string,
   name: PropTypes.string,

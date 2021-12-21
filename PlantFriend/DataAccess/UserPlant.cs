@@ -16,6 +16,11 @@ namespace PlantFriend.DataAccess
         {
             _connectionString = config.GetConnectionString("PlantFriend");
         }
+        UserPlant Map(UserPlant userPlant, Plant plant)
+        {
+            userPlant.Plant = plant;
+            return userPlant;
+        }
 
         internal IEnumerable<UserPlant> GetAll()
         {
@@ -35,11 +40,25 @@ namespace PlantFriend.DataAccess
             newUserPlant.Id = id;
         }
 
+        internal object GetAllByUserId(Guid userId)
+        {
+            using var db = new SqlConnection(_connectionString);
+            var sql = @"select * 
+                                 from UserPlant up
+	                                 left join Plant u on up.PlantId = u.Id
+                                 where UserId = @userId";
+            var usersPlants = db.Query<UserPlant, Plant, UserPlant>(sql, Map,  new { userId });
+            return usersPlants;
+        }
+
         internal UserPlant GetById(Guid id)
         {
             using var db = new SqlConnection(_connectionString);
             var sql = @"select * from UserPlant where Id = @id";
             var userPlant = db.QuerySingleOrDefault<UserPlant>(sql, new { id });
+            var plant = db.QuerySingleOrDefault<Plant>("select * from plant where id = @id", new { id = userPlant.PlantId });
+            userPlant.Plant = plant;
+
             return userPlant;
         }
 

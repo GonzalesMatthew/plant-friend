@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import PlantCard from '../components/Cards/PlantCard';
-import getUserPlantsByUserId from '../helpers/data/UserPlant';
+import getUserPlantsByUserId from '../helpers/data/UserPlantData';
 
 function User({
   user
 }) {
+  console.warn('hello from the user page', user);
+  console.warn('also from the user page', user.id);
   const [userPlants, setUserPlants] = useState([]);
   useEffect(() => {
     getUserPlantsByUserId(user.id).then(setUserPlants);
@@ -20,20 +22,20 @@ function User({
         add inventory button */}
       </div>
       <div className='d-flex flex-column justify-content-center align-items-center' >
-        {userPlants.map((plant, i) => (
+        {userPlants.map((userPlant, i) => (
           <PlantCard
             key={i}
-            id={plant.id}
-            name={plant.name}
-            light={plant.light}
-            water={plant.water}
-            waterFrequency={plant.waterFrequency}
-            temperature={plant.temperature}
-            nutrients={plant.nutrients}
-            nutrientsFrequency={plant.nutrientsFrequency}
-            description={plant.description}
-            careNeeds={plant.careNeeds}
-            imageUrl={plant.imageUrl}
+            id={userPlant.plant.id}
+            name={userPlant.plant.name}
+            light={userPlant.plant.light}
+            water={userPlant.plant.water}
+            waterFrequency={userPlant.plant.waterFrequency}
+            temperature={userPlant.plant.temperature}
+            nutrients={userPlant.plant.nutrients}
+            nutrientsFrequency={userPlant.plant.nutrientsFrequency}
+            description={userPlant.plant.description}
+            careNeeds={userPlant.plant.careNeeds}
+            imageUrl={userPlant.plant.imageUrl}
           />
         ))}
       </div>

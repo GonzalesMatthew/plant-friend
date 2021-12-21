@@ -19,15 +19,9 @@ function App() {
       if (authUser) {
         // eslint-disable-next-line no-undef
         authUser.getIdToken().then((token) => sessionStorage.setItem('token', token))
-          .then(getUserByFirebaseId(authUser.uid)
-            .then((resp) => {
-              setUser(resp);
-              console.warn('setting user to:', resp);
-            }));
-        console.warn('hello authed user', user);
+          .then(getUserByFirebaseId(authUser.uid).then(setUser));
       } else {
         setUser(false);
-        console.warn(user, 'hello not authed user');
       }
     });
   }, []);

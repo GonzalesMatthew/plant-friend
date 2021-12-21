@@ -35,6 +35,14 @@ namespace PlantFriend.DataAccess
             newUserInventory.Id = id;
         }
 
+        internal object GetAllByUserId(Guid userId)
+        {
+            using var db = new SqlConnection(_connectionString);
+            var sql = @"select * from UserInventory where UserId = @userId";
+            var usersInventory = db.Query<UserInventory>(sql, new { userId });
+            return usersInventory;
+        }
+
         internal UserInventory GetById(Guid id)
         {
             using var db = new SqlConnection(_connectionString);

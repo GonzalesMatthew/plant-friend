@@ -13,7 +13,7 @@ function PlantCard({
   ...rest
 }) {
   return (
-    <div className="col-sm-4">
+    <Col className="col-sm-4">
       <Card className='d-flex justify-content-center' body>
         <CardTitle tag='h5'>{rest.name}</CardTitle>
         <CardText style={{ minHeight: 70 }}>
@@ -39,7 +39,7 @@ function PlantCard({
           </Col>
         </Row>
       </Card>
-    </div>
+    </Col>
   );
 }
 

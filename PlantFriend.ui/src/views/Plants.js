@@ -1,19 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Container, Row } from 'reactstrap';
+import {
+  Col, Container, Row, Button
+} from 'reactstrap';
 import PlantCard from '../components/Cards/PlantCard';
+import FormModal from '../components/Modal/FormModal';
 import SearchBar from '../components/SearchBar/SearchBar';
 import getPlants from '../helpers/data/PlantData';
 
 function Plants() {
   const [plants, setPlants] = useState([]);
+  const [modalStatus, setModalStatus] = useState(false);
   const [searchPlant, setSearchPlant] = useState('');
+  const [modalTitle, setModalTitle] = useState('');
+
   useEffect(() => {
     getPlants().then(setPlants);
   }, []);
+
+  const modalToggle = () => setModalStatus(!modalStatus);
+
   return (
     <>
-      Plants
+      <h1>Plants</h1>
+      <FormModal modalStatus={modalStatus} modalToggle={modalToggle} modalTitle={modalTitle} />
       <Row>
+        <Col>
+          Plants
+        </Col>
         <Col>
           <SearchBar
             searchTerm={searchPlant}
@@ -22,7 +35,7 @@ function Plants() {
           />
         </Col>
         <Col>
-          <button>Add Plant</button>
+          <Button onClick={() => { modalToggle(); setModalTitle('Add Plant'); }}>Add Plant</Button>
         </Col>
       </Row>
       <Container>

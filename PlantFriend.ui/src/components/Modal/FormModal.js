@@ -3,25 +3,38 @@ import PropTypes from 'prop-types';
 import {
   Modal, ModalBody, ModalHeader
 } from 'reactstrap';
-const FormModal = ({
+
+function FormModal({
   modalStatus,
   modalToggle,
-  modalTitle,
-}) => {
+  modalTitle
+}) {
+  let formIdentifier = true;
+  switch (modalTitle) {
+    case 'Add Plant':
+      formIdentifier = true;
+      break;
+    case 'Add Inventory':
+      formIdentifier = false;
+      break;
+    default:
+      console.warn('No such case for modal title');
+  }
+
   return (
     <Modal
-      id={id}
+      id={modalTitle}
       size='md'
       isOpen={modalStatus}
       toggle={modalToggle}
     >
       <ModalHeader toggle={modalToggle}>{modalTitle}</ModalHeader>
       <ModalBody>
-        {/* form goes here */}
+        { formIdentifier ? console.warn('Plant Form') : console.warn('Inventory Form')}
       </ModalBody>
     </Modal>
   );
-};
+}
 
 export default FormModal;
 

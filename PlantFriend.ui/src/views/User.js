@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Row } from 'reactstrap';
+import { Col, Row, Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 import PlantCard from '../components/Cards/PlantCard';
 import InventoryCard from '../components/Cards/InventoryCard';
 import getUserPlantsByUserId from '../helpers/data/UserPlantData';
 import getUserInventory from '../helpers/data/UserInventoryData';
 import SearchBar from '../components/SearchBar/SearchBar';
+import FormModal from '../components/Modal/FormModal';
 
 function User({
   user
@@ -16,14 +17,24 @@ function User({
   const [userInventory, setUserInventory] = useState([]);
   const [searchPlant, setSearchPlant] = useState('');
   const [searchInventory, setSearchInventory] = useState('');
+  const [modalStatus, setModalStatus] = useState(false);
+  const [modalTitle, setModalTitle] = useState('');
+
   useEffect(() => {
     getUserPlantsByUserId(user.id).then(setUserPlants);
     getUserInventory(user.id).then(setUserInventory);
   }, []);
+
+  const modalToggle1 = () => setModalStatus(!modalStatus);
+
   return (
     <>
-      User
+      <h1>Profile</h1>
+      <FormModal modalToggle={modalToggle1} modalStatus={modalStatus} modalTitle={modalTitle} />
       <Row>
+        <Col>
+          Plant
+        </Col>
         <Col>
           <SearchBar
             searchTerm={searchPlant}
@@ -32,10 +43,13 @@ function User({
           />
         </Col>
         <Col>
-          <button>Add Plant</button>
+          <Button onClick={() => console.warn('scheduler goes here')}>Schedule</Button>
         </Col>
       </Row>
       <Row>
+        <Col>
+          Inventory
+        </Col>
         <Col>
           <SearchBar
             searchTerm={searchInventory}
@@ -44,7 +58,7 @@ function User({
           />
         </Col>
         <Col>
-          <button>Add Inventory</button>
+          <Button onClick={() => { modalToggle1(); setModalTitle('Add Inventory'); }}>Add Inventory</Button>
         </Col>
       </Row>
       <div className='d-flex flex-column justify-content-center align-items-center'>

@@ -26,6 +26,12 @@ namespace PlantFriend.Controllers
             return Ok(_userRepo.GetAll());
         }
 
+        [HttpGet("user/{userId}")]
+        public IActionResult GetUsersInventoryByUserId(Guid userId)
+        {
+            return Ok(_userInventoryRepo.GetAllByUserId(userId));
+        }
+
         [HttpPost]
         public IActionResult AddUser(User newUser)
         {

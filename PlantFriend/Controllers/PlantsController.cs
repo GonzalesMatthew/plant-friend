@@ -48,7 +48,7 @@ namespace PlantFriend.Controllers
             return Ok(plant);
         }
 
-        [HttpPut("{id})")]
+        [HttpPut("{id}")]
         public IActionResult UpdatePlant(Guid id, Plant plant)
         {
             var plantToUpdate = _plantRepo.GetById(id);

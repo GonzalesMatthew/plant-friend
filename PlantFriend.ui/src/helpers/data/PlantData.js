@@ -15,6 +15,12 @@ const addPlant = (obj) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const updatePlant = (obj, id) => new Promise((resolve, reject) => {
+  axios.put(`${dbUrl}/plants/${id}`, obj)
+    .then(() => getPlants().then(resolve))
+    .catch((error) => reject(error));
+});
+
 const deletePlant = (id) => new Promise((resolve, reject) => {
   axios.delete(`${dbUrl}/plants/${id}`)
     .then(() => getPlants().then(resolve))
@@ -23,10 +29,10 @@ const deletePlant = (id) => new Promise((resolve, reject) => {
 
 // const getPlantById
 // const updatePlant
-// const deletePlant
 
 export {
   getPlants,
   addPlant,
+  updatePlant,
   deletePlant
 };

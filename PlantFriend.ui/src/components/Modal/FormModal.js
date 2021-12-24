@@ -4,8 +4,9 @@ import {
   Modal, ModalBody, ModalHeader
 } from 'reactstrap';
 import PlantForm from '../Forms/PlantForm';
-import { addPlant } from '../../helpers/data/PlantData';
+import { addPlant, updatePlant } from '../../helpers/data/PlantData';
 import { addUserInventory } from '../../helpers/data/UserInventoryData';
+import InventoryForm from '../Forms/InventoryForm';
 
 function FormModal({
   modalStatus,
@@ -16,6 +17,7 @@ function FormModal({
   ...rest
 }) {
   const [plantObj, setPlantObj] = useState({
+    id: rest.id || null,
     name: rest.name || '',
     water: rest.water || '',
     waterFrequency: rest.waterFrequency || '',
@@ -27,7 +29,14 @@ function FormModal({
     careNeeds: rest.careNeeds || '',
     light: rest.light || '',
   });
-  const [inventoryObj, setInventoryObj] = useState({});
+  const [inventoryObj, setInventoryObj] = useState({
+    id: rest.id || null,
+    userId: rest.userId || '',
+    quantity: rest.quantity || '',
+    name: rest.name || '',
+    description: rest.description || '',
+    imageUrl: rest.imageUrl || '',
+  });
 
   let formIdentifier = 0;
   switch (modalTitle) {
@@ -45,31 +54,42 @@ function FormModal({
   }
 
   const handleInputChange = (e) => {
-    if (formIdentifier === true) {
+    if (formIdentifier === 1 || formIdentifier === 2) {
       setPlantObj((prevState) => ({
         ...prevState,
         [e.target.name]: e.target.value
       }));
-    } else {
+    } else if (formIdentifier === 3 || formIdentifier === 4) {
       setInventoryObj((prevState) => ({
         ...prevState,
         [e.target.name]: e.target.value
       }));
+    } else {
+      console.warn('handleInputChange function is not finding formIdentifier value 1, 2, 3 or 4');
     }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formIdentifier === 1) {
+      console.warn('trying to add plant', plantObj);
+      delete plantObj.id;
       addPlant(plantObj).then(setPlants);
-    } else {
+    } else if (formIdentifier === 2) {
+      console.warn('trying to update plant', plantObj);
+      updatePlant(plantObj, rest.id).then(setPlants);
+    } else if (formIdentifier === 3) {
+      console.warn('trying to add inventory', inventoryObj);
       addUserInventory(inventoryObj).then(setInventory);
+    } else {
+      console.warn('plantObj', plantObj);
+      console.warn('inventoryObj', inventoryObj);
     }
     modalToggle();
   };
 
   return (
     <Modal
-      id={modalTitle}
+      id={rest.id}
       size='md'
       isOpen={modalStatus}
       toggle={modalToggle}
@@ -82,8 +102,9 @@ function FormModal({
             handleInputChange={handleInputChange}
             handleSubmit={handleSubmit}
             modalToggle={modalToggle}
+            formIdentifier={formIdentifier}
           />
-          : <PlantForm
+          : <InventoryForm
             formObj={inventoryObj}
             handleInputChange={handleInputChange}
             handleSubmit={handleSubmit}
@@ -104,6 +125,7 @@ FormModal.propTypes = {
   user: PropTypes.any,
   setPlants: PropTypes.func,
   setInventory: PropTypes.func,
+  id: PropTypes.string,
   name: PropTypes.string,
   water: PropTypes.string,
   waterFrequency: PropTypes.string,
@@ -113,5 +135,7 @@ FormModal.propTypes = {
   description: PropTypes.string,
   imageUrl: PropTypes.string,
   careNeeds: PropTypes.string,
-  light: PropTypes.string
+  light: PropTypes.string,
+  userId: PropTypes.string,
+  quantity: PropTypes.number,
 };

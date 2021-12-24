@@ -16,7 +16,7 @@ function PlantCard({
 }) {
   return (
     <Col className="col-sm-4">
-      <Card className='d-flex justify-content-center' body>
+      <Card id={rest.id} className='d-flex justify-content-center' body>
         <CardTitle tag='h5'>{rest.name}</CardTitle>
         <CardText style={{ minHeight: 70 }}>
           {rest.light}<br/>
@@ -39,6 +39,7 @@ function PlantCard({
         </Row>
       </Card>
       <FormModal
+        id={rest.id}
         name={rest.name}
         water={rest.water}
         waterFrequency={rest.waterFrequency}

@@ -12,29 +12,33 @@ function FormModal({
   modalToggle,
   modalTitle,
   setPlants,
-  setInventory
+  setInventory,
+  ...rest
 }) {
   const [plantObj, setPlantObj] = useState({
-    name: '',
-    water: '',
-    waterFrequency: '',
-    nutrients: '',
-    nutrientsFrequency: '',
-    temperature: '',
-    description: '',
-    imageUrl: '',
-    careNeeds: '',
-    light: ''
+    name: rest.name || '',
+    water: rest.water || '',
+    waterFrequency: rest.waterFrequency || '',
+    nutrients: rest.nutrients || '',
+    nutrientsFrequency: rest.nutrientsFrequency || '',
+    temperature: rest.temperature || '',
+    description: rest.description || '',
+    imageUrl: rest.imageUrl || '',
+    careNeeds: rest.careNeeds || '',
+    light: rest.light || '',
   });
   const [inventoryObj, setInventoryObj] = useState({});
 
-  let formIdentifier = true;
+  let formIdentifier = 0;
   switch (modalTitle) {
     case 'Add Plant':
-      formIdentifier = true;
+      formIdentifier = 1;
+      break;
+    case 'Update Plant':
+      formIdentifier = 2;
       break;
     case 'Add Inventory':
-      formIdentifier = false;
+      formIdentifier = 3;
       break;
     default:
       console.warn('No such case for modal title');
@@ -55,7 +59,7 @@ function FormModal({
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (formIdentifier === true) {
+    if (formIdentifier === 1) {
       addPlant(plantObj).then(setPlants);
     } else {
       addUserInventory(inventoryObj).then(setInventory);
@@ -72,7 +76,7 @@ function FormModal({
     >
       <ModalHeader toggle={modalToggle}>{modalTitle}</ModalHeader>
       <ModalBody>
-        {formIdentifier
+        {formIdentifier === 1 || formIdentifier === 2
           ? <PlantForm
             formObj={plantObj}
             handleInputChange={handleInputChange}
@@ -99,5 +103,15 @@ FormModal.propTypes = {
   modalTitle: PropTypes.string,
   user: PropTypes.any,
   setPlants: PropTypes.func,
-  setInventory: PropTypes.func
+  setInventory: PropTypes.func,
+  name: PropTypes.string,
+  water: PropTypes.string,
+  waterFrequency: PropTypes.string,
+  nutrients: PropTypes.string,
+  nutrientsFrequency: PropTypes.string,
+  temperature: PropTypes.string,
+  description: PropTypes.string,
+  imageUrl: PropTypes.string,
+  careNeeds: PropTypes.string,
+  light: PropTypes.string
 };

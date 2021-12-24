@@ -9,6 +9,7 @@ import {
   Col
 } from 'reactstrap';
 import { deletePlant } from '../../helpers/data/PlantData';
+import FormModal from '../Modal/FormModal';
 
 function PlantCard({
   ...rest
@@ -30,13 +31,26 @@ function PlantCard({
         <img className='m-auto img-thumbnail' src={rest.imageUrl} alt={rest.name} />
         <Row>
           <Col>
-            <Button>Update</Button>
+            <Button onClick={() => rest.modalToggle()}>Update</Button>
           </Col>
           <Col>
             <Button onClick={() => deletePlant(rest.id).then(rest.setPlants)}>Delete</Button>
           </Col>
         </Row>
       </Card>
+      <FormModal
+        name={rest.name}
+        water={rest.water}
+        waterFrequency={rest.waterFrequency}
+        nutrients={rest.nutrients}
+        nutrientsFrequency={rest.nutrientsFrequency}
+        temperature={rest.temperature}
+        description={rest.description}
+        imageUrl={rest.imageUrl}
+        careNeeds={rest.careNeeds}
+        light={rest.light}
+        modalTitle='Update Plant'
+      />
     </Col>
   );
 }
@@ -46,6 +60,7 @@ export default PlantCard;
 PlantCard.propTypes = {
   user: PropTypes.any,
   setPlants: PropTypes.func,
+  modalToggle: PropTypes.func,
   id: PropTypes.string,
   name: PropTypes.string,
   light: PropTypes.string,

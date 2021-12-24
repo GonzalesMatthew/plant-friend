@@ -8,7 +8,7 @@ const Div = styled.div`
 
 const SearchBar = ({ searchTerm, setSearchTerm, placeholder }) => (
   <Div>
-    <input fullWidth={true} type="text" value={searchTerm} onChange={(e) => { setSearchTerm(e.target.value); } } placeholder={placeholder}></input>
+    <input type="text" value={searchTerm} onChange={(e) => { setSearchTerm(e.target.value); } } placeholder={placeholder}></input>
   </Div>
 );
 

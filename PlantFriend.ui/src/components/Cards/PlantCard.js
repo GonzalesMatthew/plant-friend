@@ -1,45 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  // Button,
+  Button,
   Card,
   CardText,
   CardTitle,
   Row,
   Col
 } from 'reactstrap';
+import { deletePlant } from '../../helpers/data/PlantData';
+import FormModal from '../Modal/FormModal';
 
 function PlantCard({
+  setPlants,
   ...rest
 }) {
+  const [modalStatus, setModalStatus] = useState(false);
+  const modalToggle = () => setModalStatus(!modalStatus);
+
   return (
-    <div className="col-sm-4">
-      <Card className='d-flex justify-content-center' body>
+    <Col className="col-sm-4">
+      <Card id={rest.id} className='d-flex justify-content-center' body>
         <CardTitle tag='h5'>{rest.name}</CardTitle>
         <CardText style={{ minHeight: 70 }}>
-          {rest.light}<br />
-          {rest.nutrients}<br />
-          {rest.nutrientsFrequency}<br />
-          {rest.water}<br />
-          {rest.waterFrequency}<br />
-          {rest.temperature}<br />
-          {rest.description}<br />
-          {rest.careNeeds}<br />
+          {rest.light}<br/>
+          {rest.nutrients}<br/>
+          {rest.nutrientsFrequency}<br/>
+          {rest.water}<br/>
+          {rest.waterFrequency}<br/>
+          {rest.temperature}<br/>
+          {rest.description}<br/>
+          {rest.careNeeds}<br/>
         </CardText>
         <img className='m-auto img-thumbnail' src={rest.imageUrl} alt={rest.name} />
         <Row>
           <Col>
-            {/* <Button onClick={(e) => minusOne(e)}><i className='fas fa-minus fa-2x'></i></Button> */}
-          </Col>
-          <Col className='m-auto'>
-            {/* {counter} */}
+            <Button onClick={() => modalToggle()}>Update</Button>
           </Col>
           <Col>
-            {/* <Button onClick={(e) => plusOne(e)}><i className='fas fa-plus fa-2x'></i></Button> */}
+            <Button onClick={() => deletePlant(rest.id).then(setPlants)}>Delete</Button>
           </Col>
         </Row>
       </Card>
-    </div>
+      <FormModal
+        id={rest.id}
+        name={rest.name}
+        water={rest.water}
+        waterFrequency={rest.waterFrequency}
+        nutrients={rest.nutrients}
+        nutrientsFrequency={rest.nutrientsFrequency}
+        temperature={rest.temperature}
+        description={rest.description}
+        imageUrl={rest.imageUrl}
+        careNeeds={rest.careNeeds}
+        light={rest.light}
+        modalStatus={modalStatus} modalToggle={modalToggle} modalTitle='Update Plant' setPlants={setPlants}
+      />
+    </Col>
   );
 }
 
@@ -47,6 +64,7 @@ export default PlantCard;
 
 PlantCard.propTypes = {
   user: PropTypes.any,
+  setPlants: PropTypes.func,
   id: PropTypes.string,
   name: PropTypes.string,
   light: PropTypes.string,

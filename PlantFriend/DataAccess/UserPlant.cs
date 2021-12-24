@@ -44,9 +44,9 @@ namespace PlantFriend.DataAccess
         {
             using var db = new SqlConnection(_connectionString);
             var sql = @"select * 
-                                 from UserPlant up
-	                                 left join Plant u on up.PlantId = u.Id
-                                 where UserId = @userId";
+                        from UserPlant up
+	                        left join Plant u on up.PlantId = u.Id
+                        where UserId = @userId";
             var usersPlants = db.Query<UserPlant, Plant, UserPlant>(sql, Map,  new { userId });
             return usersPlants;
         }

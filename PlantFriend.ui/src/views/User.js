@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { Col, Row, Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 import PlantCard from '../components/Cards/PlantCard';
 import InventoryCard from '../components/Cards/InventoryCard';
 import getUserPlantsByUserId from '../helpers/data/UserPlantData';
-import getUserInventory from '../helpers/data/UserInventoryData';
+import { getUserInventoryByUserId } from '../helpers/data/UserInventoryData';
 import SearchBar from '../components/SearchBar/SearchBar';
+import FormModal from '../components/Modal/FormModal';
 
 function User({
   user
@@ -15,29 +17,56 @@ function User({
   const [userInventory, setUserInventory] = useState([]);
   const [searchPlant, setSearchPlant] = useState('');
   const [searchInventory, setSearchInventory] = useState('');
+  const [modalStatus, setModalStatus] = useState(false);
+  const [modalTitle, setModalTitle] = useState('');
+
   useEffect(() => {
     getUserPlantsByUserId(user.id).then(setUserPlants);
-    getUserInventory(user.id).then(setUserInventory);
+    getUserInventoryByUserId(user.id).then(setUserInventory);
   }, []);
+
+  const modalToggle1 = () => setModalStatus(!modalStatus);
+
   return (
     <>
-      <div>
-        User
-        <SearchBar
-          searchTerm={searchPlant}
-          setSearchTerm={setSearchPlant}
-          placeholder={'Search plant'}
-        />
-        <button>Add Plant</button>
-        <SearchBar
-          searchTerm={searchInventory}
-          setSearchTerm={setSearchInventory}
-          placeholder={'Search inventory'}
-        />
-        <button>Add Inventory</button>
-      </div>
+      <h1>Profile</h1>
+      <FormModal modalToggle={modalToggle1} modalStatus={modalStatus} modalTitle={modalTitle} />
+      <Row>
+        <Col>
+          Plant
+        </Col>
+        <Col>
+          <SearchBar
+            searchTerm={searchPlant}
+            setSearchTerm={setSearchPlant}
+            placeholder={'Search plant'}
+          />
+        </Col>
+        <Col>
+          <Button onClick={() => console.warn('scheduler goes here')}>Schedule</Button>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          Inventory
+        </Col>
+        <Col>
+          <SearchBar
+            searchTerm={searchInventory}
+            setSearchTerm={setSearchInventory}
+            placeholder={'Search inventory'}
+          />
+        </Col>
+        <Col>
+          <Button onClick={() => { modalToggle1(); setModalTitle('Add Inventory'); }}>Add Inventory</Button>
+        </Col>
+      </Row>
       <div className='d-flex flex-column justify-content-center align-items-center'>
-        {userPlants.map((userPlant, i) => (
+        {userPlants.filter((userPlant) => {
+          if ((`${userPlant.plant.name}`).toLowerCase().includes(searchPlant.toLowerCase())) {
+            return userPlant;
+          } return '';
+        }).map((userPlant, i) => (
           <PlantCard
             key={i}
             id={userPlant.plant.id}
@@ -55,7 +84,11 @@ function User({
         ))}
       </div>
       <div className='d-flex flex-column justify-content-center align-items-center'>
-        {userInventory.map((item, i) => (
+        {userInventory.filter((item) => {
+          if ((`${item.name}`).toLowerCase().includes(searchInventory.toLowerCase())) {
+            return item;
+          } return '';
+        }).map((item, i) => (
           <InventoryCard
             key={i}
             id={item.id}

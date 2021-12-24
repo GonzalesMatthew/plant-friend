@@ -5,7 +5,7 @@ import {
 import PlantCard from '../components/Cards/PlantCard';
 import FormModal from '../components/Modal/FormModal';
 import SearchBar from '../components/SearchBar/SearchBar';
-import getPlants from '../helpers/data/PlantData';
+import { getPlants } from '../helpers/data/PlantData';
 
 function Plants() {
   const [plants, setPlants] = useState([]);
@@ -22,7 +22,7 @@ function Plants() {
   return (
     <>
       <h1>Plants</h1>
-      <FormModal modalStatus={modalStatus} modalToggle={modalToggle} modalTitle={modalTitle} />
+      <FormModal modalStatus={modalStatus} modalToggle={modalToggle} modalTitle={modalTitle} setPlants={setPlants}/>
       <Row>
         <Col>
           Plants

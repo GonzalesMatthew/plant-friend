@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import PlantCard from '../components/Cards/PlantCard';
 import InventoryCard from '../components/Cards/InventoryCard';
 import getUserPlantsByUserId from '../helpers/data/UserPlantData';
-import getUserInventoryByUserId from '../helpers/data/UserInventoryData';
+import { getUserInventoryByUserId } from '../helpers/data/UserInventoryData';
 import SearchBar from '../components/SearchBar/SearchBar';
 import FormModal from '../components/Modal/FormModal';
 

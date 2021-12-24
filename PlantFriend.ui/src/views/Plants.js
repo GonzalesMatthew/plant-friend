@@ -58,6 +58,7 @@ function Plants() {
               description={plant.description}
               careNeeds={plant.careNeeds}
               imageUrl={plant.imageUrl}
+              setPlants={setPlants}
             />
           ))}
         </Row>

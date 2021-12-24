@@ -15,12 +15,18 @@ const addPlant = (obj) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const deletePlant = (id) => new Promise((resolve, reject) => {
+  axios.delete(`${dbUrl}/plants/${id}`)
+    .then(() => getPlants().then(resolve))
+    .catch((error) => reject(error));
+});
+
 // const getPlantById
-// const addPlant
 // const updatePlant
 // const deletePlant
 
 export {
   getPlants,
-  addPlant
+  addPlant,
+  deletePlant
 };

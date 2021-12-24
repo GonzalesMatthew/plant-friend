@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  // Button,
+  Button,
   Card,
   CardText,
   CardTitle,
   Row,
   Col
 } from 'reactstrap';
+import { deletePlant } from '../../helpers/data/PlantData';
 
 function PlantCard({
   ...rest
@@ -29,13 +30,10 @@ function PlantCard({
         <img className='m-auto img-thumbnail' src={rest.imageUrl} alt={rest.name} />
         <Row>
           <Col>
-            {/* <Button onClick={(e) => minusOne(e)}><i className='fas fa-minus fa-2x'></i></Button> */}
-          </Col>
-          <Col className='m-auto'>
-            {/* {counter} */}
+            <Button>Update</Button>
           </Col>
           <Col>
-            {/* <Button onClick={(e) => plusOne(e)}><i className='fas fa-plus fa-2x'></i></Button> */}
+            <Button onClick={() => deletePlant(rest.id).then(rest.setPlants)}>Delete</Button>
           </Col>
         </Row>
       </Card>
@@ -47,6 +45,7 @@ export default PlantCard;
 
 PlantCard.propTypes = {
   user: PropTypes.any,
+  setPlants: PropTypes.func,
   id: PropTypes.string,
   name: PropTypes.string,
   light: PropTypes.string,

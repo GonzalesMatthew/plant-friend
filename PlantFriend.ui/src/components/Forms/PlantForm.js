@@ -7,7 +7,8 @@ import {
 function PlantForm({
   formObj,
   handleInputChange,
-  handleSubmit
+  handleSubmit,
+  modalToggle,
 }) {
   return (
     <Form
@@ -146,7 +147,7 @@ function PlantForm({
       </FormGroup>
 
       <Button type='submit'>Add Plant</Button>
-      <Button>Cancel</Button>
+      <Button onClick={ () => modalToggle()}>Cancel</Button>
     </Form>
   );
 }
@@ -155,6 +156,7 @@ PlantForm.propTypes = {
   formObj: PropTypes.object,
   handleInputChange: PropTypes.func,
   handleSubmit: PropTypes.func,
+  modalToggle: PropTypes.func
 };
 
 export default PlantForm;

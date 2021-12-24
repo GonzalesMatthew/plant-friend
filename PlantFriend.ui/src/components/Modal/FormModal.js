@@ -14,7 +14,7 @@ function FormModal({
   setPlants,
   setInventory
 }) {
-  const [formObj, setFormObj] = useState({
+  const [plantObj, setPlantObj] = useState({
     name: '',
     water: '',
     waterFrequency: '',
@@ -26,6 +26,7 @@ function FormModal({
     careNeeds: '',
     light: ''
   });
+  const [inventoryObj, setInventoryObj] = useState({});
 
   let formIdentifier = true;
   switch (modalTitle) {
@@ -40,20 +41,26 @@ function FormModal({
   }
 
   const handleInputChange = (e) => {
-    setFormObj((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value
-    }));
+    if (formIdentifier === true) {
+      setPlantObj((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value
+      }));
+    } else {
+      setInventoryObj((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value
+      }));
+    }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // set err logic if necessary field is needed here
-    // create logic to choose which method to use:
     if (formIdentifier === true) {
-      addPlant(formObj).then(setPlants);
+      addPlant(plantObj).then(setPlants);
     } else {
-      addUserInventory(formObj).then(setInventory);
+      addUserInventory(inventoryObj).then(setInventory);
     }
+    modalToggle();
   };
 
   return (
@@ -65,13 +72,20 @@ function FormModal({
     >
       <ModalHeader toggle={modalToggle}>{modalTitle}</ModalHeader>
       <ModalBody>
-        { formIdentifier
+        {formIdentifier
           ? <PlantForm
-              formObj={formObj}
-              handleInputChange={handleInputChange}
-              handleSubmit={handleSubmit}
-            />
-          : console.warn('Inventory Form')}
+            formObj={plantObj}
+            handleInputChange={handleInputChange}
+            handleSubmit={handleSubmit}
+            modalToggle={modalToggle}
+          />
+          : <PlantForm
+            formObj={inventoryObj}
+            handleInputChange={handleInputChange}
+            handleSubmit={handleSubmit}
+            modalToggle={modalToggle}
+          />
+        }
       </ModalBody>
     </Modal>
   );

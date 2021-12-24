@@ -17,14 +17,14 @@ function PlantCard({
       <Card className='d-flex justify-content-center' body>
         <CardTitle tag='h5'>{rest.name}</CardTitle>
         <CardText style={{ minHeight: 70 }}>
-          {rest.light}<br />
-          {rest.nutrients}<br />
-          {rest.nutrientsFrequency}<br />
-          {rest.water}<br />
-          {rest.waterFrequency}<br />
-          {rest.temperature}<br />
-          {rest.description}<br />
-          {rest.careNeeds}<br />
+          {rest.light}<br/>
+          {rest.nutrients}<br/>
+          {rest.nutrientsFrequency}<br/>
+          {rest.water}<br/>
+          {rest.waterFrequency}<br/>
+          {rest.temperature}<br/>
+          {rest.description}<br/>
+          {rest.careNeeds}<br/>
         </CardText>
         <img className='m-auto img-thumbnail' src={rest.imageUrl} alt={rest.name} />
         <Row>

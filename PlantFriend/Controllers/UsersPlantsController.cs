@@ -21,9 +21,15 @@ namespace PlantFriend.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllUserPlantss()
+        public IActionResult GetAllUserPlants()
         {
             return Ok(_userPlantRepo.GetAll());
+        }
+
+        [HttpGet("user/{userId}")]
+        public IActionResult GetAllUserPlantsByUserId(Guid userId)
+        {
+            return Ok(_userPlantRepo.GetAllByUserId(userId));
         }
 
         [HttpPost]

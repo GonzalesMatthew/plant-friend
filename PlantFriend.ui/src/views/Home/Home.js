@@ -6,7 +6,7 @@ import {
 } from 'reactstrap';
 import { signInUser, signOutUser } from '../../helpers/auth';
 import {
-  HomeContainer, HomeInfoContainer, HomeTitle, ProfileInfo, HomeButtonContainer
+  HomeContainer, HomeInfoContainer, HomeTitle, ProfileInfo, HomeButtonContainer, HomeCarousel
 } from './HomeStyled';
 
 function Home({ user }) {
@@ -54,7 +54,7 @@ function Home({ user }) {
           }
         </HomeButtonContainer>
       </HomeInfoContainer>
-      {/* <HomeCarousel
+      <HomeCarousel
         slide={true}
         items={[
           {
@@ -76,7 +76,7 @@ function Home({ user }) {
             src: '../../assets/PlantFriendLogo.png'
           }
         ]}
-      /> */}
+      />
     </HomeContainer>
   );
 }

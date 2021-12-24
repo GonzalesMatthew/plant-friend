@@ -1,8 +1,10 @@
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import 'variables';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;1,200&display=swap');
 
 body {
   background-color: $favColor;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .logo-image{

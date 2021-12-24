@@ -15,5 +15,6 @@ namespace PlantFriend.Models
         public DateTime DateCreated { get; set; }
         public int InitialAgeDays { get; set; }
         public string AgeStage { get; set; }
+        public Plant Plant { get; set; }
     }
 }

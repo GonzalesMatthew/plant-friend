@@ -59,7 +59,6 @@ function Plants() {
               careNeeds={plant.careNeeds}
               imageUrl={plant.imageUrl}
               setPlants={setPlants}
-              modalToggle={modalToggle}
             />
           ))}
         </Row>

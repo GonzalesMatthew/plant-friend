@@ -76,7 +76,7 @@ function FormModal({
       addPlant(plantObj).then(setPlants);
     } else if (formIdentifier === 2) {
       console.warn('trying to update plant', plantObj);
-      updatePlant(plantObj, rest.id).then(setPlants);
+      updatePlant(plantObj, plantObj.id).then(setPlants);
     } else if (formIdentifier === 3) {
       console.warn('trying to add inventory', inventoryObj);
       addUserInventory(inventoryObj).then(setInventory);

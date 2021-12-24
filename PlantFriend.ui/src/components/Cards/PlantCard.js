@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Button,
@@ -12,8 +12,12 @@ import { deletePlant } from '../../helpers/data/PlantData';
 import FormModal from '../Modal/FormModal';
 
 function PlantCard({
+  setPlants,
   ...rest
 }) {
+  const [modalStatus, setModalStatus] = useState(false);
+  const modalToggle = () => setModalStatus(!modalStatus);
+
   return (
     <Col className="col-sm-4">
       <Card id={rest.id} className='d-flex justify-content-center' body>
@@ -31,10 +35,10 @@ function PlantCard({
         <img className='m-auto img-thumbnail' src={rest.imageUrl} alt={rest.name} />
         <Row>
           <Col>
-            <Button onClick={() => rest.modalToggle()}>Update</Button>
+            <Button onClick={() => modalToggle()}>Update</Button>
           </Col>
           <Col>
-            <Button onClick={() => deletePlant(rest.id).then(rest.setPlants)}>Delete</Button>
+            <Button onClick={() => deletePlant(rest.id).then(setPlants)}>Delete</Button>
           </Col>
         </Row>
       </Card>
@@ -50,7 +54,7 @@ function PlantCard({
         imageUrl={rest.imageUrl}
         careNeeds={rest.careNeeds}
         light={rest.light}
-        modalTitle='Update Plant'
+        modalStatus={modalStatus} modalToggle={modalToggle} modalTitle='Update Plant' setPlants={setPlants}
       />
     </Col>
   );
@@ -61,7 +65,6 @@ export default PlantCard;
 PlantCard.propTypes = {
   user: PropTypes.any,
   setPlants: PropTypes.func,
-  modalToggle: PropTypes.func,
   id: PropTypes.string,
   name: PropTypes.string,
   light: PropTypes.string,

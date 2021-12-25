@@ -28,7 +28,7 @@ function User({
   return (
     <>
       <h1>Profile</h1>
-      <FormModal modalToggle={modalToggle1} modalStatus={modalStatus} modalTitle={modalTitle} userId={user.id}/>
+      <FormModal modalToggle={modalToggle1} modalStatus={modalStatus} modalTitle={modalTitle} userId={user.id} setUserInventory={setUserInventory}/>
       <Row>
         <Col>
           Plant

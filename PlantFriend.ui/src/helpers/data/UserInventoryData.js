@@ -15,8 +15,8 @@ const addUserInventory = (obj) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const updateUserInventory = (obj, id) => new Promise((resolve, reject) => {
-  axios.put(`${dbUrl}/usersInventory/${id}`, obj)
+const updateUserInventory = (obj) => new Promise((resolve, reject) => {
+  axios.put(`${dbUrl}/usersInventory/${obj.id}`, obj)
     .then(() => getUserInventoryByUserId(obj.userId).then(resolve))
     .catch((error) => reject(error));
 });

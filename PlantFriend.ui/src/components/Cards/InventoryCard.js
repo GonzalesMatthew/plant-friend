@@ -23,11 +23,11 @@ function InventoryCard({
       <Card className='d-flex justify-content-center' body>
         <CardTitle tag='h5'>{rest.name}</CardTitle>
         <CardText style={{ minHeight: 70 }}>
-          {rest.id}<br />
-          {rest.userId}<br />
-          {rest.quantity}<br />
-          {rest.name}<br />
-          {rest.description}<br />
+          id: {rest.id}<br />
+          userid: {rest.userId}<br />
+          quantity: {rest.quantity}<br />
+          name: {rest.name}<br />
+          description: {rest.description}<br />
         </CardText>
         <img className='m-auto img-thumbnail' src={rest.imageUrl} alt={rest.name} />
         <Row>
@@ -35,7 +35,7 @@ function InventoryCard({
             <Button onClick={() => modalToggle()}>Update</Button>
           </Col>
           <Col>
-            <Button onClick={() => deleteUserInventory(rest.id).then(setUserInventory)}>Delete</Button>
+            <Button onClick={() => deleteUserInventory(rest.id, rest.userId).then(setUserInventory)}>Delete</Button>
           </Col>
         </Row>
       </Card>

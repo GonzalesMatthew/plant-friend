@@ -15,6 +15,7 @@ function FormModal({
   modalToggle,
   modalTitle,
   setPlants,
+  setUserPlants,
   setUserInventory,
   userId,
   ...rest
@@ -113,7 +114,7 @@ function FormModal({
     } else if (formIdentifier === 5) {
       console.warn('trying to add user plant', userPlantObj);
       delete userPlantObj.id;
-      addUserPlant(userPlantObj);
+      addUserPlant(userPlantObj).then(setUserPlants);
     } else if (formIdentifier === 6) {
       console.warn('trying to update user plant', userPlantObj);
       updateUserInventory(inventoryObj).then(setUserInventory);
@@ -170,6 +171,7 @@ FormModal.propTypes = {
   modalToggle: PropTypes.func,
   modalTitle: PropTypes.string,
   setPlants: PropTypes.func,
+  setUserPlants: PropTypes.func,
   setUserInventory: PropTypes.func,
   id: PropTypes.string,
   name: PropTypes.string,

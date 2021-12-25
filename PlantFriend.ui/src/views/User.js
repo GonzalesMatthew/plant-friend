@@ -78,6 +78,14 @@ function User({
             description={userPlant.plant.description}
             careNeeds={userPlant.plant.careNeeds}
             imageUrl={userPlant.plant.imageUrl}
+            userPlantId={userPlant.id}
+            userId={userPlant.userId}
+            status={userPlant.status}
+            petName={userPlant.petName}
+            dateCreated={userPlant.dateCreated}
+            initialAgeDays={userPlant.initialAgeDays}
+            ageStage={userPlant.ageStage}
+            setUserPlants={setUserPlants}
           />
         ))}
       </div>

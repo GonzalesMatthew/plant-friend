@@ -21,9 +21,9 @@ const updateUserPlant = (obj) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const deleteUserPlant = (obj) => new Promise((resolve, reject) => {
-  axios.delete(`${dbUrl}/usersPlants/${obj.id}`)
-    .then(() => getUserPlantsByUserId(obj.userId).then(resolve))
+const deleteUserPlant = (id, uid) => new Promise((resolve, reject) => {
+  axios.delete(`${dbUrl}/usersPlants/${id}`)
+    .then(() => getUserPlantsByUserId(uid).then(resolve))
     .catch((error) => reject(error));
 });
 

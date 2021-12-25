@@ -38,6 +38,15 @@ function FormModal({
     description: rest.description || '',
     imageUrl: rest.imageUrl || '',
   });
+  const [userPlantObj, setUserPlantObj] = useState({
+    id: rest.id || null,
+    plantId = rest.plantId || '',
+    userId = rest.userId || '',
+    status = rest.status || '',
+    petName = rest.petName || '',
+    initialAgeDays = rest.initialAgeDays || '',
+    ageStage = rest.ageStage || ''
+  });
 
   let formIdentifier = 0;
   switch (modalTitle) {
@@ -52,6 +61,12 @@ function FormModal({
       break;
     case 'Update Inventory':
       formIdentifier = 4;
+      break;
+    case 'Add Plant to Profile':
+      formIdentifier = 5;
+      break;
+    case 'Update Your Plant':
+      formIdentifier = 6;
       break;
     default:
       console.warn('No such case for modal title');

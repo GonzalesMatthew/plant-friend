@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import {
   Col, Container, Row, Button
 } from 'reactstrap';
 import PlantCard from '../components/Cards/PlantCard';
-import FormModal from '../components/Modal/FormModal';
 import SearchBar from '../components/SearchBar/SearchBar';
+import FormModal from '../components/Modal/FormModal';
 import { getPlants } from '../helpers/data/PlantData';
 
-function Plants() {
+function Plants({
+  user
+}) {
   const [plants, setPlants] = useState([]);
   const [modalStatus, setModalStatus] = useState(false);
   const [searchPlant, setSearchPlant] = useState('');
@@ -59,6 +62,7 @@ function Plants() {
               careNeeds={plant.careNeeds}
               imageUrl={plant.imageUrl}
               setPlants={setPlants}
+              userId={user.id}
             />
           ))}
         </Row>
@@ -68,3 +72,7 @@ function Plants() {
 }
 
 export default Plants;
+
+Plants.propTypes = {
+  user: PropTypes.any
+};

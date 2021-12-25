@@ -7,6 +7,8 @@ import PlantForm from '../Forms/PlantForm';
 import { addPlant, updatePlant } from '../../helpers/data/PlantData';
 import { addUserInventory, updateUserInventory } from '../../helpers/data/UserInventoryData';
 import InventoryForm from '../Forms/InventoryForm';
+import { addUserPlant } from '../../helpers/data/UserPlantData';
+import UserPlantForm from '../Forms/UserPlantForm';
 
 function FormModal({
   modalStatus,
@@ -40,12 +42,12 @@ function FormModal({
   });
   const [userPlantObj, setUserPlantObj] = useState({
     id: rest.id || null,
-    plantId = rest.plantId || '',
-    userId = rest.userId || '',
-    status = rest.status || '',
-    petName = rest.petName || '',
-    initialAgeDays = rest.initialAgeDays || '',
-    ageStage = rest.ageStage || ''
+    plantId: rest.plantId || '',
+    userId: userId || '',
+    status: rest.status || '',
+    petName: rest.petName || '',
+    initialAgeDays: rest.initialAgeDays || '',
+    ageStage: rest.ageStage || ''
   });
 
   let formIdentifier = 0;
@@ -83,6 +85,11 @@ function FormModal({
         ...prevState,
         [e.target.name]: e.target.value
       }));
+    } else if (formIdentifier === 5 || formIdentifier === 6) {
+      setUserPlantObj((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value
+      }));
     } else {
       console.warn('handleInputChange function is not finding formIdentifier value 1, 2, 3 or 4');
     }
@@ -103,6 +110,13 @@ function FormModal({
     } else if (formIdentifier === 4) {
       console.warn('trying to update inventory', inventoryObj);
       updateUserInventory(inventoryObj).then(setUserInventory);
+    } else if (formIdentifier === 5) {
+      console.warn('trying to add user plant', userPlantObj);
+      delete userPlantObj.id;
+      addUserPlant(userPlantObj);
+    } else if (formIdentifier === 6) {
+      console.warn('trying to update user plant', userPlantObj);
+      updateUserInventory(inventoryObj).then(setUserInventory);
     } else {
       console.warn('plantObj', plantObj);
       console.warn('inventoryObj', inventoryObj);
@@ -119,7 +133,8 @@ function FormModal({
     >
       <ModalHeader toggle={modalToggle}>{modalTitle}</ModalHeader>
       <ModalBody>
-        {formIdentifier === 1 || formIdentifier === 2
+        {/* eslint-disable*/}
+        {(formIdentifier === 1 || formIdentifier === 2)
           ? <PlantForm
             formObj={plantObj}
             handleInputChange={handleInputChange}
@@ -127,13 +142,21 @@ function FormModal({
             modalToggle={modalToggle}
             formIdentifier={formIdentifier}
           />
-          : <InventoryForm
-            formObj={inventoryObj}
-            handleInputChange={handleInputChange}
-            handleSubmit={handleSubmit}
-            modalToggle={modalToggle}
-            formIdentifier={formIdentifier}
-          />
+          : ((formIdentifier === 3 || formIdentifier === 4)
+            ? <InventoryForm
+              formObj={inventoryObj}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              modalToggle={modalToggle}
+              formIdentifier={formIdentifier}
+            />
+            : <UserPlantForm
+              formObj={userPlantObj}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              modalToggle={modalToggle}
+              formIdentifier={formIdentifier}
+            />)
         }
       </ModalBody>
     </Modal>
@@ -159,6 +182,11 @@ FormModal.propTypes = {
   imageUrl: PropTypes.string,
   careNeeds: PropTypes.string,
   light: PropTypes.string,
-  userId: PropTypes.string,
   quantity: PropTypes.number,
+  userId: PropTypes.string,
+  plantId: PropTypes.string,
+  petName: PropTypes.string,
+  status: PropTypes.string,
+  initialAgeDays: PropTypes.number,
+  ageStage: PropTypes.string,
 };

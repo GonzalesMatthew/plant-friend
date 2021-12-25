@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Button,
@@ -19,8 +19,7 @@ function PlantCard({
   const modalToggle = () => setModalStatus(!modalStatus);
 
   const [modalStatus2, setModalStatus2] = useState(false);
-  const modalToggle2 = () => setModalStatus2(!modalStatus2); 
-
+  const modalToggle2 = () => setModalStatus2(!modalStatus2);
 
   return (
     <Col className="col-sm-4">
@@ -64,6 +63,8 @@ function PlantCard({
         modalStatus={modalStatus} modalToggle={modalToggle} modalTitle='Update Plant' setPlants={setPlants}
       />
       <FormModal
+        plantId={rest.id}
+        userId={rest.userId}
         modalStatus={modalStatus2} modalToggle={modalToggle2} modalTitle='Add Plant to Profile'
       />
     </Col>
@@ -73,7 +74,7 @@ function PlantCard({
 export default PlantCard;
 
 PlantCard.propTypes = {
-  user: PropTypes.any,
+  userId: PropTypes.string,
   setPlants: PropTypes.func,
   id: PropTypes.string,
   name: PropTypes.string,

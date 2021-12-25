@@ -15,16 +15,16 @@ const addUserPlant = (obj) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const updateUserPlant = (obj) => new Promise ((resolve, reject) => {
+const updateUserPlant = (obj) => new Promise((resolve, reject) => {
   axios.put(`${dbUrl}/usersPlants/${obj.id}`, obj)
     .then(() => getUserPlantsByUserId(obj.userId).then(resolve))
     .catch((error) => reject(error));
 });
 
-const deleteUserPlant = (id) => new Promise ((resolve, reject) => {
-  axios.delete(`${dbUrl}/usersPlants/${id}`)
-  .then(() => getUserPlantsByUserId(obj.userId).then(resolve))
-  .catch((error) => reject(error));
+const deleteUserPlant = (obj) => new Promise((resolve, reject) => {
+  axios.delete(`${dbUrl}/usersPlants/${obj.id}`)
+    .then(() => getUserPlantsByUserId(obj.userId).then(resolve))
+    .catch((error) => reject(error));
 });
 
 export {

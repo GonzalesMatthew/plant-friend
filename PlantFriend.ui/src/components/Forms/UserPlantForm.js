@@ -43,13 +43,13 @@ function UserPlantForm({
         </Input>
       </FormGroup>
       <FormGroup>
-        <Label for='initialAge'>Initial Age (Days)</Label>
+        <Label for='initialAgeDays'>Initial Age (Days)</Label>
         <Input
-          id='initialAge'
+          id='initialAgeDays'
           type='text'
-          name='initialAge'
+          name='initialAgeDays'
           placeholder='How old is your plant in days?'
-          value={formObj.initialAge}
+          value={formObj.initialAgeDays}
           onChange={handleInputChange}
           required
         >
@@ -59,7 +59,7 @@ function UserPlantForm({
         <Label for='ageStage'>Age Stage</Label>
         <Input
           id='ageStage'
-          type='select'
+          type='text'
           name='ageStage'
           placeholder='E.g. Current stage of the plant&apos;s life cycle'
           value={formObj.ageStage}

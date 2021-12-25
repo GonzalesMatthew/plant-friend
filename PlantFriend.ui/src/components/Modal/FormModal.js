@@ -7,7 +7,7 @@ import PlantForm from '../Forms/PlantForm';
 import { addPlant, updatePlant } from '../../helpers/data/PlantData';
 import { addUserInventory, updateUserInventory } from '../../helpers/data/UserInventoryData';
 import InventoryForm from '../Forms/InventoryForm';
-import { addUserPlant } from '../../helpers/data/UserPlantData';
+import { addUserPlant, updateUserPlant } from '../../helpers/data/UserPlantData';
 import UserPlantForm from '../Forms/UserPlantForm';
 
 function FormModal({
@@ -117,10 +117,11 @@ function FormModal({
       addUserPlant(userPlantObj).then(setUserPlants);
     } else if (formIdentifier === 6) {
       console.warn('trying to update user plant', userPlantObj);
-      updateUserInventory(inventoryObj).then(setUserInventory);
+      updateUserPlant(inventoryObj).then(setUserPlants);
     } else {
       console.warn('plantObj', plantObj);
       console.warn('inventoryObj', inventoryObj);
+      console.warn('userPlantObj', userPlantObj);
     }
     modalToggle();
   };

@@ -23,6 +23,9 @@ function PlantCard({
   const [modalStatus2, setModalStatus2] = useState(false);
   const modalToggle2 = () => setModalStatus2(!modalStatus2);
 
+  const [modalStatus3, setModalStatus3] = useState(false);
+  const modalToggle3 = () => setModalStatus3(!modalStatus3);
+
   return (
     <Col className="col-sm-4">
       <Card id={rest.id} className='d-flex justify-content-center' body>
@@ -47,6 +50,9 @@ function PlantCard({
         <Row>
           <Col>
             <Button onClick={() => modalToggle2()}>Add To Profile</Button>
+          </Col>
+          <Col>
+            <Button onClick={() => modalToggle3()}>Update Your Plant</Button>
           </Col>
           <Col>
             <Button onClick={() => deleteUserPlant(rest.userPlantId, rest.userId).then(setUserPlants)}>Delete Plant From Profile</Button>
@@ -77,6 +83,16 @@ function PlantCard({
         plantId={rest.id}
         userId={rest.userId}
         modalStatus={modalStatus2} modalToggle={modalToggle2} modalTitle='Add Plant to Profile' setUserPlants={setUserPlants}
+      />
+      <FormModal
+        id={rest.userPlantId}
+        plantId={rest.id}
+        userId={rest.userId}
+        status={rest.status}
+        petName={rest.petName}
+        initialAgeDays={rest.initialAgeDays}
+        ageStage={rest.ageStage}
+        modalStatus={modalStatus3} modalToggle={modalToggle3} modalTitle='Update Your Plant' setUserPlants={setUserPlants}
       />
     </Col>
   );

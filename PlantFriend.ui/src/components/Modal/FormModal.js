@@ -5,7 +5,7 @@ import {
 } from 'reactstrap';
 import PlantForm from '../Forms/PlantForm';
 import { addPlant, updatePlant } from '../../helpers/data/PlantData';
-import { addUserInventory } from '../../helpers/data/UserInventoryData';
+import { addUserInventory, updateUserInventory } from '../../helpers/data/UserInventoryData';
 import InventoryForm from '../Forms/InventoryForm';
 
 function FormModal({
@@ -14,6 +14,7 @@ function FormModal({
   modalTitle,
   setPlants,
   setInventory,
+  userId,
   ...rest
 }) {
   const [plantObj, setPlantObj] = useState({
@@ -31,7 +32,7 @@ function FormModal({
   });
   const [inventoryObj, setInventoryObj] = useState({
     id: rest.id || null,
-    userId: rest.userId || '',
+    userId: userId || '',
     quantity: rest.quantity || '',
     name: rest.name || '',
     description: rest.description || '',
@@ -48,6 +49,9 @@ function FormModal({
       break;
     case 'Add Inventory':
       formIdentifier = 3;
+      break;
+    case 'Update Inventory':
+      formIdentifier = 4;
       break;
     default:
       console.warn('No such case for modal title');
@@ -79,7 +83,11 @@ function FormModal({
       updatePlant(plantObj, plantObj.id).then(setPlants);
     } else if (formIdentifier === 3) {
       console.warn('trying to add inventory', inventoryObj);
+      delete inventoryObj.id;
       addUserInventory(inventoryObj).then(setInventory);
+    } else if (formIdentifier === 4) {
+      console.warn('trying to update inventory', inventoryObj);
+      updateUserInventory(inventoryObj, inventoryObj.id).then(setInventory);
     } else {
       console.warn('plantObj', plantObj);
       console.warn('inventoryObj', inventoryObj);
@@ -109,6 +117,7 @@ function FormModal({
             handleInputChange={handleInputChange}
             handleSubmit={handleSubmit}
             modalToggle={modalToggle}
+            formIdentifier={formIdentifier}
           />
         }
       </ModalBody>
@@ -122,7 +131,6 @@ FormModal.propTypes = {
   modalStatus: PropTypes.bool,
   modalToggle: PropTypes.func,
   modalTitle: PropTypes.string,
-  user: PropTypes.any,
   setPlants: PropTypes.func,
   setInventory: PropTypes.func,
   id: PropTypes.string,

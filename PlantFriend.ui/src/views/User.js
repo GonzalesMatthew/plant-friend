@@ -11,8 +11,6 @@ import FormModal from '../components/Modal/FormModal';
 function User({
   user
 }) {
-  console.warn('hello from the user page', user);
-  console.warn('also from the user page', user.id);
   const [userPlants, setUserPlants] = useState([]);
   const [userInventory, setUserInventory] = useState([]);
   const [searchPlant, setSearchPlant] = useState('');
@@ -30,7 +28,7 @@ function User({
   return (
     <>
       <h1>Profile</h1>
-      <FormModal modalToggle={modalToggle1} modalStatus={modalStatus} modalTitle={modalTitle} />
+      <FormModal modalToggle={modalToggle1} modalStatus={modalStatus} modalTitle={modalTitle} userId={user.id}/>
       <Row>
         <Col>
           Plant
@@ -97,6 +95,7 @@ function User({
             userId={item.userId}
             description={item.description}
             imageUrl={item.imageUrl}
+            setUserInventory={setUserInventory}
           />
         ))}
       </div>

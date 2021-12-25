@@ -22,86 +22,8 @@ function InventoryForm({
           id='name'
           type='text'
           name='name'
-          placeholder='Enter the plant&apos;s official name'
+          placeholder='Enter the name of the item or tool.'
           value={formObj.name}
-          onChange={handleInputChange}
-          required
-        >
-        </Input>
-      </FormGroup>
-      <FormGroup>
-        <Label for='light'>Light</Label>
-        <Input
-          id='light'
-          type='text'
-          name='light'
-          placeholder='What light requirements are needed?'
-          value={formObj.light}
-          onChange={handleInputChange}
-          required
-        >
-        </Input>
-      </FormGroup>
-      <FormGroup>
-        <Label for='water'>Water</Label>
-        <Input
-          id='water'
-          type='text'
-          name='water'
-          placeholder='How much water is needed per watering?'
-          value={formObj.water}
-          onChange={handleInputChange}
-          required
-        >
-        </Input>
-      </FormGroup>
-      <FormGroup>
-        <Label for='waterFrequency'>Water Frequency</Label>
-        <Input
-          id='waterFrequency'
-          type='text'
-          name='waterFrequency'
-          placeholder='How often should the plant be watered?'
-          value={formObj.waterFrequency}
-          onChange={handleInputChange}
-          required
-        >
-        </Input>
-      </FormGroup>
-      <FormGroup>
-        <Label for='temperature'>Temperature</Label>
-        <Input
-          id='temperature'
-          type='text'
-          name='temperature'
-          placeholder='What temperature does the the plant thrive in?'
-          value={formObj.temperature}
-          onChange={handleInputChange}
-          required
-        >
-        </Input>
-      </FormGroup>
-      <FormGroup>
-        <Label for='nutrients'>Nutrients</Label>
-        <Input
-          id='nutrients'
-          type='text'
-          name='nutrients'
-          placeholder='What nutrients does the plant require?'
-          value={formObj.nutrients}
-          onChange={handleInputChange}
-          required
-        >
-        </Input>
-      </FormGroup>
-      <FormGroup>
-        <Label for='nutrientsFrequency'>Nutrients Frequency</Label>
-        <Input
-          id='nutrientsFrequency'
-          type='text'
-          name='nutrientsFrequency'
-          placeholder='How often should the plant be fed?'
-          value={formObj.nutrientsFrequency}
           onChange={handleInputChange}
           required
         >
@@ -113,7 +35,7 @@ function InventoryForm({
           id='description'
           type='text'
           name='description'
-          placeholder='Plant description.'
+          placeholder='Describe this item here.'
           value={formObj.description}
           onChange={handleInputChange}
           required
@@ -121,25 +43,25 @@ function InventoryForm({
         </Input>
       </FormGroup>
       <FormGroup>
-        <Label for='careNeeds'>Care Needs</Label>
+        <Label for='quantity'>Quantity</Label>
         <Input
-          id='careNeeds'
-          type='text'
-          name='careNeeds'
-          placeholder='Other care requirements.'
-          value={formObj.careNeeds}
+          id='quantity'
+          type='number'
+          name='quantity'
+          placeholder= '0'
+          value={formObj.quantity}
           onChange={handleInputChange}
           required
         >
         </Input>
       </FormGroup>
       <FormGroup>
-        <Label for='imageUrl'>Image</Label>
+        <Label for='imageUrl'>Image URL</Label>
         <Input
           id='imageUrl'
           type='text'
           name='imageUrl'
-          placeholder='Enter URL'
+          placeholder='Enter image URL here.'
           value={formObj.imageUrl}
           onChange={handleInputChange}
           required
@@ -147,7 +69,7 @@ function InventoryForm({
         </Input>
       </FormGroup>
 
-      <Button type='submit'>{formIdentifier === 1 ? 'Add Plant' : 'Update Plant'}</Button>
+      <Button type='submit'>{formIdentifier === 3 ? 'Add Inventory' : 'Update Inventory'}</Button>
       <Button onClick={ () => modalToggle()}>Cancel</Button>
     </Form>
   );

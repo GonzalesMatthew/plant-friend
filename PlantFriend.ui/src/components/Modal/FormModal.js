@@ -117,7 +117,7 @@ function FormModal({
       addUserPlant(userPlantObj).then(setUserPlants);
     } else if (formIdentifier === 6) {
       console.warn('trying to update user plant', userPlantObj);
-      updateUserPlant(inventoryObj).then(setUserPlants);
+      updateUserPlant(userPlantObj).then(setUserPlants);
     } else {
       console.warn('plantObj', plantObj);
       console.warn('inventoryObj', inventoryObj);

@@ -43,6 +43,14 @@ namespace PlantFriend.DataAccess
             return log;
         }
 
+        internal object GetAllByUserPlantId(Guid userPlantId)
+        {
+            using var db = new SqlConnection(_connectionString);
+            var sql = @"select * from Log where UserPlantId = @userPlantId";
+            var logs = db.Query<Log>(sql, new { userPlantId });
+            return logs;
+        }
+
         internal Log UpdateLog(Guid id, Log log)
         {
             using var db = new SqlConnection(_connectionString);

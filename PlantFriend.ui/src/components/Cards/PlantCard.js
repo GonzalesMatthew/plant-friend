@@ -11,10 +11,12 @@ import {
 import { deletePlant } from '../../helpers/data/PlantData';
 import FormModal from '../Modal/FormModal';
 import { deleteUserPlant } from '../../helpers/data/UserPlantData';
+import getLogsByUserPlantId from '../../helpers/data/LogData';
 
 function PlantCard({
   setPlants,
   setUserPlants,
+  setPlantLogs,
   ...rest
 }) {
   const [modalStatus, setModalStatus] = useState(false);
@@ -56,6 +58,9 @@ function PlantCard({
           </Col>
           <Col>
             <Button onClick={() => deleteUserPlant(rest.userPlantId, rest.userId).then(setUserPlants)}>Delete Plant From Profile</Button>
+          </Col>
+          <Col>
+            <Button onClick={() => getLogsByUserPlantId(rest.userPlantId).then(setPlantLogs)}>Log</Button>
           </Col>
           <Col>
             <Button onClick={() => modalToggle()}>Update Card</Button>
@@ -104,6 +109,7 @@ PlantCard.propTypes = {
   userId: PropTypes.string,
   setPlants: PropTypes.func,
   setUserPlants: PropTypes.func,
+  setPlantLogs: PropTypes.func,
   id: PropTypes.string,
   name: PropTypes.string,
   light: PropTypes.string,

@@ -7,6 +7,7 @@ import { getUserPlantsByUserId } from '../helpers/data/UserPlantData';
 import { getUserInventoryByUserId } from '../helpers/data/UserInventoryData';
 import SearchBar from '../components/SearchBar/SearchBar';
 import FormModal from '../components/Modal/FormModal';
+import ScheduleModal from '../components/Modal/ScheduleModal';
 
 function User({
   user
@@ -15,7 +16,6 @@ function User({
   const [userInventory, setUserInventory] = useState([]);
   const [searchPlant, setSearchPlant] = useState('');
   const [searchInventory, setSearchInventory] = useState('');
-  const [modalStatus, setModalStatus] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
 
   useEffect(() => {
@@ -23,12 +23,17 @@ function User({
     getUserInventoryByUserId(user.id).then(setUserInventory);
   }, []);
 
-  const modalToggle1 = () => setModalStatus(!modalStatus);
+  const [modalStatus1, setModalStatus1] = useState(false);
+  const modalToggle1 = () => setModalStatus1(!modalStatus1);
+ 
+  const [modalStatus2, setModalStatus2] = useState(false);
+  const modalToggle2 = () => setModalStatus2(!modalStatus2);
 
   return (
     <>
       <h1>Profile</h1>
-      <FormModal modalToggle={modalToggle1} modalStatus={modalStatus} modalTitle={modalTitle} userId={user.id} setUserInventory={setUserInventory} />
+      <FormModal modalToggle={modalToggle1} modalStatus={modalStatus1} modalTitle={modalTitle} userId={user.id} setUserInventory={setUserInventory} />
+      <ScheduleModal modalToggle={modalToggle2} modalStatus={modalStatus2} modalTitle='Care Schedule' userPlants={userPlants} />
       <Row>
         <Col>
           Plant

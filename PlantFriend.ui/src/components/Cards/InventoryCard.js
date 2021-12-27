@@ -1,41 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
-  // Button,
+  Button,
   Card,
   CardText,
   CardTitle,
   Row,
   Col
 } from 'reactstrap';
+import { deleteUserInventory } from '../../helpers/data/UserInventoryData';
+import FormModal from '../Modal/FormModal';
 
 function InventoryCard({
+  setUserInventory,
   ...rest
 }) {
+  const [modalStatus, setModalStatus] = useState(false);
+  const modalToggle = () => setModalStatus(!modalStatus);
+
   return (
     <div className="col-sm-4">
       <Card className='d-flex justify-content-center' body>
         <CardTitle tag='h5'>{rest.name}</CardTitle>
         <CardText style={{ minHeight: 70 }}>
-          {rest.id}<br />
-          {rest.userId}<br />
-          {rest.quantity}<br />
-          {rest.name}<br />
-          {rest.description}<br />
+          id: {rest.id}<br />
+          userid: {rest.userId}<br />
+          quantity: {rest.quantity}<br />
+          name: {rest.name}<br />
+          description: {rest.description}<br />
         </CardText>
         <img className='m-auto img-thumbnail' src={rest.imageUrl} alt={rest.name} />
         <Row>
           <Col>
-            {/* <Button onClick={(e) => minusOne(e)}><i className='fas fa-minus fa-2x'></i></Button> */}
-          </Col>
-          <Col className='m-auto'>
-            {/* {counter} */}
+            <Button onClick={() => modalToggle()}>Update</Button>
           </Col>
           <Col>
-            {/* <Button onClick={(e) => plusOne(e)}><i className='fas fa-plus fa-2x'></i></Button> */}
+            <Button onClick={() => deleteUserInventory(rest.id, rest.userId).then(setUserInventory)}>Delete</Button>
           </Col>
         </Row>
       </Card>
+      <FormModal
+        id={rest.id}
+        userId={rest.userId}
+        quantity={rest.quantity}
+        name={rest.name}
+        description={rest.description}
+        imageUrl={rest.imageUrl}
+        modalStatus={modalStatus} modalToggle={modalToggle} modalTitle='Update Inventory' setUserInventory={setUserInventory}
+      />
     </div>
   );
 }
@@ -43,6 +55,7 @@ function InventoryCard({
 export default InventoryCard;
 
 InventoryCard.propTypes = {
+  setUserInventory: PropTypes.func,
   id: PropTypes.string,
   userId: PropTypes.string,
   quantity: PropTypes.number,

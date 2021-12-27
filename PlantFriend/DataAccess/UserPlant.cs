@@ -67,11 +67,8 @@ namespace PlantFriend.DataAccess
             using var db = new SqlConnection(_connectionString);
             var sql = @"update UserPlant
                         set 
-                            PlantId = @plantId,
-                            UserId = @userId, 
                             [Status] = @status, 
                             PetName = @petName, 
-                            DateCreated = @dateCreated, 
                             InitialAgeDays = @initialAgeDays, 
                             AgeStage = @ageStage
                         output inserted.*

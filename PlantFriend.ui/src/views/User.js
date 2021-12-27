@@ -3,21 +3,19 @@ import { Col, Row, Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 import PlantCard from '../components/Cards/PlantCard';
 import InventoryCard from '../components/Cards/InventoryCard';
-import getUserPlantsByUserId from '../helpers/data/UserPlantData';
+import { getUserPlantsByUserId } from '../helpers/data/UserPlantData';
 import { getUserInventoryByUserId } from '../helpers/data/UserInventoryData';
 import SearchBar from '../components/SearchBar/SearchBar';
 import FormModal from '../components/Modal/FormModal';
+import ScheduleModal from '../components/Modal/ScheduleModal';
 
 function User({
   user
 }) {
-  console.warn('hello from the user page', user);
-  console.warn('also from the user page', user.id);
   const [userPlants, setUserPlants] = useState([]);
   const [userInventory, setUserInventory] = useState([]);
   const [searchPlant, setSearchPlant] = useState('');
   const [searchInventory, setSearchInventory] = useState('');
-  const [modalStatus, setModalStatus] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
 
   useEffect(() => {
@@ -25,12 +23,17 @@ function User({
     getUserInventoryByUserId(user.id).then(setUserInventory);
   }, []);
 
-  const modalToggle1 = () => setModalStatus(!modalStatus);
+  const [modalStatus1, setModalStatus1] = useState(false);
+  const modalToggle1 = () => setModalStatus1(!modalStatus1);
+
+  const [modalStatus2, setModalStatus2] = useState(false);
+  const modalToggle2 = () => setModalStatus2(!modalStatus2);
 
   return (
     <>
       <h1>Profile</h1>
-      <FormModal modalToggle={modalToggle1} modalStatus={modalStatus} modalTitle={modalTitle} />
+      <FormModal modalToggle={modalToggle1} modalStatus={modalStatus1} modalTitle={modalTitle} userId={user.id} setUserInventory={setUserInventory} />
+      <ScheduleModal modalToggle={modalToggle2} modalStatus={modalStatus2} modalTitle='Care Schedule' userPlants={userPlants} />
       <Row>
         <Col>
           Plant
@@ -43,7 +46,7 @@ function User({
           />
         </Col>
         <Col>
-          <Button onClick={() => console.warn('scheduler goes here')}>Schedule</Button>
+          <Button onClick={() => modalToggle2()}>Schedule</Button>
         </Col>
       </Row>
       <Row>
@@ -80,6 +83,14 @@ function User({
             description={userPlant.plant.description}
             careNeeds={userPlant.plant.careNeeds}
             imageUrl={userPlant.plant.imageUrl}
+            userPlantId={userPlant.id}
+            userId={userPlant.userId}
+            status={userPlant.status}
+            petName={userPlant.petName}
+            dateCreated={userPlant.dateCreated}
+            initialAgeDays={userPlant.initialAgeDays}
+            ageStage={userPlant.ageStage}
+            setUserPlants={setUserPlants}
           />
         ))}
       </div>
@@ -97,6 +108,7 @@ function User({
             userId={item.userId}
             description={item.description}
             imageUrl={item.imageUrl}
+            setUserInventory={setUserInventory}
           />
         ))}
       </div>

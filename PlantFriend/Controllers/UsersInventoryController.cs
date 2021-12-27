@@ -54,7 +54,7 @@ namespace PlantFriend.Controllers
             return Ok(userInventory);
         }
 
-        [HttpPut("{id})")]
+        [HttpPut("{id}")]
         public IActionResult UpdateUserInventory(Guid id, UserInventory userInventory)
         {
             var userInventoryToUpdate = _userInventoryRepo.GetById(id);

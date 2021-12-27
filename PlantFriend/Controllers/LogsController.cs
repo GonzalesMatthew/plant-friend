@@ -48,7 +48,13 @@ namespace PlantFriend.Controllers
             return Ok(log);
         }
 
-        [HttpPut("{id})")]
+        [HttpGet("userPlant/{userPlantId}")]
+        public IActionResult GetAllByUserPlantId(Guid userPlantId)
+        {
+            return Ok(_logRepo.GetAllByUserPlantId(userPlantId));
+        }
+
+        [HttpPut("{id}")]
         public IActionResult UpdateLog(Guid id, Log log)
         {
             var logToUpdate = _logRepo.GetById(id);

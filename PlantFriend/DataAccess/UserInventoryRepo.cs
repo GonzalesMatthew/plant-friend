@@ -28,9 +28,9 @@ namespace PlantFriend.DataAccess
         internal void Add(UserInventory newUserInventory)
         {
             using var db = new SqlConnection(_connectionString);
-            var sql = @"insert into UserInventory(UserId, Quantity, [Name], [Description])
+            var sql = @"insert into UserInventory(UserId, Quantity, [Name], [Description], ImageUrl)
                         output inserted.Id
-                        values (@userId, @quantity, @name, @description)";
+                        values (@userId, @quantity, @name, @description, @imageUrl)";
             var id = db.ExecuteScalar<Guid>(sql, newUserInventory);
             newUserInventory.Id = id;
         }
@@ -58,7 +58,8 @@ namespace PlantFriend.DataAccess
                         set 
                             Quantity = @quantity, 
                             [Name] = @name, 
-                            [Description] = @description
+                            [Description] = @description,
+                            ImageUrl = @imageUrl
                         output inserted.*
                         where Id = @id";
             userInventory.Id = id;

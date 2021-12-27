@@ -12,7 +12,7 @@ import {
 import { deletePlant } from '../../helpers/data/PlantData';
 import FormModal from '../Modal/FormModal';
 import { deleteUserPlant } from '../../helpers/data/UserPlantData';
-import getLogsByUserPlantId from '../../helpers/data/LogData';
+import { getLogsByUserPlantId } from '../../helpers/data/LogData';
 import LogCard from './LogCard';
 
 function PlantCard({
@@ -89,6 +89,7 @@ function PlantCard({
             entryNumber={log.entryNumber}
             entry={log.entry}
             entryDate={log.entryDate}
+            setPlantLogs={setPlantLogs}
           />
         ))}
       </Collapse>

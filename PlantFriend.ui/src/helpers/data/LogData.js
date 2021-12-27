@@ -9,4 +9,20 @@ const getLogsByUserPlantId = (userPlantId) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-export default getLogsByUserPlantId;
+const addLog = (obj) => new Promise((resolve, reject) => {
+  axios.post(`${dbUrl}/logs`, obj)
+    .then(() => getLogsByUserPlantId(obj.userPlantId).then(resolve))
+    .catch((error) => reject(error));
+});
+
+const updateLog = (id, obj) => new Promise((resolve, reject) => {
+  axios.post(`${dbUrl}/logs/${id}`, obj)
+    .then(() => getLogsByUserPlantId(obj.userPlantId).then(resolve))
+    .catch((error) => reject(error));
+});
+
+export {
+  getLogsByUserPlantId,
+  addLog,
+  updateLog
+};

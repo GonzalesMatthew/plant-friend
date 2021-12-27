@@ -9,6 +9,7 @@ import { addUserInventory, updateUserInventory } from '../../helpers/data/UserIn
 import InventoryForm from '../Forms/InventoryForm';
 import { addUserPlant, updateUserPlant } from '../../helpers/data/UserPlantData';
 import UserPlantForm from '../Forms/UserPlantForm';
+import { addLog, updateLog } from '../../helpers/data/LogData';
 
 function FormModal({
   modalStatus,
@@ -17,6 +18,7 @@ function FormModal({
   setPlants,
   setUserPlants,
   setUserInventory,
+  setPlantLogs,
   userId,
   ...rest
 }) {
@@ -50,6 +52,14 @@ function FormModal({
     initialAgeDays: rest.initialAgeDays || '',
     ageStage: rest.ageStage || ''
   });
+  const [logEntryObj, setlogEntryObj] = useState({
+    id: rest.id || null,
+    userPlantId: rest.userPlantId || '',
+    dateCreated: rest.dateCreated || '',
+    entryNumber: rest.entryNumber || '',
+    entry: rest.entry || '',
+    entryDate: rest.entryDate || ''
+  });
 
   let formIdentifier = 0;
   switch (modalTitle) {
@@ -71,6 +81,12 @@ function FormModal({
     case 'Update Your Plant':
       formIdentifier = 6;
       break;
+    case 'Add A New Entry':
+      formIdentifier = 7;
+      break;
+    case 'Update Your Entry':
+      formIdentifier = 8;
+      break;
     default:
       console.warn('No such case for modal title');
   }
@@ -88,6 +104,11 @@ function FormModal({
       }));
     } else if (formIdentifier === 5 || formIdentifier === 6) {
       setUserPlantObj((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value
+      }));
+    } else if (formIdentifier === 7 || formIdentifier === 8) {
+      setlogEntryObj((prevState) => ({
         ...prevState,
         [e.target.name]: e.target.value
       }));
@@ -118,10 +139,18 @@ function FormModal({
     } else if (formIdentifier === 6) {
       console.warn('trying to update user plant', userPlantObj);
       updateUserPlant(userPlantObj).then(setUserPlants);
+    } else if (formIdentifier === 7) {
+      console.warn('trying to add log entry', logEntryObj);
+      delete logEntryObj.id;
+      addLog().then(setPlantLogs);
+    } else if (formIdentifier === 8) {
+      console.warn('trying to update log entry', logEntryObj);
+      updateLog().then(setPlantLogs);
     } else {
       console.warn('plantObj', plantObj);
       console.warn('inventoryObj', inventoryObj);
       console.warn('userPlantObj', userPlantObj);
+      console.warn('logEntryObj', logEntryObj);
     }
     modalToggle();
   };
@@ -174,6 +203,7 @@ FormModal.propTypes = {
   setPlants: PropTypes.func,
   setUserPlants: PropTypes.func,
   setUserInventory: PropTypes.func,
+  setPlantLogs: PropTypes.func,
   id: PropTypes.string,
   name: PropTypes.string,
   water: PropTypes.string,

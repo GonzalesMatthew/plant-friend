@@ -13,7 +13,7 @@ function ScheduleModal({
 }) {
   return (
     <Modal
-      id={rest.id}
+      id='scheduleModal'
       size='md'
       isOpen={modalStatus}
       toggle={modalToggle}

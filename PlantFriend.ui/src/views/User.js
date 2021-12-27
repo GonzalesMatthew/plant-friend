@@ -25,7 +25,7 @@ function User({
 
   const [modalStatus1, setModalStatus1] = useState(false);
   const modalToggle1 = () => setModalStatus1(!modalStatus1);
- 
+
   const [modalStatus2, setModalStatus2] = useState(false);
   const modalToggle2 = () => setModalStatus2(!modalStatus2);
 
@@ -46,7 +46,7 @@ function User({
           />
         </Col>
         <Col>
-          <Button onClick={() => console.warn('scheduler goes here')}>Schedule</Button>
+          <Button onClick={() => modalToggle2()}>Schedule</Button>
         </Col>
       </Row>
       <Row>

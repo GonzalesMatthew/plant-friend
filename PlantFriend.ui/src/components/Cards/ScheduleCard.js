@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Container } from 'reactstrap';
 
 function ScheduleCard({
   plant
 }) {
+  console.warn('plant object', plant);
   return (
     <>
       <Container>

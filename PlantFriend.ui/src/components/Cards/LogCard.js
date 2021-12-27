@@ -29,8 +29,8 @@ export default LogCard;
 LogCard.propTypes = {
   id: PropTypes.string,
   userPlantId: PropTypes.string,
-  dateCreated: PropTypes.instanceOf(Date),
+  dateCreated: PropTypes.string,
   entryNumber: PropTypes.number,
   entry: PropTypes.string,
-  entryDate: PropTypes.instanceOf(Date)
+  entryDate: PropTypes.string
 };

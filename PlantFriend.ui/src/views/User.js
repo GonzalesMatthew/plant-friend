@@ -7,7 +7,6 @@ import { getUserPlantsByUserId } from '../helpers/data/UserPlantData';
 import { getUserInventoryByUserId } from '../helpers/data/UserInventoryData';
 import SearchBar from '../components/SearchBar/SearchBar';
 import FormModal from '../components/Modal/FormModal';
-import LogSidebar from '../components/LogSideBar';
 
 function User({
   user
@@ -18,7 +17,6 @@ function User({
   const [searchInventory, setSearchInventory] = useState('');
   const [modalStatus, setModalStatus] = useState(false);
   const [modalTitle, setModalTitle] = useState('');
-  const [plantLogs, setPlantLogs] = useState([]);
 
   useEffect(() => {
     getUserPlantsByUserId(user.id).then(setUserPlants);
@@ -29,7 +27,6 @@ function User({
 
   return (
     <>
-      <LogSidebar plantLogs={plantLogs} setPlantLogs={setPlantLogs}/>
       <h1>Profile</h1>
       <FormModal modalToggle={modalToggle1} modalStatus={modalStatus} modalTitle={modalTitle} userId={user.id} setUserInventory={setUserInventory} />
       <Row>
@@ -89,7 +86,6 @@ function User({
             initialAgeDays={userPlant.initialAgeDays}
             ageStage={userPlant.ageStage}
             setUserPlants={setUserPlants}
-            setPlantLogs={setPlantLogs}
           />
         ))}
       </div>

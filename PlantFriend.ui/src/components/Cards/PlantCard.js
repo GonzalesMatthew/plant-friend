@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
   Button,
@@ -6,17 +6,18 @@ import {
   CardText,
   CardTitle,
   Row,
-  Col
+  Col,
+  Collapse
 } from 'reactstrap';
 import { deletePlant } from '../../helpers/data/PlantData';
 import FormModal from '../Modal/FormModal';
 import { deleteUserPlant } from '../../helpers/data/UserPlantData';
 import getLogsByUserPlantId from '../../helpers/data/LogData';
+import LogCard from './LogCard';
 
 function PlantCard({
   setPlants,
   setUserPlants,
-  setPlantLogs,
   ...rest
 }) {
   const [modalStatus, setModalStatus] = useState(false);
@@ -28,25 +29,33 @@ function PlantCard({
   const [modalStatus3, setModalStatus3] = useState(false);
   const modalToggle3 = () => setModalStatus3(!modalStatus3);
 
+  const [logContainerStatus, setLogContainerStatus] = useState(false);
+  const toggleLogContainer = () => setLogContainerStatus(!logContainerStatus);
+
+  const [plantLogs, setPlantLogs] = useState([]);
+  useEffect(() => {
+    getLogsByUserPlantId(rest.userPlantId).then(setPlantLogs);
+  }, []);
+
   return (
     <Col className="col-sm-4">
       <Card id={rest.id} className='d-flex justify-content-center' body>
         <CardTitle tag='h5'>{rest.name}</CardTitle>
         <CardText style={{ minHeight: 70 }}>
-          User Plant Id: {rest.userPlantId}<br/>
-          Status: {rest.status}<br/>
-          Pet Name: {rest.petName}<br/>
-          Date Created: {rest.dateCreated}<br/>
-          Initial Age (Days): {rest.initialAgeDays}<br/>
-          Life Cycle Stage: {rest.ageStage}<br/>
-          Light Needs: {rest.light}<br/>
-          Nutrients Needs: {rest.nutrients}<br/>
-          Nutrients Frequency: {rest.nutrientsFrequency}<br/>
-          Water Needs: {rest.water}<br/>
-          Water Frequency: {rest.waterFrequency}<br/>
-          Temperature Needs: {rest.temperature}<br/>
-          Description: {rest.description}<br/>
-          Care Needs (Misc.): {rest.careNeeds}<br/>
+          User Plant Id: {rest.userPlantId}<br />
+          Status: {rest.status}<br />
+          Pet Name: {rest.petName}<br />
+          Date Created: {rest.dateCreated}<br />
+          Initial Age (Days): {rest.initialAgeDays}<br />
+          Life Cycle Stage: {rest.ageStage}<br />
+          Light Needs: {rest.light}<br />
+          Nutrients Needs: {rest.nutrients}<br />
+          Nutrients Frequency: {rest.nutrientsFrequency}<br />
+          Water Needs: {rest.water}<br />
+          Water Frequency: {rest.waterFrequency}<br />
+          Temperature Needs: {rest.temperature}<br />
+          Description: {rest.description}<br />
+          Care Needs (Misc.): {rest.careNeeds}<br />
         </CardText>
         <img className='m-auto img-thumbnail' src={rest.imageUrl} alt={rest.name} />
         <Row>
@@ -60,16 +69,29 @@ function PlantCard({
             <Button onClick={() => deleteUserPlant(rest.userPlantId, rest.userId).then(setUserPlants)}>Delete Plant From Profile</Button>
           </Col>
           <Col>
-            <Button onClick={() => getLogsByUserPlantId(rest.userPlantId).then(setPlantLogs)}>Log</Button>
+            <Button onClick={() => toggleLogContainer()}>Log</Button>
           </Col>
           <Col>
             <Button onClick={() => modalToggle()}>Update Card</Button>
           </Col>
           <Col>
-            <Button onClick={() => deletePlant(rest.id).then(setPlants)}>Delete Card</Button>
+            <Button onClick={() => deletePlant(rest.id).then(toggleLogContainer)}>Delete Card</Button>
           </Col>
         </Row>
       </Card>
+      <Collapse isOpen={logContainerStatus}>
+        {plantLogs.map((log, i) => (
+          <LogCard
+            key={i}
+            id={log.id}
+            userPlantId={log.userPlantId}
+            dateCreated={log.dateCreated}
+            entryNumber={log.entryNumber}
+            entry={log.entry}
+            entryDate={log.entryDate}
+          />
+        ))}
+      </Collapse>
       <FormModal
         id={rest.id}
         name={rest.name}
@@ -109,7 +131,6 @@ PlantCard.propTypes = {
   userId: PropTypes.string,
   setPlants: PropTypes.func,
   setUserPlants: PropTypes.func,
-  setPlantLogs: PropTypes.func,
   id: PropTypes.string,
   name: PropTypes.string,
   light: PropTypes.string,

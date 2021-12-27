@@ -29,6 +29,9 @@ function PlantCard({
   const [modalStatus3, setModalStatus3] = useState(false);
   const modalToggle3 = () => setModalStatus3(!modalStatus3);
 
+  const [modalStatus4, setModalStatus4] = useState(false);
+  const modalToggle4 = () => setModalStatus4(!modalStatus4);
+
   const [logContainerStatus, setLogContainerStatus] = useState(false);
   const toggleLogContainer = () => setLogContainerStatus(!logContainerStatus);
 
@@ -80,6 +83,7 @@ function PlantCard({
         </Row>
       </Card>
       <Collapse isOpen={logContainerStatus}>
+        <Button onClick={() => modalToggle4()}><i className='far fa-plus-square'></i></Button>
         {plantLogs.map((log, i) => (
           <LogCard
             key={i}
@@ -121,6 +125,10 @@ function PlantCard({
         initialAgeDays={rest.initialAgeDays}
         ageStage={rest.ageStage}
         modalStatus={modalStatus3} modalToggle={modalToggle3} modalTitle='Update Your Plant' setUserPlants={setUserPlants}
+      />
+      <FormModal
+        userPlantId={userPlantId}
+        modalStatus={modalStatus4} modalToggle={modalToggle4} modalTitle='Add A New Entry' setPlantLogs={setPlantLogs}
       />
     </Col>
   );

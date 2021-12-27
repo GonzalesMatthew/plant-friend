@@ -142,10 +142,10 @@ function FormModal({
     } else if (formIdentifier === 7) {
       console.warn('trying to add log entry', logEntryObj);
       delete logEntryObj.id;
-      addLog().then(setPlantLogs);
+      addLog(logEntryObj).then(setPlantLogs);
     } else if (formIdentifier === 8) {
       console.warn('trying to update log entry', logEntryObj);
-      updateLog().then(setPlantLogs);
+      updateLog(logEntryObj).then(setPlantLogs);
     } else {
       console.warn('plantObj', plantObj);
       console.warn('inventoryObj', inventoryObj);
@@ -181,13 +181,21 @@ function FormModal({
               modalToggle={modalToggle}
               formIdentifier={formIdentifier}
             />
-            : <UserPlantForm
+            : ((formIdentifier === 5 || formIdentifier === 6)
+              ? <UserPlantForm
               formObj={userPlantObj}
               handleInputChange={handleInputChange}
               handleSubmit={handleSubmit}
               modalToggle={modalToggle}
               formIdentifier={formIdentifier}
-            />)
+            />
+            : <LogForm
+            formObj={logEntryObj}
+            handleInputChange={handleInputChange}
+            handleSubmit={handleSubmit}
+            modalToggle={modalToggle}
+            formIdentifier={formIdentifier}/>
+            ))
         }
       </ModalBody>
     </Modal>
@@ -222,4 +230,9 @@ FormModal.propTypes = {
   status: PropTypes.string,
   initialAgeDays: PropTypes.number,
   ageStage: PropTypes.string,
+  userPlantId: PropTypes.string,
+  dateCreated: PropTypes.string,
+  entryNumber: PropTypes.number,
+  entry: PropTypes.string,
+  entryDate: PropTypes.string,
 };

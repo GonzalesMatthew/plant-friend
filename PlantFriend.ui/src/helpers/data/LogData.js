@@ -15,8 +15,8 @@ const addLog = (obj) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
-const updateLog = (id, obj) => new Promise((resolve, reject) => {
-  axios.post(`${dbUrl}/logs/${id}`, obj)
+const updateLog = (obj) => new Promise((resolve, reject) => {
+  axios.put(`${dbUrl}/logs/${obj.id}`, obj)
     .then(() => getLogsByUserPlantId(obj.userPlantId).then(resolve))
     .catch((error) => reject(error));
 });

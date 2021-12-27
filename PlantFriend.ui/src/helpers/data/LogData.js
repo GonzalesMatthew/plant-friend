@@ -21,8 +21,15 @@ const updateLog = (obj) => new Promise((resolve, reject) => {
     .catch((error) => reject(error));
 });
 
+const deletelog = (id, userPlantId) => new Promise((resolve, reject) => {
+  axios.delete(`${dbUrl}/logs/${id}`)
+    .then(() => getLogsByUserPlantId(userPlantId).then(resolve))
+    .catch((error) => reject(error));
+});
+
 export {
   getLogsByUserPlantId,
   addLog,
-  updateLog
+  updateLog,
+  deleteLog
 };

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Button } from 'reactstrap';
 import FormModal from '../Modal/FormModal';
+import { deleteLog } from '../../helpers/data/LogData';
 
 function LogCard({
   id,
@@ -19,8 +20,8 @@ function LogCard({
       <Container>
         <div className='d-flex flex-row'>
           <div>{entryNumber} {entryDate}</div>
-          <Button><i className='fas fa-eye'></i></Button>
-          <Button><i className='fas fa-trash'></i></Button>
+          <Button onClick={() => modalToggle()}><i className='fas fa-eye'></i></Button>
+          <Button onClick={() => deleteLog(id, userPlantId).then(setPlantLogs)}><i className='fas fa-trash'></i></Button>
         </div>
       </Container>
       <FormModal

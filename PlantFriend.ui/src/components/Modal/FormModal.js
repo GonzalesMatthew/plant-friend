@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import {
   Modal, ModalBody, ModalHeader
@@ -10,6 +11,7 @@ import InventoryForm from '../Forms/InventoryForm';
 import { addUserPlant, updateUserPlant } from '../../helpers/data/UserPlantData';
 import UserPlantForm from '../Forms/UserPlantForm';
 import { addLog, updateLog } from '../../helpers/data/LogData';
+import LogForm from '../Forms/LogForm';
 
 function FormModal({
   modalStatus,
@@ -58,7 +60,7 @@ function FormModal({
     dateCreated: rest.dateCreated || '',
     entryNumber: rest.entryNumber || '',
     entry: rest.entry || '',
-    entryDate: rest.entryDate || ''
+    entryDate: moment(rest.entryDate).format('yyyy-MM-DD') || ''
   });
 
   let formIdentifier = 0;
@@ -110,7 +112,7 @@ function FormModal({
     } else if (formIdentifier === 7 || formIdentifier === 8) {
       setlogEntryObj((prevState) => ({
         ...prevState,
-        [e.target.name]: e.target.value
+        [e.target.name]: e.target.name === 'entryDate' ? moment(e.target.value).format('yyyy-MM-DDThh:mm:ss') : e.target.value
       }));
     } else {
       console.warn('handleInputChange function is not finding formIdentifier value 1, 2, 3 or 4');
@@ -142,6 +144,7 @@ function FormModal({
     } else if (formIdentifier === 7) {
       console.warn('trying to add log entry', logEntryObj);
       delete logEntryObj.id;
+      delete logEntryObj.dateCreated;
       addLog(logEntryObj).then(setPlantLogs);
     } else if (formIdentifier === 8) {
       console.warn('trying to update log entry', logEntryObj);

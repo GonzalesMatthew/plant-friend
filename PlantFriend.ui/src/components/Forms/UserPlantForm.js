@@ -56,7 +56,7 @@ function UserPlantForm({
         </Input>
       </FormGroup>
       <FormGroup>
-        <Label for='ageStage'>Age Stage</Label>
+        <Label for='ageStage'>Current Life Cycle Stage</Label>
         <Input
           id='ageStage'
           type='text'

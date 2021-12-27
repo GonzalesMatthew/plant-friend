@@ -30,7 +30,7 @@ namespace PlantFriend.DataAccess
             using var db = new SqlConnection(_connectionString);
             var sql = @"insert into [Log] (UserPlantId, DateCreated, EntryNumber, [Entry], EntryDate)
                         output inserted.Id
-                        values (@userPlantId, GETDATE(), @entryNumber, @entry, GETDATE())";
+                        values (@userPlantId, GETDATE(), @entryNumber, @entry, @entryDate)";
             var id = db.ExecuteScalar<Guid>(sql, newLog);
             newLog.Id = id;
         }

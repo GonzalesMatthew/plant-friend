@@ -127,7 +127,7 @@ function PlantCard({
         modalStatus={modalStatus3} modalToggle={modalToggle3} modalTitle='Update Your Plant' setUserPlants={setUserPlants}
       />
       <FormModal
-        userPlantId={userPlantId}
+        userPlantId={rest.userPlantId}
         modalStatus={modalStatus4} modalToggle={modalToggle4} modalTitle='Add A New Entry' setPlantLogs={setPlantLogs}
       />
     </Col>

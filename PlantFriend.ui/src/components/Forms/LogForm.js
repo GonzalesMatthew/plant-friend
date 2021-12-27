@@ -48,7 +48,7 @@ function LogForm({
           id='entry'
           type='text'
           name='entry'
-          placeholder= '0'
+          placeholder= 'Enter your notes here.'
           value={formObj.entry}
           onChange={handleInputChange}
           required

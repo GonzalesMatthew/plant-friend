@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   Button,
@@ -41,39 +42,46 @@ function PlantCard({
   }, []);
 
   return (
-    <Col className="col-sm-4">
+    <Col className="col-sm-9">
       <Card id={rest.id} className='d-flex justify-content-center' body>
-        <CardTitle tag='h5'>{rest.name}</CardTitle>
+        <CardTitle tag='h5'>
+          {useLocation().pathname === '/user'
+            ? `${rest.petName} the ${rest.name}`
+            : `${rest.name}`
+          }
+        </CardTitle>
         <CardText style={{ minHeight: 70 }}>
-          User Plant Id: {rest.userPlantId}<br />
+          {/* User Plant Id: {rest.userPlantId}<br /> */}
+          {/* Pet Name: {rest.petName}<br /> */}
           Status: {rest.status}<br />
-          Pet Name: {rest.petName}<br />
-          Date Created: {rest.dateCreated}<br />
-          Initial Age (Days): {rest.initialAgeDays}<br />
+          {/* Date Created: {rest.dateCreated}<br /> */}
+          {/* Initial Age (Days): {rest.initialAgeDays}<br /> */}
           Life Cycle Stage: {rest.ageStage}<br />
-          Light Needs: {rest.light}<br />
-          Nutrients Needs: {rest.nutrients}<br />
-          Nutrients Frequency: {rest.nutrientsFrequency}<br />
-          Water Needs: {rest.water}<br />
-          Water Frequency: {rest.waterFrequency}<br />
-          Temperature Needs: {rest.temperature}<br />
+          {/* Light Needs: {rest.light}<br /> */}
+          {/* Nutrients Needs: {rest.nutrients}<br /> */}
+          {/* Nutrients Frequency: {rest.nutrientsFrequency}<br /> */}
+          {/* Water Needs: {rest.water}<br /> */}
+          {/* Water Frequency: {rest.waterFrequency}<br /> */}
+          {/* Temperature Needs: {rest.temperature}<br /> */}
           Description: {rest.description}<br />
-          Care Needs (Misc.): {rest.careNeeds}<br />
+          {/* Care Needs (Misc.): {rest.careNeeds}<br /> */}
         </CardText>
         <img className='m-auto img-thumbnail' src={rest.imageUrl} alt={rest.name} />
         <Row>
-          <Col>
-            <Button onClick={() => modalToggle2()}>Add To Profile</Button>
-          </Col>
-          <Col>
-            <Button onClick={() => modalToggle3()}>Update Your Plant</Button>
-          </Col>
-          <Col>
-            <Button onClick={() => deleteUserPlant(rest.userPlantId, rest.userId).then(setUserPlants)}>Delete Plant From Profile</Button>
-          </Col>
-          <Col>
-            <Button onClick={() => toggleLogContainer()}>Log</Button>
-          </Col>
+          {useLocation.pathname === '/user'
+            && <Col>
+                <Button onClick={() => modalToggle2()}>Add To Profile</Button>
+              </Col>
+              <Col>
+                <Button onClick={() => modalToggle3()}>Update Your Plant</Button>
+              </Col>
+              <Col>
+                <Button onClick={() => deleteUserPlant(rest.userPlantId, rest.userId).then(setUserPlants)}>Delete Plant From Profile</Button>
+              </Col>
+              <Col>
+                <Button onClick={() => toggleLogContainer()}>Log</Button>
+              </Col>
+          }
           <Col>
             <Button onClick={() => modalToggle()}>Update Card</Button>
           </Col>

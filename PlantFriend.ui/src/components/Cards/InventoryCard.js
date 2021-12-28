@@ -21,13 +21,15 @@ function InventoryCard({
   return (
     <div className="col-sm-4">
       <Card className='d-flex justify-content-center' body>
-        <CardTitle tag='h5'>{rest.name}</CardTitle>
+        <CardTitle tag='h5'>
+          {rest.name}
+        </CardTitle>
         <CardText style={{ minHeight: 70 }}>
-          id: {rest.id}<br />
-          userid: {rest.userId}<br />
+          {/* id: {rest.id}<br /> */}
+          {/* userid: {rest.userId}<br /> */}
+          {/* name: {rest.name}<br /> */}
+          {rest.description}<br />
           quantity: {rest.quantity}<br />
-          name: {rest.name}<br />
-          description: {rest.description}<br />
         </CardText>
         <img className='m-auto img-thumbnail' src={rest.imageUrl} alt={rest.name} />
         <Row>

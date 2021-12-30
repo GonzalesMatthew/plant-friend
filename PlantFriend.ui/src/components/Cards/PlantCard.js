@@ -42,7 +42,7 @@ function PlantCard({
   }, []);
 
   return (
-    <Col className="col-sm-9">
+    <Col className="col-sm-3">
       <Card id={rest.id} className='d-flex justify-content-center' body>
         <CardTitle tag='h5'>
           {useLocation().pathname === '/user'
@@ -74,10 +74,14 @@ function PlantCard({
                 <Button onClick={() => modalToggle3()}>My Plant</Button>
               </Col>
               <Col>
-                <Button onClick={() => toggleLogContainer()}>Add Journal</Button>
+                <Button onClick={() => toggleLogContainer()}>Journal</Button>
               </Col>
               <Col>
-                <Button onClick={() => deleteUserPlant(rest.userPlantId, rest.userId).then(setUserPlants)}>Delete Plant From Profile</Button>
+                <Button onClick={() => {
+                  // eslint-disable-next-line
+                  const result = window.confirm('Are you sure? This is permanent.');
+                  if (result) deleteUserPlant(rest.userPlantId, rest.userId).then(setUserPlants);
+                }}>Remove From Profile</Button>
               </Col>
             </>}
           {useLocation().pathname === '/plants/'

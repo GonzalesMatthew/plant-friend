@@ -19,7 +19,7 @@ function InventoryCard({
   const modalToggle = () => setModalStatus(!modalStatus);
 
   return (
-    <div className="col-sm-4">
+    <div className="col-sm-3">
       <Card className='d-flex justify-content-center' body>
         <CardTitle tag='h5'>
           {rest.name}
@@ -29,15 +29,22 @@ function InventoryCard({
           {/* userid: {rest.userId}<br /> */}
           {/* name: {rest.name}<br /> */}
           {rest.description}<br />
-          quantity: {rest.quantity}<br />
+          {/* quantity: {rest.quantity}<br /> */}
         </CardText>
         <img className='m-auto img-thumbnail' src={rest.imageUrl} alt={rest.name} />
         <Row>
-          <Col>
+          {/* <Col>
             <Button onClick={() => modalToggle()}>Update</Button>
+          </Col> */}
+          <Col>
+            <Button onClick={() => modalToggle()}>Quantity: {rest.quantity}</Button>
           </Col>
           <Col>
-            <Button onClick={() => deleteUserInventory(rest.id, rest.userId).then(setUserInventory)}>Delete</Button>
+            <Button onClick={() => {
+              // eslint-disable-next-line
+              const result = window.confirm('Are you sure? This is permanent.');
+              if (result) deleteUserInventory(rest.id, rest.userId).then(setUserInventory);
+            }}>Remove</Button>
           </Col>
         </Row>
       </Card>

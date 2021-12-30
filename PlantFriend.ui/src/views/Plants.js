@@ -42,7 +42,7 @@ function Plants({
         </Col>
       </Row>
       <Container>
-        <Row className='d-flex flex-column justify-content-center align-items-center' >
+        <Row className='d-flex flex-row overflow-auto justify-content-center align-items-center' >
           {plants.filter((plant) => {
             if ((`${plant.name}`).toLowerCase().includes(searchPlant.toLowerCase())) {
               return plant;

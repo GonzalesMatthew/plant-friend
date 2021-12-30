@@ -64,7 +64,7 @@ function User({
           <Button onClick={() => { modalToggle1(); setModalTitle('Add Inventory'); }}>Add Inventory</Button>
         </Col>
       </Row>
-      <div className='d-flex flex-column justify-content-center align-items-center'>
+      <div className='d-flex flex-row justify-content-center align-items-center overflow-auto'>
         {userPlants.filter((userPlant) => {
           if ((`${userPlant.plant.name}`).toLowerCase().includes(searchPlant.toLowerCase())) {
             return userPlant;

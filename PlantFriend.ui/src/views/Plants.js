@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   Col, Container, Row, Button
@@ -22,9 +21,6 @@ function Plants({
   }, []);
 
   const modalToggle = () => setModalStatus(!modalStatus);
-
-  const location = useLocation();
-  console.warn(location.pathname);
 
   return (
     <>

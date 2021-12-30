@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import { Col, Row, Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 import PlantCard from '../components/Cards/PlantCard';
@@ -29,9 +28,6 @@ function User({
 
   const [modalStatus2, setModalStatus2] = useState(false);
   const modalToggle2 = () => setModalStatus2(!modalStatus2);
-
-  const location = useLocation();
-  console.warn(location.pathname);
 
   return (
     <>

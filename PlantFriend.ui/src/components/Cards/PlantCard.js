@@ -51,12 +51,12 @@ function PlantCard({
           }
         </CardTitle>
         <CardText style={{ minHeight: 70 }}>
-          {/* User Plant Id: {rest.userPlantId}<br /> */}
-          {/* Pet Name: {rest.petName}<br /> */}
-          Status: {rest.status}<br />
-          {/* Date Created: {rest.dateCreated}<br /> */}
-          {/* Initial Age (Days): {rest.initialAgeDays}<br /> */}
-          Life Cycle Stage: {rest.ageStage}<br />
+          {useLocation().pathname === '/user'
+            && <>
+              Status: {rest.status}<br />
+              Life Cycle Stage: {rest.ageStage}<br />
+            </>
+          }
           {/* Light Needs: {rest.light}<br /> */}
           {/* Nutrients Needs: {rest.nutrients}<br /> */}
           {/* Nutrients Frequency: {rest.nutrientsFrequency}<br /> */}
@@ -64,30 +64,38 @@ function PlantCard({
           {/* Water Frequency: {rest.waterFrequency}<br /> */}
           {/* Temperature Needs: {rest.temperature}<br /> */}
           Description: {rest.description}<br />
-          {/* Care Needs (Misc.): {rest.careNeeds}<br /> */}
+          {/* Additional Care Instructions: {rest.careNeeds}<br /> */}
         </CardText>
         <img className='m-auto img-thumbnail' src={rest.imageUrl} alt={rest.name} />
         <Row>
-          {useLocation.pathname === '/user'
-            && <Col>
-                <Button onClick={() => modalToggle2()}>Add To Profile</Button>
+          {useLocation().pathname === '/user'
+            && <>
+              <Col>
+                <Button onClick={() => modalToggle3()}>My Plant</Button>
               </Col>
               <Col>
-                <Button onClick={() => modalToggle3()}>Update Your Plant</Button>
+                <Button onClick={() => toggleLogContainer()}>Add Journal</Button>
               </Col>
               <Col>
                 <Button onClick={() => deleteUserPlant(rest.userPlantId, rest.userId).then(setUserPlants)}>Delete Plant From Profile</Button>
               </Col>
+            </>}
+          {useLocation().pathname === '/plants/'
+            && <>
               <Col>
-                <Button onClick={() => toggleLogContainer()}>Log</Button>
+                <Button onClick={() => modalToggle2()}>Add To Profile</Button>
               </Col>
-          }
-          <Col>
-            <Button onClick={() => modalToggle()}>Update Card</Button>
-          </Col>
-          <Col>
-            <Button onClick={() => deletePlant(rest.id).then(toggleLogContainer)}>Delete Card</Button>
-          </Col>
+              <Col>
+                <Button onClick={() => modalToggle()}>Update Research</Button>
+              </Col>
+              <Col>
+                <Button onClick={() => {
+                  // eslint-disable-next-line
+                  const result = window.confirm('Are you sure? This is permanent.');
+                  if (result) deletePlant(rest.id).then(setPlants).then(toggleLogContainer);
+                }}>Remove Plant</Button>
+              </Col>
+            </>}
         </Row>
       </Card>
       <Collapse isOpen={logContainerStatus}>

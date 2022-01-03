@@ -40,16 +40,16 @@ const NavBar = ({ user }) => {
           </div>
         </a> */}
         <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
+        <Collapse className='d-flex' isOpen={isOpen} navbar>
+          <Nav navbar>
             {user && authenticated()}
             {
               user !== null
-              && <NavItem>
+              && <NavItem className='ml-auto'>
                 {
                   user
-                    ? <Button color='danger' onClick={signOutUser}>Sign Out</Button>
-                    : <Button color='info' onClick={signInUser}>Sign In</Button>
+                    ? <Button color='danger' onClick={signOutUser}>Log Out</Button>
+                    : <Button color='info' onClick={signInUser}>Log In</Button>
                 }
               </NavItem>
             }

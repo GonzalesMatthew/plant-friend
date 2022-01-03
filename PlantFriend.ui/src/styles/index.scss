@@ -4,7 +4,7 @@
 
 body {
   background-color: $favColor;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 .logo-image{
@@ -17,15 +17,4 @@ body {
 
 .userButton{
   display: block;
-}
-
-.plant-overflow{
-  display: inline-block;
-  height: 100%;
-  max-width: 700px;
-  padding: 0 2em;
-  font-size: 14px;
-  white-space: normal;
-  overflow: hidden;
-  vertical-align:top;
 }

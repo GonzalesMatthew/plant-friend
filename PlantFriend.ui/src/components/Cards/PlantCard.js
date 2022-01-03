@@ -63,7 +63,7 @@ function PlantCard({
           {/* Water Needs: {rest.water}<br /> */}
           {/* Water Frequency: {rest.waterFrequency}<br /> */}
           {/* Temperature Needs: {rest.temperature}<br /> */}
-          Description: {rest.description}<br />
+          {rest.description}<br />
           {/* Additional Care Instructions: {rest.careNeeds}<br /> */}
         </CardText>
         <img className='m-auto img-thumbnail' src={rest.imageUrl} alt={rest.name} />

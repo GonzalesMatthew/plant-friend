@@ -30,7 +30,7 @@ function ScheduleModal({
               <th scope="col">Nutrients</th>
               <th scope="col">Light</th>
               <th scope="col">Temperature</th>
-              <th scope="col">Misc</th>
+              <th scope="col">Soil</th>
             </tr>
           </thead>
           <tbody>

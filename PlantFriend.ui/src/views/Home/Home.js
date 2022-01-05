@@ -21,7 +21,7 @@ function Home({ user }) {
         {user
           ? <div>
             <ProfileInfo>
-              View your house plants, inventory, and caretaker schedule.
+              View your house plants, inventory, and caretaker&apos;s schedule.
             </ProfileInfo>
             <Button outline color='info' tag={Link} to={'/user'}
               style={{ marginLeft: '4px' }}>

@@ -34,15 +34,15 @@ function Plants({
           <SearchBar
             searchTerm={searchPlant}
             setSearchTerm={setSearchPlant}
-            placeholder={'Search plant'}
+            placeholder={'Search plants'}
           />
         </Col>
         <Col>
-          <Button onClick={() => { modalToggle(); setModalTitle('Add Plant'); }}>Add Plant</Button>
+          <Button onClick={() => { modalToggle(); setModalTitle('New Plant Research'); }}>Add Plant</Button>
         </Col>
       </Row>
       <Container>
-        <Row className='d-flex flex-row justify-content-center align-items-center' >
+        <Col className='div-scroll d-flex flex-row' >
           {plants.filter((plant) => {
             if ((`${plant.name}`).toLowerCase().includes(searchPlant.toLowerCase())) {
               return plant;
@@ -65,7 +65,7 @@ function Plants({
               userId={user.id}
             />
           ))}
-        </Row>
+        </Col>
       </Container>
     </>
   );

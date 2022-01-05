@@ -41,66 +41,61 @@ function PlantCard({
     getLogsByUserPlantId(rest.userPlantId).then(setPlantLogs);
   }, []);
 
+  const [desc, setDesc] = useState(false);
+  const toggleDesc = () => setDesc(!desc);
+
   return (
-    <Col className="col-sm-3">
-      <Card id={rest.id} className='d-flex justify-content-center' body>
+    <Col className="col-sm-4">
+      <Card id={rest.id} className='plant-color d-flex justify-content-center' body>
         <CardTitle tag='h5'>
           {useLocation().pathname === '/user'
             ? `${rest.petName} the ${rest.name}`
             : `${rest.name}`
           }
         </CardTitle>
-        <CardText style={{ minHeight: 70 }}>
+        {/* Light Needs: {rest.light}<br /> */}
+        {/* Nutrients Needs: {rest.nutrients}<br /> */}
+        {/* Nutrients Frequency: {rest.nutrientsFrequency}<br /> */}
+        {/* Water Needs: {rest.water}<br /> */}
+        {/* Water Frequency: {rest.waterFrequency}<br /> */}
+        {/* Temperature Needs: {rest.temperature}<br /> */}
+        {/* Additional Care Instructions: {rest.careNeeds}<br /> */}
+        <Button className='btn bg-transparent' onClick={toggleDesc}>
+          <img className='project-image m-auto img-thumbnail' src={rest.imageUrl} alt={rest.name} />
+        </Button>
+        {useLocation().pathname === '/user'
+          && <CardText className='my-1'>
+            Status: {rest.status}<br />
+            Life Cycle Stage: {rest.ageStage}<br />
+          </CardText>
+        }
+        {desc && <>{rest.description}<br /></>}
+        <Col>
           {useLocation().pathname === '/user'
             && <>
-              Status: {rest.status}<br />
-              Life Cycle Stage: {rest.ageStage}<br />
-            </>
-          }
-          {/* Light Needs: {rest.light}<br /> */}
-          {/* Nutrients Needs: {rest.nutrients}<br /> */}
-          {/* Nutrients Frequency: {rest.nutrientsFrequency}<br /> */}
-          {/* Water Needs: {rest.water}<br /> */}
-          {/* Water Frequency: {rest.waterFrequency}<br /> */}
-          {/* Temperature Needs: {rest.temperature}<br /> */}
-          {rest.description}<br />
-          {/* Additional Care Instructions: {rest.careNeeds}<br /> */}
-        </CardText>
-        <img className='m-auto img-thumbnail' src={rest.imageUrl} alt={rest.name} />
-        <Row>
-          {useLocation().pathname === '/user'
-            && <>
-              <Col>
-                <Button onClick={() => modalToggle3()}>My Plant</Button>
-              </Col>
-              <Col>
-                <Button onClick={() => toggleLogContainer()}>Journal</Button>
-              </Col>
-              <Col>
+              <Row className='justify-content-around'>
+                <Button onClick={() => modalToggle3()}><i className="fas fa-seedling"></i></Button>
+                <Button onClick={() => toggleLogContainer()}><i className="fas fa-book"></i></Button>
                 <Button onClick={() => {
                   // eslint-disable-next-line
-                  const result = window.confirm('Are you sure? This is permanent.');
+                  const result = window.confirm('Are you sure you want to remove your plant? It will be permanently deleted.');
                   if (result) deleteUserPlant(rest.userPlantId, rest.userId).then(setUserPlants);
-                }}>Remove From Profile</Button>
-              </Col>
+                }}><i className="fas fa-trash-alt"></i></Button>
+              </Row>
             </>}
           {useLocation().pathname === '/plants/'
             && <>
-              <Col>
-                <Button onClick={() => modalToggle2()}>Add To Profile</Button>
-              </Col>
-              <Col>
-                <Button onClick={() => modalToggle()}>Update Research</Button>
-              </Col>
-              <Col>
+              <Row className='justify-content-around'>
+                <Button onClick={() => modalToggle()}><i className="fas fa-edit"></i></Button>
+                <Button onClick={() => modalToggle2()}><i className="fas fa-plus-square"></i></Button>
                 <Button onClick={() => {
                   // eslint-disable-next-line
-                  const result = window.confirm('Are you sure? This is permanent.');
+                  const result = window.confirm('Are you sure? All of your research on this plant will be permanently deleted, and you&aps;ll no longer be able to add it to your profile.');
                   if (result) deletePlant(rest.id).then(setPlants).then(toggleLogContainer);
-                }}>Remove Plant</Button>
-              </Col>
+                }}><i className="fas fa-trash-alt"></i></Button>
+              </Row>
             </>}
-        </Row>
+        </Col>
       </Card>
       <Collapse isOpen={logContainerStatus}>
         <Button onClick={() => modalToggle4()}><i className='far fa-plus-square'></i></Button>
@@ -129,7 +124,7 @@ function PlantCard({
         imageUrl={rest.imageUrl}
         careNeeds={rest.careNeeds}
         light={rest.light}
-        modalStatus={modalStatus} modalToggle={modalToggle} modalTitle='Update Plant' setPlants={setPlants}
+        modalStatus={modalStatus} modalToggle={modalToggle} modalTitle='Update Plant Research' setPlants={setPlants}
       />
       <FormModal
         plantId={rest.id}

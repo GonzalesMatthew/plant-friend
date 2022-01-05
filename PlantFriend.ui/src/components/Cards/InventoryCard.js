@@ -18,33 +18,40 @@ function InventoryCard({
   const [modalStatus, setModalStatus] = useState(false);
   const modalToggle = () => setModalStatus(!modalStatus);
 
+  const [desc, setDesc] = useState(false);
+  const toggleDesc = () => setDesc(!desc);
+
   return (
-    <div className="col-sm-3">
-      <Card className='d-flex justify-content-center' body>
+    <Col className="col-sm-4">
+      <Card className='tool-color d-flex justify-content-center' body>
         <CardTitle tag='h5'>
           {rest.name}
         </CardTitle>
-        <CardText style={{ minHeight: 70 }}>
-          {/* id: {rest.id}<br /> */}
-          {/* userid: {rest.userId}<br /> */}
-          {/* name: {rest.name}<br /> */}
-          {rest.description}<br />
-          {/* quantity: {rest.quantity}<br /> */}
-        </CardText>
-        <img className='m-auto img-thumbnail' src={rest.imageUrl} alt={rest.name} />
+        <Button className='btn bg-transparent' onClick={toggleDesc}>
+          <img className='project-image m-auto img-thumbnail' src={rest.imageUrl} alt={rest.name} />
+        </Button>
+        {desc
+          && <CardText className='my-1'>
+            {/* id: {rest.id}<br /> */}
+            {/* userid: {rest.userId}<br /> */}
+            {/* name: {rest.name}<br /> */}
+            {rest.description}<br />
+            {/* quantity: {rest.quantity}<br /> */}
+          </CardText>
+        }
         <Row>
           {/* <Col>
             <Button onClick={() => modalToggle()}>Update</Button>
           </Col> */}
           <Col>
-            <Button onClick={() => modalToggle()}>Quantity: {rest.quantity}</Button>
+            <Button onClick={() => modalToggle()}><i className='fas fa-briefcase'></i>&ensp;{rest.quantity}</Button>
           </Col>
           <Col>
             <Button onClick={() => {
               // eslint-disable-next-line
-              const result = window.confirm('Are you sure? This is permanent.');
+              const result = window.confirm('Are you sure? This will permanently remove this item.');
               if (result) deleteUserInventory(rest.id, rest.userId).then(setUserInventory);
-            }}>Remove</Button>
+            }}><i className="fas fa-trash-alt"></i></Button>
           </Col>
         </Row>
       </Card>
@@ -57,7 +64,7 @@ function InventoryCard({
         imageUrl={rest.imageUrl}
         modalStatus={modalStatus} modalToggle={modalToggle} modalTitle='Update Inventory' setUserInventory={setUserInventory}
       />
-    </div>
+    </Col>
   );
 }
 

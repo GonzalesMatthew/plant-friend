@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Row, Button } from 'reactstrap';
+import {
+  Col, Row, Button, Container
+} from 'reactstrap';
 import PropTypes from 'prop-types';
 import PlantCard from '../components/Cards/PlantCard';
 import InventoryCard from '../components/Cards/InventoryCard';
@@ -36,13 +38,13 @@ function User({
       <ScheduleModal modalToggle={modalToggle2} modalStatus={modalStatus2} modalTitle='Care Schedule' userPlants={userPlants} />
       <Row>
         <Col>
-          Plant
+          Plants
         </Col>
         <Col>
           <SearchBar
             searchTerm={searchPlant}
             setSearchTerm={setSearchPlant}
-            placeholder={'Search plant'}
+            placeholder={'Search plants'}
           />
         </Col>
         <Col>
@@ -64,54 +66,58 @@ function User({
           <Button onClick={() => { modalToggle1(); setModalTitle('Add Inventory'); }}>Add Inventory</Button>
         </Col>
       </Row>
-      <div className='d-flex flex-row justify-content-center align-items-center overflow-auto'>
-        {userPlants.filter((userPlant) => {
-          if ((`${userPlant.plant.name}`).toLowerCase().includes(searchPlant.toLowerCase())) {
-            return userPlant;
-          } return '';
-        }).map((userPlant, i) => (
-          <PlantCard
-            key={i}
-            id={userPlant.plant.id}
-            name={userPlant.plant.name}
-            light={userPlant.plant.light}
-            water={userPlant.plant.water}
-            waterFrequency={userPlant.plant.waterFrequency}
-            temperature={userPlant.plant.temperature}
-            nutrients={userPlant.plant.nutrients}
-            nutrientsFrequency={userPlant.plant.nutrientsFrequency}
-            description={userPlant.plant.description}
-            careNeeds={userPlant.plant.careNeeds}
-            imageUrl={userPlant.plant.imageUrl}
-            userPlantId={userPlant.id}
-            userId={userPlant.userId}
-            status={userPlant.status}
-            petName={userPlant.petName}
-            dateCreated={userPlant.dateCreated}
-            initialAgeDays={userPlant.initialAgeDays}
-            ageStage={userPlant.ageStage}
-            setUserPlants={setUserPlants}
-          />
-        ))}
-      </div>
-      <div className='d-flex flex-column justify-content-center align-items-center'>
-        {userInventory.filter((item) => {
-          if ((`${item.name}`).toLowerCase().includes(searchInventory.toLowerCase())) {
-            return item;
-          } return '';
-        }).map((item, i) => (
-          <InventoryCard
-            key={i}
-            id={item.id}
-            quantity={item.quantity}
-            name={item.name}
-            userId={item.userId}
-            description={item.description}
-            imageUrl={item.imageUrl}
-            setUserInventory={setUserInventory}
-          />
-        ))}
-      </div>
+      <Container>
+        <Col className='div-scroll d-flex flex-row'>
+          {userPlants.filter((userPlant) => {
+            if ((`${userPlant.plant.name}`).toLowerCase().includes(searchPlant.toLowerCase())) {
+              return userPlant;
+            } return '';
+          }).map((userPlant, i) => (
+            <PlantCard
+              key={i}
+              id={userPlant.plant.id}
+              name={userPlant.plant.name}
+              light={userPlant.plant.light}
+              water={userPlant.plant.water}
+              waterFrequency={userPlant.plant.waterFrequency}
+              temperature={userPlant.plant.temperature}
+              nutrients={userPlant.plant.nutrients}
+              nutrientsFrequency={userPlant.plant.nutrientsFrequency}
+              description={userPlant.plant.description}
+              careNeeds={userPlant.plant.careNeeds}
+              imageUrl={userPlant.plant.imageUrl}
+              userPlantId={userPlant.id}
+              userId={userPlant.userId}
+              status={userPlant.status}
+              petName={userPlant.petName}
+              dateCreated={userPlant.dateCreated}
+              initialAgeDays={userPlant.initialAgeDays}
+              ageStage={userPlant.ageStage}
+              setUserPlants={setUserPlants}
+            />
+          ))}
+        </Col>
+      </Container>
+      <Container>
+        <Col className='div-scroll d-flex flex-row'>
+          {userInventory.filter((item) => {
+            if ((`${item.name}`).toLowerCase().includes(searchInventory.toLowerCase())) {
+              return item;
+            } return '';
+          }).map((item, i) => (
+            <InventoryCard
+              key={i}
+              id={item.id}
+              quantity={item.quantity}
+              name={item.name}
+              userId={item.userId}
+              description={item.description}
+              imageUrl={item.imageUrl}
+              setUserInventory={setUserInventory}
+            />
+          ))}
+        </Col>
+      </Container>
     </>
   );
 }

@@ -121,7 +121,7 @@ function PlantForm({
         </Input>
       </FormGroup>
       <FormGroup>
-        <Label for='careNeeds'>Care Needs</Label>
+        <Label for='careNeeds'>Soil</Label>
         <Input
           id='careNeeds'
           type='text'
@@ -147,7 +147,7 @@ function PlantForm({
         </Input>
       </FormGroup>
 
-      <Button type='submit'>{formIdentifier === 1 ? 'Add Plant' : 'Update Plant'}</Button>
+      <Button type='submit'>{formIdentifier === 1 ? 'New Plant Research' : 'Update Plant Research'}</Button>
       <Button onClick={ () => modalToggle()}>Cancel</Button>
     </Form>
   );

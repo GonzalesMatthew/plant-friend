@@ -22,7 +22,7 @@ const NavBar = ({ user }) => {
   const authenticated = () => (
     <>
       <NavItem>
-        <Link className="nav-link" to="/plants/">Plants</Link>
+        <Link className="nav-link" to="/plants/">Research</Link>
       </NavItem>
       <NavItem>
         <Link className="nav-link" to="/user">Profile</Link>
@@ -32,7 +32,7 @@ const NavBar = ({ user }) => {
 
   return (
     <div>
-      <Navbar color="light" light expand="md">
+      <Navbar className='sticky-top d-flex' color="light" light expand="md">
         <NavbarBrand href='/'>PlantFriend</NavbarBrand>
         {/* <a href="/">
           <div className='logo-image'>
@@ -41,15 +41,17 @@ const NavBar = ({ user }) => {
         </a> */}
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="mr-auto" navbar>
+          <Nav navbar>
             {user && authenticated()}
+          </Nav>
+          <Nav className='ml-auto'>
             {
               user !== null
               && <NavItem>
                 {
                   user
-                    ? <Button color='danger' onClick={signOutUser}>Sign Out</Button>
-                    : <Button color='info' onClick={signInUser}>Sign In</Button>
+                    ? <Button onClick={signOutUser}>Log Out</Button>
+                    : <Button onClick={signInUser}>Log In</Button>
                 }
               </NavItem>
             }

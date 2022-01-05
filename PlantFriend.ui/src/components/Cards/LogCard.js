@@ -19,9 +19,12 @@ function LogCard({
     <>
       <Container>
         <div className='d-flex flex-row'>
-          <div>{entryNumber} {entryDate}</div>
-          <Button onClick={() => modalToggle()}><i className='fas fa-eye'></i></Button>
-          <Button onClick={() => deleteLog(id, userPlantId).then(setPlantLogs)}><i className='fas fa-trash'></i></Button>
+          <Button onClick={() => modalToggle()}>Entry:&ensp;{entryNumber}&emsp;<i className='fas fa-edit'></i></Button>
+          <Button onClick={() => {
+            // eslint-disable-next-line
+            const result = window.confirm('This will permanently delete your entry. Are you sure?');
+            if (result) deleteLog(id, userPlantId).then(setPlantLogs);
+          }}><i className='fas fa-trash'></i></Button>
         </div>
       </Container>
       <FormModal

@@ -65,10 +65,10 @@ function FormModal({
 
   let formIdentifier = 0;
   switch (modalTitle) {
-    case 'Add Plant':
+    case 'New Plant Research':
       formIdentifier = 1;
       break;
-    case 'Update Plant':
+    case 'Update Plant Research':
       formIdentifier = 2;
       break;
     case 'Add Inventory':
@@ -83,7 +83,7 @@ function FormModal({
     case 'Update Your Plant':
       formIdentifier = 6;
       break;
-    case 'Add A New Entry':
+    case 'Add A New Journal Entry':
       formIdentifier = 7;
       break;
     case 'Update Your Entry':

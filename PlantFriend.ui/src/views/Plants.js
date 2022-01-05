@@ -24,25 +24,27 @@ function Plants({
 
   return (
     <>
-      <h1>Plants</h1>
-      <FormModal modalStatus={modalStatus} modalToggle={modalToggle} modalTitle={modalTitle} setPlants={setPlants}/>
-      <Row>
-        <Col>
-          Plants
-        </Col>
-        <Col>
-          <SearchBar
-            searchTerm={searchPlant}
-            setSearchTerm={setSearchPlant}
-            placeholder={'Search plant'}
-          />
-        </Col>
-        <Col>
-          <Button onClick={() => { modalToggle(); setModalTitle('Add Plant'); }}>Add Plant</Button>
-        </Col>
-      </Row>
+      <FormModal modalStatus={modalStatus} modalToggle={modalToggle} modalTitle={modalTitle} setPlants={setPlants} />
+      <div className='border border-dark rounded sticky-top header-sticky py-3'>
+        <h1>Plants</h1>
+        <Row>
+          <Col>
+            Plants
+          </Col>
+          <Col>
+            <SearchBar
+              searchTerm={searchPlant}
+              setSearchTerm={setSearchPlant}
+              placeholder={'Search plants'}
+            />
+          </Col>
+          <Col>
+            <Button onClick={() => { modalToggle(); setModalTitle('New Plant Research'); }}>Add Plant</Button>
+          </Col>
+        </Row>
+      </div>
       <Container>
-        <Row className='d-flex flex-column justify-content-center align-items-center' >
+        <Row className='d-flex' >
           {plants.filter((plant) => {
             if ((`${plant.name}`).toLowerCase().includes(searchPlant.toLowerCase())) {
               return plant;

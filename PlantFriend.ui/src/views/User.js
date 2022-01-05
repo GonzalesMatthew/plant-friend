@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Col, Row, Button } from 'reactstrap';
+import {
+  Col, Row, Button, Container
+} from 'reactstrap';
 import PropTypes from 'prop-types';
 import PlantCard from '../components/Cards/PlantCard';
 import InventoryCard from '../components/Cards/InventoryCard';
@@ -31,87 +33,93 @@ function User({
 
   return (
     <>
-      <h1>Profile</h1>
       <FormModal modalToggle={modalToggle1} modalStatus={modalStatus1} modalTitle={modalTitle} userId={user.id} setUserInventory={setUserInventory} />
       <ScheduleModal modalToggle={modalToggle2} modalStatus={modalStatus2} modalTitle='Care Schedule' userPlants={userPlants} />
-      <Row>
-        <Col>
-          Plant
-        </Col>
-        <Col>
-          <SearchBar
-            searchTerm={searchPlant}
-            setSearchTerm={setSearchPlant}
-            placeholder={'Search plant'}
-          />
-        </Col>
-        <Col>
-          <Button onClick={() => modalToggle2()}>Schedule</Button>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          Inventory
-        </Col>
-        <Col>
-          <SearchBar
-            searchTerm={searchInventory}
-            setSearchTerm={setSearchInventory}
-            placeholder={'Search inventory'}
-          />
-        </Col>
-        <Col>
-          <Button onClick={() => { modalToggle1(); setModalTitle('Add Inventory'); }}>Add Inventory</Button>
-        </Col>
-      </Row>
-      <div className='d-flex flex-column justify-content-center align-items-center'>
-        {userPlants.filter((userPlant) => {
-          if ((`${userPlant.plant.name}`).toLowerCase().includes(searchPlant.toLowerCase())) {
-            return userPlant;
-          } return '';
-        }).map((userPlant, i) => (
-          <PlantCard
-            key={i}
-            id={userPlant.plant.id}
-            name={userPlant.plant.name}
-            light={userPlant.plant.light}
-            water={userPlant.plant.water}
-            waterFrequency={userPlant.plant.waterFrequency}
-            temperature={userPlant.plant.temperature}
-            nutrients={userPlant.plant.nutrients}
-            nutrientsFrequency={userPlant.plant.nutrientsFrequency}
-            description={userPlant.plant.description}
-            careNeeds={userPlant.plant.careNeeds}
-            imageUrl={userPlant.plant.imageUrl}
-            userPlantId={userPlant.id}
-            userId={userPlant.userId}
-            status={userPlant.status}
-            petName={userPlant.petName}
-            dateCreated={userPlant.dateCreated}
-            initialAgeDays={userPlant.initialAgeDays}
-            ageStage={userPlant.ageStage}
-            setUserPlants={setUserPlants}
-          />
-        ))}
+      <div className='rounded border border-dark sticky-top header-sticky py-3'>
+        <h1>Profile</h1>
+        <Row>
+          <Col>
+            Plants
+          </Col>
+          <Col>
+            <SearchBar
+              searchTerm={searchPlant}
+              setSearchTerm={setSearchPlant}
+              placeholder={'Search plants'}
+            />
+          </Col>
+          <Col>
+            <Button onClick={() => modalToggle2()}>Schedule</Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            Inventory
+          </Col>
+          <Col>
+            <SearchBar
+              searchTerm={searchInventory}
+              setSearchTerm={setSearchInventory}
+              placeholder={'Search inventory'}
+            />
+          </Col>
+          <Col>
+            <Button onClick={() => { modalToggle1(); setModalTitle('Add Inventory'); }}>Add Inventory</Button>
+          </Col>
+        </Row>
       </div>
-      <div className='d-flex flex-column justify-content-center align-items-center'>
-        {userInventory.filter((item) => {
-          if ((`${item.name}`).toLowerCase().includes(searchInventory.toLowerCase())) {
-            return item;
-          } return '';
-        }).map((item, i) => (
-          <InventoryCard
-            key={i}
-            id={item.id}
-            quantity={item.quantity}
-            name={item.name}
-            userId={item.userId}
-            description={item.description}
-            imageUrl={item.imageUrl}
-            setUserInventory={setUserInventory}
-          />
-        ))}
-      </div>
+      <Container className='rounded border border-dark'>
+        <Col className='overflow-auto d-flex flex-row'>
+          {userPlants.filter((userPlant) => {
+            if ((`${userPlant.petName} the ${userPlant.plant.name}`).toLowerCase().includes(searchPlant.toLowerCase())) {
+              return userPlant;
+            } return '';
+          }).map((userPlant, i) => (
+            <PlantCard
+              key={i}
+              id={userPlant.plant.id}
+              name={userPlant.plant.name}
+              light={userPlant.plant.light}
+              water={userPlant.plant.water}
+              waterFrequency={userPlant.plant.waterFrequency}
+              temperature={userPlant.plant.temperature}
+              nutrients={userPlant.plant.nutrients}
+              nutrientsFrequency={userPlant.plant.nutrientsFrequency}
+              description={userPlant.plant.description}
+              careNeeds={userPlant.plant.careNeeds}
+              imageUrl={userPlant.plant.imageUrl}
+              userPlantId={userPlant.id}
+              userId={userPlant.userId}
+              status={userPlant.status}
+              petName={userPlant.petName}
+              dateCreated={userPlant.dateCreated}
+              initialAgeDays={userPlant.initialAgeDays}
+              ageStage={userPlant.ageStage}
+              setUserPlants={setUserPlants}
+            />
+          ))}
+        </Col>
+      </Container>
+      <Container className='rounded border border-dark'>
+        <Col className='overflow-auto d-flex flex-row'>
+          {userInventory.filter((item) => {
+            if ((`${item.name}`).toLowerCase().includes(searchInventory.toLowerCase())) {
+              return item;
+            } return '';
+          }).map((item, i) => (
+            <InventoryCard
+              key={i}
+              id={item.id}
+              quantity={item.quantity}
+              name={item.name}
+              userId={item.userId}
+              description={item.description}
+              imageUrl={item.imageUrl}
+              setUserInventory={setUserInventory}
+            />
+          ))}
+        </Col>
+      </Container>
     </>
   );
 }

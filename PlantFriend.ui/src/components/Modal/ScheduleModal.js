@@ -14,18 +14,35 @@ function ScheduleModal({
   return (
     <Modal
       id='scheduleModal'
-      size='md'
+      className="modal-xl"
       isOpen={modalStatus}
       toggle={modalToggle}
+      animation='true'
     >
       <ModalHeader toggle={modalToggle}>{modalTitle}</ModalHeader>
       <ModalBody>
-        {userPlants.map((plant, i) => (
-          <ScheduleCard
-            key={i}
-            plant={plant}
-          />
-        ))}
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Plant</th>
+              <th scope="col">Water</th>
+              <th scope="col">Nutrients</th>
+              <th scope="col">Light</th>
+              <th scope="col">Temperature</th>
+              <th scope="col">Soil</th>
+            </tr>
+          </thead>
+          <tbody>
+            {userPlants.map((plant, i) => (
+              <ScheduleCard
+                key={i}
+                plant={plant}
+                row={i}
+              />
+            ))}
+          </tbody>
+        </table>
       </ModalBody>
     </Modal>
   );

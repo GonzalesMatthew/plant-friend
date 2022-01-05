@@ -4,7 +4,7 @@
 
 body {
   background-color: $favColor;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif !important;
 }
 
 .logo-image{
@@ -13,4 +13,36 @@ body {
   border-radius: 50%;
   overflow: hidden;
   margin-top: -6px;
+}
+
+.userButton{
+  display: block;
+}
+
+.project-image{
+  max-width:150px;
+  min-width:150px;
+  max-height:150px;
+  min-height:150px;
+}
+
+.plant-color{
+  background-color: #99cc98 !important;
+}
+
+.tool-color{
+  background-color: #98c2cc !important;
+}
+
+.btn:focus{
+  box-shadow: none !important;
+}
+
+.div-scroll{
+  width: 100%;
+  overflow-x: auto;
+}
+
+.header-sticky{
+  background: rgba(252, 252, 252, 1) !important;
 }

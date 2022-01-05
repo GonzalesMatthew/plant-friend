@@ -32,7 +32,7 @@ const NavBar = ({ user }) => {
 
   return (
     <div>
-      <Navbar className='d-flex' color="light" light expand="md">
+      <Navbar className='sticky-top d-flex' color="light" light expand="md">
         <NavbarBrand href='/'>PlantFriend</NavbarBrand>
         {/* <a href="/">
           <div className='logo-image'>

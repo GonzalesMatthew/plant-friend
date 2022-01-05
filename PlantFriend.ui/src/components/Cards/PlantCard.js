@@ -76,9 +76,10 @@ function PlantCard({
               <Row className='justify-content-around'>
                 <Button onClick={() => modalToggle3()}><i className="fas fa-seedling"></i></Button>
                 <Button onClick={() => toggleLogContainer()}><i className="fas fa-book"></i></Button>
+                <Button onClick={() => modalToggle4()}><i className='fas fa-plus-circle'></i></Button>
                 <Button onClick={() => {
                   // eslint-disable-next-line
-                  const result = window.confirm('Are you sure you want to remove your plant? It will be permanently deleted.');
+                  const result = window.confirm('Are you sure you want to remove your plant? Its journal and all of its information will be permanently deleted.');
                   if (result) deleteUserPlant(rest.userPlantId, rest.userId).then(setUserPlants);
                 }}><i className="fas fa-trash-alt"></i></Button>
               </Row>
@@ -98,19 +99,23 @@ function PlantCard({
         </Col>
       </Card>
       <Collapse isOpen={logContainerStatus}>
-        <Button onClick={() => modalToggle4()}><i className='far fa-plus-square'></i></Button>
-        {plantLogs.map((log, i) => (
-          <LogCard
-            key={i}
-            id={log.id}
-            userPlantId={log.userPlantId}
-            dateCreated={log.dateCreated}
-            entryNumber={log.entryNumber}
-            entry={log.entry}
-            entryDate={log.entryDate}
-            setPlantLogs={setPlantLogs}
-          />
-        ))}
+        <div className='plant-color'>Journal:
+          {plantLogs.length === 0
+            && <div>You currently have no journal entries.</div>
+          }
+          {plantLogs.map((log, i) => (
+            <LogCard
+              key={i}
+              id={log.id}
+              userPlantId={log.userPlantId}
+              dateCreated={log.dateCreated}
+              entryNumber={log.entryNumber}
+              entry={log.entry}
+              entryDate={log.entryDate}
+              setPlantLogs={setPlantLogs}
+            />
+          ))}
+        </div>
       </Collapse>
       <FormModal
         id={rest.id}
@@ -143,7 +148,7 @@ function PlantCard({
       />
       <FormModal
         userPlantId={rest.userPlantId}
-        modalStatus={modalStatus4} modalToggle={modalToggle4} modalTitle='Add A New Entry' setPlantLogs={setPlantLogs}
+        modalStatus={modalStatus4} modalToggle={modalToggle4} modalTitle='Add A New Journal Entry' setPlantLogs={setPlantLogs}
       />
     </Col>
   );

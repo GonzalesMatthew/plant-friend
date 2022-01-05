@@ -33,43 +33,45 @@ function User({
 
   return (
     <>
-      <h1>Profile</h1>
       <FormModal modalToggle={modalToggle1} modalStatus={modalStatus1} modalTitle={modalTitle} userId={user.id} setUserInventory={setUserInventory} />
       <ScheduleModal modalToggle={modalToggle2} modalStatus={modalStatus2} modalTitle='Care Schedule' userPlants={userPlants} />
-      <Row>
-        <Col>
-          Plants
-        </Col>
-        <Col>
-          <SearchBar
-            searchTerm={searchPlant}
-            setSearchTerm={setSearchPlant}
-            placeholder={'Search plants'}
-          />
-        </Col>
-        <Col>
-          <Button onClick={() => modalToggle2()}>Schedule</Button>
-        </Col>
-      </Row>
-      <Row>
-        <Col>
-          Inventory
-        </Col>
-        <Col>
-          <SearchBar
-            searchTerm={searchInventory}
-            setSearchTerm={setSearchInventory}
-            placeholder={'Search inventory'}
-          />
-        </Col>
-        <Col>
-          <Button onClick={() => { modalToggle1(); setModalTitle('Add Inventory'); }}>Add Inventory</Button>
-        </Col>
-      </Row>
-      <Container>
-        <Col className='div-scroll d-flex flex-row'>
+      <div className='rounded border border-dark sticky-top header-sticky py-3'>
+        <h1>Profile</h1>
+        <Row>
+          <Col>
+            Plants
+          </Col>
+          <Col>
+            <SearchBar
+              searchTerm={searchPlant}
+              setSearchTerm={setSearchPlant}
+              placeholder={'Search plants'}
+            />
+          </Col>
+          <Col>
+            <Button onClick={() => modalToggle2()}>Schedule</Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            Inventory
+          </Col>
+          <Col>
+            <SearchBar
+              searchTerm={searchInventory}
+              setSearchTerm={setSearchInventory}
+              placeholder={'Search inventory'}
+            />
+          </Col>
+          <Col>
+            <Button onClick={() => { modalToggle1(); setModalTitle('Add Inventory'); }}>Add Inventory</Button>
+          </Col>
+        </Row>
+      </div>
+      <Container className='rounded border border-dark'>
+        <Col className='overflow-auto d-flex flex-row'>
           {userPlants.filter((userPlant) => {
-            if ((`${userPlant.plant.name}`).toLowerCase().includes(searchPlant.toLowerCase())) {
+            if ((`${userPlant.petName} the ${userPlant.plant.name}`).toLowerCase().includes(searchPlant.toLowerCase())) {
               return userPlant;
             } return '';
           }).map((userPlant, i) => (
@@ -98,8 +100,8 @@ function User({
           ))}
         </Col>
       </Container>
-      <Container>
-        <Col className='div-scroll d-flex flex-row'>
+      <Container className='rounded border border-dark'>
+        <Col className='overflow-auto d-flex flex-row'>
           {userInventory.filter((item) => {
             if ((`${item.name}`).toLowerCase().includes(searchInventory.toLowerCase())) {
               return item;

@@ -83,7 +83,7 @@ function FormModal({
     case 'Update Your Plant':
       formIdentifier = 6;
       break;
-    case 'Add A New Entry':
+    case 'Add A New Journal Entry':
       formIdentifier = 7;
       break;
     case 'Update Your Entry':

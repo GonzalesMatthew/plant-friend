@@ -37,9 +37,11 @@ function PlantCard({
   const toggleLogContainer = () => setLogContainerStatus(!logContainerStatus);
 
   const [plantLogs, setPlantLogs] = useState([]);
+
+  const userPageCheck = (useLocation().pathname === '/user');
   useEffect(() => {
-    getLogsByUserPlantId(rest.userPlantId).then(setPlantLogs);
-  }, []);
+    if (userPageCheck) getLogsByUserPlantId(rest.userPlantId).then(setPlantLogs);
+  }, [userPageCheck]);
 
   const [desc, setDesc] = useState(false);
   const toggleDesc = () => setDesc(!desc);

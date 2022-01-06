@@ -69,6 +69,7 @@ function User({
         </Row>
       </div>
       <Container className='rounded border border-dark'>
+        <Col><h2>Plants</h2></Col>
         <Col className='overflow-auto d-flex flex-row'>
           {userPlants.filter((userPlant) => {
             if ((`${userPlant.petName} the ${userPlant.plant.name}`).toLowerCase().includes(searchPlant.toLowerCase())) {
@@ -101,6 +102,7 @@ function User({
         </Col>
       </Container>
       <Container className='rounded border border-dark'>
+        <Col><h2>Inventory</h2></Col>
         <Col className='overflow-auto d-flex flex-row'>
           {userInventory.filter((item) => {
             if ((`${item.name}`).toLowerCase().includes(searchInventory.toLowerCase())) {

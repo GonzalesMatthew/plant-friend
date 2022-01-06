@@ -35,7 +35,7 @@ function UserPlantForm({
           id='status'
           type='text'
           name='status'
-          placeholder='E.g. Alive, Dead, Gifted, etc.'
+          placeholder='How is your plant doing?'
           value={formObj.status}
           onChange={handleInputChange}
           required

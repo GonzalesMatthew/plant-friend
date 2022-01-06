@@ -115,7 +115,7 @@ function FormModal({
         [e.target.name]: e.target.name === 'entryDate' ? moment(e.target.value).format('yyyy-MM-DDThh:mm:ss') : e.target.value
       }));
     } else {
-      console.warn('handleInputChange function is not finding formIdentifier value 1, 2, 3 or 4');
+      console.warn('handleInputChange function is encountering a problem');
     }
   };
   const handleSubmit = (e) => {
@@ -123,14 +123,30 @@ function FormModal({
     if (formIdentifier === 1) {
       console.warn('trying to add plant', plantObj);
       delete plantObj.id;
-      addPlant(plantObj).then(setPlants);
+      addPlant(plantObj).then(setPlants).then(() => {
+        plantObj.name = '';
+        plantObj.water = '';
+        plantObj.waterFrequency = '';
+        plantObj.nutrients = '';
+        plantObj.nutrientsFrequency = '';
+        plantObj.temperature = '';
+        plantObj.description = '';
+        plantObj.imageUrl = '';
+        plantObj.careNeeds = '';
+        plantObj.light = '';
+      });
     } else if (formIdentifier === 2) {
       console.warn('trying to update plant', plantObj);
       updatePlant(plantObj, plantObj.id).then(setPlants);
     } else if (formIdentifier === 3) {
       console.warn('trying to add inventory', inventoryObj);
       delete inventoryObj.id;
-      addUserInventory(inventoryObj).then(setUserInventory);
+      addUserInventory(inventoryObj).then(setUserInventory).then(() => {
+        inventoryObj.quantity = '';
+        inventoryObj.name = '';
+        inventoryObj.description = '';
+        inventoryObj.imageUrl = '';
+      });
     } else if (formIdentifier === 4) {
       console.warn('trying to update inventory', inventoryObj);
       updateUserInventory(inventoryObj).then(setUserInventory);
@@ -146,6 +162,12 @@ function FormModal({
       delete logEntryObj.id;
       delete logEntryObj.dateCreated;
       addLog(logEntryObj).then(setPlantLogs);
+      // .then(() => {
+      //   logEntryObj.dateCreated = '';
+      //   logEntryObj.entryNumber = '';
+      //   logEntryObj.entry = '';
+      //   logEntryObj.entryDate = '';
+      // });
     } else if (formIdentifier === 8) {
       console.warn('trying to update log entry', logEntryObj);
       updateLog(logEntryObj).then(setPlantLogs);
@@ -186,18 +208,18 @@ function FormModal({
             />
             : ((formIdentifier === 5 || formIdentifier === 6)
               ? <UserPlantForm
-              formObj={userPlantObj}
-              handleInputChange={handleInputChange}
-              handleSubmit={handleSubmit}
-              modalToggle={modalToggle}
-              formIdentifier={formIdentifier}
-            />
-            : <LogForm
-            formObj={logEntryObj}
-            handleInputChange={handleInputChange}
-            handleSubmit={handleSubmit}
-            modalToggle={modalToggle}
-            formIdentifier={formIdentifier}/>
+                formObj={userPlantObj}
+                handleInputChange={handleInputChange}
+                handleSubmit={handleSubmit}
+                modalToggle={modalToggle}
+                formIdentifier={formIdentifier}
+              />
+              : <LogForm
+                formObj={logEntryObj}
+                handleInputChange={handleInputChange}
+                handleSubmit={handleSubmit}
+                modalToggle={modalToggle}
+                formIdentifier={formIdentifier} />
             ))
         }
       </ModalBody>

@@ -20,10 +20,20 @@ body {
 }
 
 .project-image{
-  max-width:150px;
-  min-width:150px;
-  max-height:150px;
-  min-height:150px;
+  max-width:200px;
+  // min-width:200px;
+  max-height:200px;
+  // min-height:200px;
+  // background-size:cover;
+  // background-position:center;
+  // overflow: hidden;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 100%;
+}
+
+.project-image img{
+  position: absolute;
 }
 
 .plant-color{

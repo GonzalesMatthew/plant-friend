@@ -21,8 +21,8 @@ function PlantCard({
   setUserPlants,
   ...rest
 }) {
-  const [modalStatus, setModalStatus] = useState(false);
-  const modalToggle = () => setModalStatus(!modalStatus);
+  const [modalStatus0, setModalStatus0] = useState(false);
+  const modalToggle0 = () => setModalStatus0(!modalStatus0);
 
   const [modalStatus2, setModalStatus2] = useState(false);
   const modalToggle2 = () => setModalStatus2(!modalStatus2);
@@ -81,7 +81,7 @@ function PlantCard({
                 <Button onClick={() => modalToggle4()}><i className='fas fa-plus-circle'></i></Button>
                 <Button onClick={() => {
                   // eslint-disable-next-line
-                  const result = window.confirm('Are you sure you want to remove your plant? Its journal and all of its information will be permanently deleted.');
+                  const result = window.confirm('Are you sure you want to remove your plant? Its journal and all of its information will be permanently removed.');
                   if (result) deleteUserPlant(rest.userPlantId, rest.userId).then(setUserPlants);
                 }}><i className="fas fa-trash-alt"></i></Button>
               </Row>
@@ -89,18 +89,18 @@ function PlantCard({
           {useLocation().pathname === '/plants/'
             && <>
               <Row className='justify-content-around'>
-                <Button onClick={() => modalToggle()}><i className="fas fa-edit"></i></Button>
-                <Button onClick={() => modalToggle2()}><i className="fas fa-plus-square"></i></Button>
+                <Button onClick={() => modalToggle0()}><i className="fas fa-edit"></i></Button>
+                <Button onClick={() => modalToggle2()}><i className="fas fa-plus-circle"></i></Button>
                 <Button onClick={() => {
                   // eslint-disable-next-line
-                  const result = window.confirm('Are you sure? All of your research on this plant will be permanently deleted, and you&aps;ll no longer be able to add it to your profile.');
+                  const result = window.confirm(`Are you sure? All of your research on this plant (${rest.name}) will be permanently removed, and you'll no longer be able to add it to your profile.`);
                   if (result) deletePlant(rest.id).then(setPlants).then(toggleLogContainer);
                 }}><i className="fas fa-trash-alt"></i></Button>
               </Row>
             </>}
         </Col>
       </Card>
-      <Collapse isOpen={logContainerStatus}>
+      <Collapse isOpen={logContainerStatus && useLocation().pathname === '/user'}>
         <div className='plant-color'>Journal:
           {plantLogs.length === 0
             && <div>You currently have no journal entries.</div>
@@ -115,6 +115,8 @@ function PlantCard({
               entry={log.entry}
               entryDate={log.entryDate}
               setPlantLogs={setPlantLogs}
+              petName={rest.petName}
+              name={rest.name}
             />
           ))}
         </div>
@@ -131,7 +133,7 @@ function PlantCard({
         imageUrl={rest.imageUrl}
         careNeeds={rest.careNeeds}
         light={rest.light}
-        modalStatus={modalStatus} modalToggle={modalToggle} modalTitle='Update Plant Research' setPlants={setPlants}
+        modalStatus={modalStatus0} modalToggle={modalToggle0} modalTitle='Update Plant Research' setPlants={setPlants}
       />
       <FormModal
         plantId={rest.id}

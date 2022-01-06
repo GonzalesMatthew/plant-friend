@@ -90,7 +90,7 @@ function FormModal({
       formIdentifier = 8;
       break;
     default:
-      console.warn('No such case for modal title');
+      formIdentifier = 0;
   }
 
   const handleInputChange = (e) => {

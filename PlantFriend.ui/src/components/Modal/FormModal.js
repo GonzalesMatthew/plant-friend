@@ -60,7 +60,7 @@ function FormModal({
     dateCreated: rest.dateCreated || '',
     entryNumber: rest.entryNumber || '',
     entry: rest.entry || '',
-    entryDate: moment(rest.entryDate).format('yyyy-MM-DD') || ''
+    entryDate: moment(rest.entryDate).format('YYYY-MM-DD') || ''
   });
 
   let formIdentifier = 0;
@@ -112,7 +112,7 @@ function FormModal({
     } else if (formIdentifier === 7 || formIdentifier === 8) {
       setlogEntryObj((prevState) => ({
         ...prevState,
-        [e.target.name]: e.target.name === 'entryDate' ? moment(e.target.value).format('yyyy-MM-DDThh:mm:ss') : e.target.value
+        [e.target.name]: e.target.name === 'entryDate' ? moment(e.target.value).format('YYYY-MM-DD') : e.target.value
       }));
     } else {
       console.warn('handleInputChange function is encountering a problem');

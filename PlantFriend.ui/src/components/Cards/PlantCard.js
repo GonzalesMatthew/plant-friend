@@ -19,6 +19,7 @@ import LogCard from './LogCard';
 function PlantCard({
   setPlants,
   setUserPlants,
+  userPlantIds,
   ...rest
 }) {
   const [modalStatus0, setModalStatus0] = useState(false);
@@ -38,13 +39,13 @@ function PlantCard({
 
   const [plantLogs, setPlantLogs] = useState([]);
 
+  const [desc, setDesc] = useState(false);
+  const toggleDesc = () => setDesc(!desc);
+
   const userPageCheck = (useLocation().pathname === '/user');
   useEffect(() => {
     if (userPageCheck) getLogsByUserPlantId(rest.userPlantId).then(setPlantLogs);
   }, [userPageCheck]);
-
-  const [desc, setDesc] = useState(false);
-  const toggleDesc = () => setDesc(!desc);
 
   return (
     <Col className="col-sm-4">
@@ -92,9 +93,14 @@ function PlantCard({
                 <Button onClick={() => modalToggle0()}><i className="fas fa-edit"></i></Button>
                 <Button onClick={() => modalToggle2()}><i className="fas fa-plus-circle"></i></Button>
                 <Button onClick={() => {
-                  // eslint-disable-next-line
-                  const result = window.confirm(`Are you sure? All of your research on this plant (${rest.name}) will be permanently removed, and you'll no longer be able to add it to your profile.`);
-                  if (result) deletePlant(rest.id).then(setPlants).then(toggleLogContainer);
+                  if (userPlantIds.includes(rest.id)) {
+                    // eslint-disable-next-line
+                    window.alert(`You cannot remove a plant that you currently own. Please remove any ${rest.name} from your profile first.`);
+                  } else {
+                    // eslint-disable-next-line
+                    const result = window.confirm(`Are you sure? All of your research on this plant (${rest.name}) will be permanently removed, and you'll no longer be able to add it to your profile.`);
+                    if (result) deletePlant(rest.id).then(setPlants).then(toggleLogContainer);
+                  }
                 }}><i className="fas fa-trash-alt"></i></Button>
               </Row>
             </>}
@@ -181,4 +187,5 @@ PlantCard.propTypes = {
   dateCreated: PropTypes.string,
   initialAgeDays: PropTypes.number,
   ageStage: PropTypes.string,
+  userPlantIds: PropTypes.array
 };

@@ -16,14 +16,14 @@ function User({
 }) {
   const [userPlants, setUserPlants] = useState([]);
   const [userInventory, setUserInventory] = useState([]);
-  const [searchPlant, setSearchPlant] = useState('');
-  const [searchInventory, setSearchInventory] = useState('');
-  const [modalTitle, setModalTitle] = useState('');
-
   useEffect(() => {
     getUserPlantsByUserId(user.id).then(setUserPlants);
     getUserInventoryByUserId(user.id).then(setUserInventory);
   }, []);
+
+  const [searchPlant, setSearchPlant] = useState('');
+  const [searchInventory, setSearchInventory] = useState('');
+  const [modalTitle, setModalTitle] = useState('');
 
   const [modalStatus1, setModalStatus1] = useState(false);
   const modalToggle1 = () => setModalStatus1(!modalStatus1);

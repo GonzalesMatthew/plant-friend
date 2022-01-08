@@ -47,7 +47,7 @@ function Plants({
             />
           </Col>
           <Col>
-            <Button onClick={() => { modalToggle(); setModalTitle('New Plant Research'); }}>Add Plant</Button>
+            <Button onClick={() => { modalToggle(); setModalTitle('New Plant Research'); }}>New Plant</Button>
           </Col>
         </Row>
       </div>

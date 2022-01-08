@@ -7,7 +7,7 @@ body {
   font-family: 'Montserrat', sans-serif !important;
 }
 
-.logo-image{
+.logo-image {
   width: 46px;
   height:46px;
   border-radius: 50%;
@@ -15,11 +15,11 @@ body {
   margin-top: -6px;
 }
 
-.userButton{
+.userButton {
   display: block;
 }
 
-.project-image{
+.project-image {
   max-width:200px;
   // min-width:200px;
   max-height:200px;
@@ -32,27 +32,31 @@ body {
   padding-bottom: 100%;
 }
 
-.project-image img{
+.project-image img {
   position: absolute;
 }
 
-.plant-color{
+.plant-color {
   background-color: #99cc98 !important;
 }
 
-.tool-color{
+.tool-color {
   background-color: #98c2cc !important;
 }
 
-.btn:focus{
+.btn:focus {
   box-shadow: none !important;
 }
 
-.div-scroll{
+.div-scroll {
   width: 100%;
   overflow-x: auto;
 }
 
-.header-sticky{
+.header-sticky {
   background: rgba(252, 252, 252, 1) !important;
+}
+
+.modal-body {
+  overflow: auto;
 }

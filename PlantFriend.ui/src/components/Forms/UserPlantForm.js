@@ -46,7 +46,7 @@ function UserPlantForm({
         <Label for='initialAgeDays'>Initial Age (Days)</Label>
         <Input
           id='initialAgeDays'
-          type='text'
+          type='number'
           name='initialAgeDays'
           placeholder='How old is your plant in days?'
           value={formObj.initialAgeDays}

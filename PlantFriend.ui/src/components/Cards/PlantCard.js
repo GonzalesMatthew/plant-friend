@@ -45,7 +45,7 @@ function PlantCard({
   const userPageCheck = (useLocation().pathname === '/user');
   useEffect(() => {
     if (userPageCheck) getLogsByUserPlantId(rest.userPlantId).then(setPlantLogs);
-  }, [userPageCheck]);
+  }, []);
 
   return (
     <Col className="col-sm-4">

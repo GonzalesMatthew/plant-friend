@@ -121,7 +121,7 @@ function FormModal({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formIdentifier === 1) {
-      console.warn('trying to add plant', plantObj);
+      // console.warn('trying to add plant', plantObj);
       delete plantObj.id;
       addPlant(plantObj).then(setPlants).then(() => {
         plantObj.name = '';
@@ -136,10 +136,10 @@ function FormModal({
         plantObj.light = '';
       });
     } else if (formIdentifier === 2) {
-      console.warn('trying to update plant', plantObj);
+      // console.warn('trying to update plant', plantObj);
       updatePlant(plantObj, plantObj.id).then(setPlants);
     } else if (formIdentifier === 3) {
-      console.warn('trying to add inventory', inventoryObj);
+      // console.warn('trying to add inventory', inventoryObj);
       delete inventoryObj.id;
       addUserInventory(inventoryObj).then(setUserInventory).then(() => {
         inventoryObj.quantity = '';
@@ -148,34 +148,39 @@ function FormModal({
         inventoryObj.imageUrl = '';
       });
     } else if (formIdentifier === 4) {
-      console.warn('trying to update inventory', inventoryObj);
+      // console.warn('trying to update inventory', inventoryObj);
       updateUserInventory(inventoryObj).then(setUserInventory);
     } else if (formIdentifier === 5) {
-      console.warn('trying to add user plant', userPlantObj);
+      // console.warn('trying to add user plant', userPlantObj);
       delete userPlantObj.id;
-      addUserPlant(userPlantObj).then(setUserPlants);
+      addUserPlant(userPlantObj).then(setUserPlants).then(() => {
+        userPlantObj.status = '';
+        userPlantObj.petName = '';
+        userPlantObj.initialAgeDays = '';
+        userPlantObj.ageStage = '';
+      });
     } else if (formIdentifier === 6) {
-      console.warn('trying to update user plant', userPlantObj);
+      // console.warn('trying to update user plant', userPlantObj);
       updateUserPlant(userPlantObj).then(setUserPlants);
     } else if (formIdentifier === 7) {
-      console.warn('trying to add log entry', logEntryObj);
+      // console.warn('trying to add log entry', logEntryObj);
       delete logEntryObj.id;
       delete logEntryObj.dateCreated;
-      addLog(logEntryObj).then(setPlantLogs);
-      // .then(() => {
-      //   logEntryObj.dateCreated = '';
-      //   logEntryObj.entryNumber = '';
-      //   logEntryObj.entry = '';
-      //   logEntryObj.entryDate = '';
-      // });
+      addLog(logEntryObj).then(setPlantLogs).then(() => {
+        logEntryObj.dateCreated = '';
+        logEntryObj.entryNumber = '';
+        logEntryObj.entry = '';
+        logEntryObj.entryDate = '';
+      });
     } else if (formIdentifier === 8) {
-      console.warn('trying to update log entry', logEntryObj);
+      // console.warn('trying to update log entry', logEntryObj);
       updateLog(logEntryObj).then(setPlantLogs);
     } else {
-      console.warn('plantObj', plantObj);
-      console.warn('inventoryObj', inventoryObj);
-      console.warn('userPlantObj', userPlantObj);
-      console.warn('logEntryObj', logEntryObj);
+      console.warn('form submission error');
+      // console.warn('plantObj', plantObj);
+      // console.warn('inventoryObj', inventoryObj);
+      // console.warn('userPlantObj', userPlantObj);
+      // console.warn('logEntryObj', logEntryObj);
     }
     modalToggle();
   };

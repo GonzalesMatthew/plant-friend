@@ -17,6 +17,7 @@ function User({
   const [userPlants, setUserPlants] = useState([]);
   const [userInventory, setUserInventory] = useState([]);
   useEffect(() => {
+    if (user.id === undefined) return;
     getUserPlantsByUserId(user.id).then(setUserPlants);
     getUserInventoryByUserId(user.id).then(setUserInventory);
   }, []);

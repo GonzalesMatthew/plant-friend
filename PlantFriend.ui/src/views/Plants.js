@@ -23,6 +23,7 @@ function Plants({
   }, []);
 
   useEffect(() => {
+    if (user.id === undefined) return;
     getUserPlantsByUserId(user.id).then(setUserPlants);
   }, []);
   const userPlantIds = [];

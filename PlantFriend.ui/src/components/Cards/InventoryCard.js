@@ -56,6 +56,7 @@ function InventoryCard({
         </Row>
       </Card>
       <FormModal
+        key={rest.id + rest.userId + 1}
         id={rest.id}
         userId={rest.userId}
         quantity={rest.quantity}

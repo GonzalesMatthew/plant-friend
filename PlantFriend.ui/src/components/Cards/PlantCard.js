@@ -128,6 +128,7 @@ function PlantCard({
         </div>
       </Collapse>
       <FormModal
+        key={rest.id + rest.name}
         id={rest.id}
         name={rest.name}
         water={rest.water}
@@ -142,11 +143,13 @@ function PlantCard({
         modalStatus={modalStatus0} modalToggle={modalToggle0} modalTitle='Update Plant Research' setPlants={setPlants}
       />
       <FormModal
+        key={rest.id + rest.userId}
         plantId={rest.id}
         userId={rest.userId}
         modalStatus={modalStatus2} modalToggle={modalToggle2} modalTitle='Add Plant to Profile' setUserPlants={setUserPlants}
       />
       <FormModal
+        key={rest.userPlantId + rest.id}
         id={rest.userPlantId}
         plantId={rest.id}
         userId={rest.userId}
@@ -157,6 +160,7 @@ function PlantCard({
         modalStatus={modalStatus3} modalToggle={modalToggle3} modalTitle='Update Your Plant' setUserPlants={setUserPlants}
       />
       <FormModal
+        key={rest.userPlantId}
         userPlantId={rest.userPlantId}
         modalStatus={modalStatus4} modalToggle={modalToggle4} modalTitle='Add A New Journal Entry' setPlantLogs={setPlantLogs}
       />

@@ -30,6 +30,7 @@ function LogCard({
         </div>
       </Container>
       <FormModal
+        key={id + 1}
         id={id}
         userPlantId={userPlantId}
         dateCreated={dateCreated}

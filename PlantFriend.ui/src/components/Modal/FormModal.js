@@ -197,6 +197,7 @@ function FormModal({
         {/* eslint-disable*/}
         {(formIdentifier === 1 || formIdentifier === 2)
           ? <PlantForm
+            key={plantObj.id}
             formObj={plantObj}
             handleInputChange={handleInputChange}
             handleSubmit={handleSubmit}
@@ -205,6 +206,7 @@ function FormModal({
           />
           : ((formIdentifier === 3 || formIdentifier === 4)
             ? <InventoryForm
+              key={inventoryObj.id}
               formObj={inventoryObj}
               handleInputChange={handleInputChange}
               handleSubmit={handleSubmit}
@@ -213,6 +215,7 @@ function FormModal({
             />
             : ((formIdentifier === 5 || formIdentifier === 6)
               ? <UserPlantForm
+                key={userPlantObj.id}
                 formObj={userPlantObj}
                 handleInputChange={handleInputChange}
                 handleSubmit={handleSubmit}
@@ -220,6 +223,7 @@ function FormModal({
                 formIdentifier={formIdentifier}
               />
               : <LogForm
+                key={logEntryObj.id}
                 formObj={logEntryObj}
                 handleInputChange={handleInputChange}
                 handleSubmit={handleSubmit}

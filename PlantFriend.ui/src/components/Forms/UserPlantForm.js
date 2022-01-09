@@ -4,7 +4,7 @@ import {
   Form, FormGroup, Input, Button, Label
 } from 'reactstrap';
 
-function InventoryForm({
+function UserPlantForm({
   formObj,
   handleInputChange,
   handleSubmit,
@@ -17,65 +17,65 @@ function InventoryForm({
       onSubmit={handleSubmit}
     >
       <FormGroup>
-        <Label for='name'>Name</Label>
+        <Label for='petName'>Pet Name</Label>
         <Input
-          id='name'
+          id='petName'
           type='text'
-          name='name'
-          placeholder='Enter the name of the item or tool.'
-          value={formObj.name}
+          name='petName'
+          placeholder='What will you call your plant?'
+          value={formObj.petName}
           onChange={handleInputChange}
           required
         >
         </Input>
       </FormGroup>
       <FormGroup>
-        <Label for='description'>Description</Label>
+        <Label for='status'>Status</Label>
         <Input
-          id='description'
+          id='status'
           type='text'
-          name='description'
-          placeholder='Describe this item here.'
-          value={formObj.description}
+          name='status'
+          placeholder='How is your plant doing?'
+          value={formObj.status}
           onChange={handleInputChange}
           required
         >
         </Input>
       </FormGroup>
       <FormGroup>
-        <Label for='quantity'>Quantity</Label>
+        <Label for='initialAgeDays'>Initial Age (Days)</Label>
         <Input
-          id='quantity'
+          id='initialAgeDays'
           type='number'
-          name='quantity'
-          placeholder= '0'
-          value={formObj.quantity}
+          name='initialAgeDays'
+          placeholder='How old is your plant in days?'
+          value={formObj.initialAgeDays}
           onChange={handleInputChange}
           required
         >
         </Input>
       </FormGroup>
       <FormGroup>
-        <Label for='imageUrl'>Image URL</Label>
+        <Label for='ageStage'>Current Life Cycle Stage</Label>
         <Input
-          id='imageUrl'
+          id='ageStage'
           type='text'
-          name='imageUrl'
-          placeholder='Enter image URL here.'
-          value={formObj.imageUrl}
+          name='ageStage'
+          placeholder='E.g. Current stage of the plant&apos;s life cycle'
+          value={formObj.ageStage}
           onChange={handleInputChange}
           required
         >
         </Input>
       </FormGroup>
 
-      <Button type='submit'>{formIdentifier === 3 ? 'Add Inventory' : 'Update Inventory'}</Button>
+      <Button type='submit'>{formIdentifier === 5 ? 'Add Plant to Profile' : 'Update Your Plant'}</Button>
       <Button onClick={ () => modalToggle()}>Cancel</Button>
     </Form>
   );
 }
 
-InventoryForm.propTypes = {
+UserPlantForm.propTypes = {
   formObj: PropTypes.object,
   handleInputChange: PropTypes.func,
   handleSubmit: PropTypes.func,
@@ -83,4 +83,4 @@ InventoryForm.propTypes = {
   formIdentifier: PropTypes.number
 };
 
-export default InventoryForm;
+export default UserPlantForm;

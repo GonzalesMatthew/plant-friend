@@ -30,7 +30,7 @@ namespace PlantFriend.DataAccess
             using var db = new SqlConnection(_connectionString);
             var sql = @"insert into [Log] (UserPlantId, DateCreated, EntryNumber, [Entry], EntryDate)
                         output inserted.Id
-                        values (@userPlantId, GETDATE(), @entryNumber, @entry, GETDATE())";
+                        values (@userPlantId, GETDATE(), @entryNumber, @entry, @entryDate)";
             var id = db.ExecuteScalar<Guid>(sql, newLog);
             newLog.Id = id;
         }
@@ -41,6 +41,14 @@ namespace PlantFriend.DataAccess
             var sql = @"select * from Log where Id = @id";
             var log = db.QuerySingleOrDefault<Log>(sql, new { id });
             return log;
+        }
+
+        internal object GetAllByUserPlantId(Guid userPlantId)
+        {
+            using var db = new SqlConnection(_connectionString);
+            var sql = @"select * from Log where UserPlantId = @userPlantId";
+            var logs = db.Query<Log>(sql, new { userPlantId });
+            return logs;
         }
 
         internal Log UpdateLog(Guid id, Log log)

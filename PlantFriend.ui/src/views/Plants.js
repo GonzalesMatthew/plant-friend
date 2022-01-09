@@ -1,45 +1,59 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import {
   Col, Container, Row, Button
 } from 'reactstrap';
 import PlantCard from '../components/Cards/PlantCard';
-import FormModal from '../components/Modal/FormModal';
 import SearchBar from '../components/SearchBar/SearchBar';
+import FormModal from '../components/Modal/FormModal';
 import { getPlants } from '../helpers/data/PlantData';
+import { getUserPlantsByUserId } from '../helpers/data/UserPlantData';
 
-function Plants() {
+function Plants({
+  user
+}) {
   const [plants, setPlants] = useState([]);
   const [modalStatus, setModalStatus] = useState(false);
   const [searchPlant, setSearchPlant] = useState('');
   const [modalTitle, setModalTitle] = useState('');
+  const [userPlants, setUserPlants] = useState([]);
 
   useEffect(() => {
     getPlants().then(setPlants);
   }, []);
 
+  useEffect(() => {
+    if (user.id === undefined) return;
+    getUserPlantsByUserId(user.id).then(setUserPlants);
+  }, []);
+  const userPlantIds = [];
+  userPlants.forEach((userPlant) => userPlantIds.push(userPlant.plant.id));
+
   const modalToggle = () => setModalStatus(!modalStatus);
 
   return (
     <>
-      <h1>Plants</h1>
-      <FormModal modalStatus={modalStatus} modalToggle={modalToggle} modalTitle={modalTitle} setPlants={setPlants}/>
-      <Row>
-        <Col>
-          Plants
-        </Col>
-        <Col>
-          <SearchBar
-            searchTerm={searchPlant}
-            setSearchTerm={setSearchPlant}
-            placeholder={'Search plant'}
-          />
-        </Col>
-        <Col>
-          <Button onClick={() => { modalToggle(); setModalTitle('Add Plant'); }}>Add Plant</Button>
-        </Col>
-      </Row>
+      <FormModal modalStatus={modalStatus} modalToggle={modalToggle} modalTitle={modalTitle} setPlants={setPlants} />
+      <div className='border border-dark rounded sticky-top header-sticky py-3'>
+        <h1>Plants</h1>
+        <Row>
+          <Col>
+            Plants
+          </Col>
+          <Col>
+            <SearchBar
+              searchTerm={searchPlant}
+              setSearchTerm={setSearchPlant}
+              placeholder={'Search plants'}
+            />
+          </Col>
+          <Col>
+            <Button onClick={() => { modalToggle(); setModalTitle('New Plant Research'); }}>New Plant</Button>
+          </Col>
+        </Row>
+      </div>
       <Container>
-        <Row className='d-flex flex-column justify-content-center align-items-center' >
+        <Row className='d-flex' >
           {plants.filter((plant) => {
             if ((`${plant.name}`).toLowerCase().includes(searchPlant.toLowerCase())) {
               return plant;
@@ -59,6 +73,8 @@ function Plants() {
               careNeeds={plant.careNeeds}
               imageUrl={plant.imageUrl}
               setPlants={setPlants}
+              userId={user.id}
+              userPlantIds={userPlantIds}
             />
           ))}
         </Row>
@@ -68,3 +84,7 @@ function Plants() {
 }
 
 export default Plants;
+
+Plants.propTypes = {
+  user: PropTypes.any
+};

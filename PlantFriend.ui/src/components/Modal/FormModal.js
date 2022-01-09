@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import {
   Modal, ModalBody, ModalHeader
 } from 'reactstrap';
 import PlantForm from '../Forms/PlantForm';
 import { addPlant, updatePlant } from '../../helpers/data/PlantData';
-import { addUserInventory } from '../../helpers/data/UserInventoryData';
+import { addUserInventory, updateUserInventory } from '../../helpers/data/UserInventoryData';
 import InventoryForm from '../Forms/InventoryForm';
+import { addUserPlant, updateUserPlant } from '../../helpers/data/UserPlantData';
+import UserPlantForm from '../Forms/UserPlantForm';
+import { addLog, updateLog } from '../../helpers/data/LogData';
+import LogForm from '../Forms/LogForm';
 
 function FormModal({
   modalStatus,
   modalToggle,
   modalTitle,
   setPlants,
-  setInventory,
+  setUserPlants,
+  setUserInventory,
+  setPlantLogs,
+  userId,
   ...rest
 }) {
   const [plantObj, setPlantObj] = useState({
@@ -31,26 +39,58 @@ function FormModal({
   });
   const [inventoryObj, setInventoryObj] = useState({
     id: rest.id || null,
-    userId: rest.userId || '',
+    userId: userId || '',
     quantity: rest.quantity || '',
     name: rest.name || '',
     description: rest.description || '',
     imageUrl: rest.imageUrl || '',
   });
+  const [userPlantObj, setUserPlantObj] = useState({
+    id: rest.id || null,
+    plantId: rest.plantId || '',
+    userId: userId || '',
+    status: rest.status || '',
+    petName: rest.petName || '',
+    initialAgeDays: rest.initialAgeDays || '',
+    ageStage: rest.ageStage || ''
+  });
+  const [logEntryObj, setlogEntryObj] = useState({
+    id: rest.id || null,
+    userPlantId: rest.userPlantId || '',
+    dateCreated: rest.dateCreated || '',
+    entryNumber: rest.entryNumber || '',
+    entry: rest.entry || '',
+    entryDate: moment(rest.entryDate).format('YYYY-MM-DD') || ''
+  });
 
   let formIdentifier = 0;
   switch (modalTitle) {
-    case 'Add Plant':
+    case 'New Plant Research':
       formIdentifier = 1;
       break;
-    case 'Update Plant':
+    case 'Update Plant Research':
       formIdentifier = 2;
       break;
     case 'Add Inventory':
       formIdentifier = 3;
       break;
+    case 'Update Inventory':
+      formIdentifier = 4;
+      break;
+    case 'Add Plant to Profile':
+      formIdentifier = 5;
+      break;
+    case 'Update Your Plant':
+      formIdentifier = 6;
+      break;
+    case 'Add A New Journal Entry':
+      formIdentifier = 7;
+      break;
+    case 'Update Your Entry':
+      formIdentifier = 8;
+      break;
     default:
-      console.warn('No such case for modal title');
+      formIdentifier = 0;
   }
 
   const handleInputChange = (e) => {
@@ -64,25 +104,83 @@ function FormModal({
         ...prevState,
         [e.target.name]: e.target.value
       }));
+    } else if (formIdentifier === 5 || formIdentifier === 6) {
+      setUserPlantObj((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.value
+      }));
+    } else if (formIdentifier === 7 || formIdentifier === 8) {
+      setlogEntryObj((prevState) => ({
+        ...prevState,
+        [e.target.name]: e.target.name === 'entryDate' ? moment(e.target.value).format('YYYY-MM-DD') : e.target.value
+      }));
     } else {
-      console.warn('handleInputChange function is not finding formIdentifier value 1, 2, 3 or 4');
+      console.warn('handleInputChange function is encountering a problem');
     }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formIdentifier === 1) {
-      console.warn('trying to add plant', plantObj);
+      // console.warn('trying to add plant', plantObj);
       delete plantObj.id;
-      addPlant(plantObj).then(setPlants);
+      addPlant(plantObj).then(setPlants).then(() => {
+        plantObj.name = '';
+        plantObj.water = '';
+        plantObj.waterFrequency = '';
+        plantObj.nutrients = '';
+        plantObj.nutrientsFrequency = '';
+        plantObj.temperature = '';
+        plantObj.description = '';
+        plantObj.imageUrl = '';
+        plantObj.careNeeds = '';
+        plantObj.light = '';
+      });
     } else if (formIdentifier === 2) {
-      console.warn('trying to update plant', plantObj);
+      // console.warn('trying to update plant', plantObj);
       updatePlant(plantObj, plantObj.id).then(setPlants);
     } else if (formIdentifier === 3) {
-      console.warn('trying to add inventory', inventoryObj);
-      addUserInventory(inventoryObj).then(setInventory);
+      // console.warn('trying to add inventory', inventoryObj);
+      delete inventoryObj.id;
+      addUserInventory(inventoryObj).then(setUserInventory).then(() => {
+        inventoryObj.quantity = '';
+        inventoryObj.name = '';
+        inventoryObj.description = '';
+        inventoryObj.imageUrl = '';
+      });
+    } else if (formIdentifier === 4) {
+      // console.warn('trying to update inventory', inventoryObj);
+      updateUserInventory(inventoryObj).then(setUserInventory);
+    } else if (formIdentifier === 5) {
+      // console.warn('trying to add user plant', userPlantObj);
+      delete userPlantObj.id;
+      addUserPlant(userPlantObj).then(setUserPlants).then(() => {
+        userPlantObj.status = '';
+        userPlantObj.petName = '';
+        userPlantObj.initialAgeDays = '';
+        userPlantObj.ageStage = '';
+      });
+    } else if (formIdentifier === 6) {
+      // console.warn('trying to update user plant', userPlantObj);
+      updateUserPlant(userPlantObj).then(setUserPlants);
+    } else if (formIdentifier === 7) {
+      // console.warn('trying to add log entry', logEntryObj);
+      delete logEntryObj.id;
+      delete logEntryObj.dateCreated;
+      addLog(logEntryObj).then(setPlantLogs).then(() => {
+        logEntryObj.dateCreated = '';
+        logEntryObj.entryNumber = '';
+        logEntryObj.entry = '';
+        logEntryObj.entryDate = '';
+      });
+    } else if (formIdentifier === 8) {
+      // console.warn('trying to update log entry', logEntryObj);
+      updateLog(logEntryObj).then(setPlantLogs);
     } else {
-      console.warn('plantObj', plantObj);
-      console.warn('inventoryObj', inventoryObj);
+      console.warn('form submission error');
+      // console.warn('plantObj', plantObj);
+      // console.warn('inventoryObj', inventoryObj);
+      // console.warn('userPlantObj', userPlantObj);
+      // console.warn('logEntryObj', logEntryObj);
     }
     modalToggle();
   };
@@ -96,20 +194,42 @@ function FormModal({
     >
       <ModalHeader toggle={modalToggle}>{modalTitle}</ModalHeader>
       <ModalBody>
-        {formIdentifier === 1 || formIdentifier === 2
+        {/* eslint-disable*/}
+        {(formIdentifier === 1 || formIdentifier === 2)
           ? <PlantForm
+            key={plantObj.id}
             formObj={plantObj}
             handleInputChange={handleInputChange}
             handleSubmit={handleSubmit}
             modalToggle={modalToggle}
             formIdentifier={formIdentifier}
           />
-          : <InventoryForm
-            formObj={inventoryObj}
-            handleInputChange={handleInputChange}
-            handleSubmit={handleSubmit}
-            modalToggle={modalToggle}
-          />
+          : ((formIdentifier === 3 || formIdentifier === 4)
+            ? <InventoryForm
+              key={inventoryObj.id}
+              formObj={inventoryObj}
+              handleInputChange={handleInputChange}
+              handleSubmit={handleSubmit}
+              modalToggle={modalToggle}
+              formIdentifier={formIdentifier}
+            />
+            : ((formIdentifier === 5 || formIdentifier === 6)
+              ? <UserPlantForm
+                key={userPlantObj.id}
+                formObj={userPlantObj}
+                handleInputChange={handleInputChange}
+                handleSubmit={handleSubmit}
+                modalToggle={modalToggle}
+                formIdentifier={formIdentifier}
+              />
+              : <LogForm
+                key={logEntryObj.id}
+                formObj={logEntryObj}
+                handleInputChange={handleInputChange}
+                handleSubmit={handleSubmit}
+                modalToggle={modalToggle}
+                formIdentifier={formIdentifier} />
+            ))
         }
       </ModalBody>
     </Modal>
@@ -122,9 +242,10 @@ FormModal.propTypes = {
   modalStatus: PropTypes.bool,
   modalToggle: PropTypes.func,
   modalTitle: PropTypes.string,
-  user: PropTypes.any,
   setPlants: PropTypes.func,
-  setInventory: PropTypes.func,
+  setUserPlants: PropTypes.func,
+  setUserInventory: PropTypes.func,
+  setPlantLogs: PropTypes.func,
   id: PropTypes.string,
   name: PropTypes.string,
   water: PropTypes.string,
@@ -136,6 +257,16 @@ FormModal.propTypes = {
   imageUrl: PropTypes.string,
   careNeeds: PropTypes.string,
   light: PropTypes.string,
-  userId: PropTypes.string,
   quantity: PropTypes.number,
+  userId: PropTypes.string,
+  plantId: PropTypes.string,
+  petName: PropTypes.string,
+  status: PropTypes.string,
+  initialAgeDays: PropTypes.number,
+  ageStage: PropTypes.string,
+  userPlantId: PropTypes.string,
+  dateCreated: PropTypes.string,
+  entryNumber: PropTypes.number,
+  entry: PropTypes.string,
+  entryDate: PropTypes.string,
 };

@@ -81,10 +81,13 @@ namespace PlantFriend.DataAccess
         internal void Remove(Guid id)
         {
             using var db = new SqlConnection(_connectionString);
-            var sql = @"Delete
+            var logSql = @"Delete From Log Where UserPlantId = @id";
+            db.Execute(logSql, new { id });
+
+            var userPlantSql = @"Delete
                         From UserPlant
                         Where Id = @id";
-            db.Execute(sql, new { id });
+            db.Execute(userPlantSql, new { id });
         }
     }
 }

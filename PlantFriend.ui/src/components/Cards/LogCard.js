@@ -11,7 +11,9 @@ function LogCard({
   entryNumber,
   entry,
   entryDate,
-  setPlantLogs
+  setPlantLogs,
+  petName,
+  name
 }) {
   const [modalStatus, setModalStatus] = useState(false);
   const modalToggle = () => setModalStatus(!modalStatus);
@@ -22,12 +24,13 @@ function LogCard({
           <Button onClick={() => modalToggle()}>Entry:&ensp;{entryNumber}&emsp;<i className='fas fa-edit'></i></Button>
           <Button onClick={() => {
             // eslint-disable-next-line
-            const result = window.confirm('This will permanently delete your entry. Are you sure?');
+            const result = window.confirm(`This will permanently remove your entry (Entry ${entryNumber} for ${petName} the ${name}). Are you sure?`);
             if (result) deleteLog(id, userPlantId).then(setPlantLogs);
           }}><i className='fas fa-trash'></i></Button>
         </div>
       </Container>
       <FormModal
+        key={id + 1}
         id={id}
         userPlantId={userPlantId}
         dateCreated={dateCreated}
@@ -49,5 +52,7 @@ LogCard.propTypes = {
   entryNumber: PropTypes.number,
   entry: PropTypes.string,
   entryDate: PropTypes.string,
-  setPlantLogs: PropTypes.func
+  setPlantLogs: PropTypes.func,
+  petName: PropTypes.string,
+  name: PropTypes.string
 };

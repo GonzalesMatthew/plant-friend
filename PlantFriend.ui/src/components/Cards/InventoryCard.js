@@ -49,13 +49,14 @@ function InventoryCard({
           <Col>
             <Button onClick={() => {
               // eslint-disable-next-line
-              const result = window.confirm('Are you sure? This will permanently remove this item.');
+              const result = window.confirm(`Are you sure? This will permanently remove this item (${rest.name}).`);
               if (result) deleteUserInventory(rest.id, rest.userId).then(setUserInventory);
             }}><i className="fas fa-trash-alt"></i></Button>
           </Col>
         </Row>
       </Card>
       <FormModal
+        key={rest.id + rest.userId + 1}
         id={rest.id}
         userId={rest.userId}
         quantity={rest.quantity}

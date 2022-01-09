@@ -7,6 +7,7 @@ import PlantCard from '../components/Cards/PlantCard';
 import SearchBar from '../components/SearchBar/SearchBar';
 import FormModal from '../components/Modal/FormModal';
 import { getPlants } from '../helpers/data/PlantData';
+import { getUserPlantsByUserId } from '../helpers/data/UserPlantData';
 
 function Plants({
   user
@@ -15,10 +16,18 @@ function Plants({
   const [modalStatus, setModalStatus] = useState(false);
   const [searchPlant, setSearchPlant] = useState('');
   const [modalTitle, setModalTitle] = useState('');
+  const [userPlants, setUserPlants] = useState([]);
 
   useEffect(() => {
     getPlants().then(setPlants);
   }, []);
+
+  useEffect(() => {
+    if (user.id === undefined) return;
+    getUserPlantsByUserId(user.id).then(setUserPlants);
+  }, []);
+  const userPlantIds = [];
+  userPlants.forEach((userPlant) => userPlantIds.push(userPlant.plant.id));
 
   const modalToggle = () => setModalStatus(!modalStatus);
 
@@ -39,7 +48,7 @@ function Plants({
             />
           </Col>
           <Col>
-            <Button onClick={() => { modalToggle(); setModalTitle('New Plant Research'); }}>Add Plant</Button>
+            <Button onClick={() => { modalToggle(); setModalTitle('New Plant Research'); }}>New Plant</Button>
           </Col>
         </Row>
       </div>
@@ -65,6 +74,7 @@ function Plants({
               imageUrl={plant.imageUrl}
               setPlants={setPlants}
               userId={user.id}
+              userPlantIds={userPlantIds}
             />
           ))}
         </Row>

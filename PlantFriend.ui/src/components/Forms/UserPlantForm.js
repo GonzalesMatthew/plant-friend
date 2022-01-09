@@ -35,7 +35,7 @@ function UserPlantForm({
           id='status'
           type='text'
           name='status'
-          placeholder='E.g. Alive, Dead, Gifted, etc.'
+          placeholder='How is your plant doing?'
           value={formObj.status}
           onChange={handleInputChange}
           required
@@ -46,7 +46,7 @@ function UserPlantForm({
         <Label for='initialAgeDays'>Initial Age (Days)</Label>
         <Input
           id='initialAgeDays'
-          type='text'
+          type='number'
           name='initialAgeDays'
           placeholder='How old is your plant in days?'
           value={formObj.initialAgeDays}

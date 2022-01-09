@@ -16,14 +16,15 @@ function User({
 }) {
   const [userPlants, setUserPlants] = useState([]);
   const [userInventory, setUserInventory] = useState([]);
-  const [searchPlant, setSearchPlant] = useState('');
-  const [searchInventory, setSearchInventory] = useState('');
-  const [modalTitle, setModalTitle] = useState('');
-
   useEffect(() => {
+    if (user.id === undefined) return;
     getUserPlantsByUserId(user.id).then(setUserPlants);
     getUserInventoryByUserId(user.id).then(setUserInventory);
   }, []);
+
+  const [searchPlant, setSearchPlant] = useState('');
+  const [searchInventory, setSearchInventory] = useState('');
+  const [modalTitle, setModalTitle] = useState('');
 
   const [modalStatus1, setModalStatus1] = useState(false);
   const modalToggle1 = () => setModalStatus1(!modalStatus1);
@@ -69,6 +70,7 @@ function User({
         </Row>
       </div>
       <Container className='rounded border border-dark'>
+        <Col><h2>Plants</h2></Col>
         <Col className='overflow-auto d-flex flex-row'>
           {userPlants.filter((userPlant) => {
             if ((`${userPlant.petName} the ${userPlant.plant.name}`).toLowerCase().includes(searchPlant.toLowerCase())) {
@@ -101,6 +103,7 @@ function User({
         </Col>
       </Container>
       <Container className='rounded border border-dark'>
+        <Col><h2>Inventory</h2></Col>
         <Col className='overflow-auto d-flex flex-row'>
           {userInventory.filter((item) => {
             if ((`${item.name}`).toLowerCase().includes(searchInventory.toLowerCase())) {

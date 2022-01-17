@@ -97,6 +97,10 @@ namespace PlantFriend
 
             app.UseHttpsRedirection();
 
+            app.UseDefaultFiles();
+
+            app.UseStaticFiles();
+
             app.UseRouting();
 
             app.UseAuthentication();

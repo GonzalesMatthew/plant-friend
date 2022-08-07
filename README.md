@@ -14,12 +14,27 @@ Welcome to my custom application that lets you gather research on house plants, 
   - CRUD Research/Plant/Inventory objects
   - View Schedule of owned house plants
   - Keep individual journals for each owned house plant
-### Screenshots of your project
+### Screenshots of project
+- Landing Page
+
 ![App Screenshot](pics/landing.png)
+
+- Research Page
+
 ![App Screenshot](pics/research.png)
+
+- Profile Page
+
 ![App Screenshot](pics/profile.png)
+
+- Journal
+
 ![App Screenshot](pics/journal.png)
+
+- Schedule
+
 ![App Screenshot](pics/schedule.png)
+
 ### List of contributors and links to their GH profiles
 @GonzalesMatthew
 ### Link to Loom video walkthrough of your app
